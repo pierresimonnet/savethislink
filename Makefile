@@ -17,7 +17,7 @@ ps: ## container ps
 
 ## -- Database --
 connect: ## Connect to the database
-	${DOCKER_COMPOSE} exec database mysql -u root --password=password
+	docker exec -it shareintel_database_1 psql -U root main
 
 migration: ## Create migration
 	symfony console make:migration
