@@ -5,6 +5,7 @@ namespace App\Entity;
 use ApiPlatform\Core\Annotation\ApiResource;
 use App\Repository\WebsiteRepository;
 use Doctrine\ORM\Mapping as ORM;
+use Symfony\Component\Validator\Constraints as Assert;
 
 /**
  * @ApiResource()
@@ -21,16 +22,32 @@ class Website
 
     /**
      * @ORM\Column(type="string", length=255)
+     * @Assert\NotBlank
+     * @Assert\Url
+     * @Assert\Length(
+     *      min = 2,
+     *      max = 255
+     * )
      */
     private $url;
 
     /**
      * @ORM\Column(type="string", length=255)
+     * @Assert\NotBlank
+     * @Assert\Length(
+     *      min = 2,
+     *      max = 255
+     * )
      */
     private $title;
 
     /**
      * @ORM\Column(type="string", length=255)
+     * @Assert\NotBlank
+     * @Assert\Length(
+     *      min = 2,
+     *      max = 255
+     * )
      */
     private $description;
 
@@ -41,6 +58,9 @@ class Website
 
     /**
      * @ORM\Column(type="text", nullable=true)
+     * @Assert\Length(
+     *      min = 2
+     * )
      */
     private $comment;
 
