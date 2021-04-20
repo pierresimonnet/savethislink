@@ -3,41 +3,10 @@
 {% block title %}Website index{% endblock %}
 
 {% block body %}
-    <h1>Website index</h1>
+    <div id='website-app'></div>
+{% endblock %}
 
-    <table class="table">
-        <thead>
-            <tr>
-                <th>Id</th>
-                <th>Url</th>
-                <th>Title</th>
-                <th>Description</th>
-                <th>Image</th>
-                <th>Comment</th>
-                <th>actions</th>
-            </tr>
-        </thead>
-        <tbody>
-        {% for website in websites %}
-            <tr>
-                <td>{{ website.id }}</td>
-                <td>{{ website.url }}</td>
-                <td>{{ website.title }}</td>
-                <td>{{ website.description }}</td>
-                <td>{{ website.image }}</td>
-                <td>{{ website.comment }}</td>
-                <td>
-                    <a href="{{ path('website_show', {'id': website.id}) }}">show</a>
-                    <a href="{{ path('website_edit', {'id': website.id}) }}">edit</a>
-                </td>
-            </tr>
-        {% else %}
-            <tr>
-                <td colspan="7">no records found</td>
-            </tr>
-        {% endfor %}
-        </tbody>
-    </table>
-
-    <a href="{{ path('website_new') }}">Create new</a>
+{% block javascripts %}
+    {{ parent() }}
+    {{ encore_entry_script_tags('website') }}
 {% endblock %}
