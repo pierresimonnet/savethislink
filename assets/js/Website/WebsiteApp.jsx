@@ -1,18 +1,11 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import Websites from "./Websites";
+import { getWebsites, deleteWebsite, createWebsite } from "../api/websites_api";
 
 export default function WebsiteApp() {
-  const [websites, setWebsites] = useState([
-    {
-      id: 1,
-      url: "string",
-      title: "string",
-      description: "string",
-      image: "string",
-      comment: "string",
-    },
-  ]);
+  const [websites, setWebsites] = useState([]);
   const [highlightedRowId, setHighlightedRowId] = useState(null);
+  const [isLoaded, setIsLoaded] = useState(false);
 
   const handleRowClick = (id) => {
     setHighlightedRowId(id);
@@ -20,19 +13,29 @@ export default function WebsiteApp() {
 
   const handleAddItem = (url, title, description, comment) => {
     const newWebsite = {
-      id: "TODO",
       url,
       title,
       description,
       image: "TODO",
       comment,
     };
-    setWebsites((websites) => [...websites, newWebsite]);
+    createWebsite(newWebsite).then((data) => {
+      console.log(data);
+      setWebsites((websites) => [...websites, data]);
+    });
   };
 
   const handleDeleteItem = (id) => {
+    deleteWebsite(id);
     setWebsites((websites) => websites.filter((site) => site.id !== id));
   };
+
+  useEffect(() => {
+    getWebsites().then((data) => {
+      setWebsites(data);
+      setIsLoaded(true);
+    });
+  }, []);
 
   return (
     <Websites
@@ -41,6 +44,7 @@ export default function WebsiteApp() {
       onRowClick={handleRowClick}
       onAddItem={handleAddItem}
       onDeleteItem={handleDeleteItem}
+      isLoaded={isLoaded}
     />
   );
 }

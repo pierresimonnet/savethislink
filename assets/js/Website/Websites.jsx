@@ -8,6 +8,7 @@ export default function Websites({
   onRowClick,
   onAddItem,
   onDeleteItem,
+  isLoaded,
 }) {
   return (
     <div>
@@ -30,6 +31,7 @@ export default function Websites({
           highlightedRowId={highlightedRowId}
           onRowClick={onRowClick}
           onDeleteItem={onDeleteItem}
+          isLoaded={isLoaded}
         />
       </table>
       <WebsiteCreator onAddItem={onAddItem} />

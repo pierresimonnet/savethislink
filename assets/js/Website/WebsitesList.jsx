@@ -5,12 +5,25 @@ export default function WebsitesList({
   highlightedRowId,
   onRowClick,
   onDeleteItem,
+  isLoaded,
 }) {
   const handleDeleteClick = (e, id) => {
     e.preventDefault();
 
     onDeleteItem(id);
   };
+
+  if (!isLoaded) {
+    return (
+      <tbody>
+        <tr>
+          <td colSpan="7" className="text-center">
+            Loading...
+          </td>
+        </tr>
+      </tbody>
+    );
+  }
 
   return (
     <tbody>
