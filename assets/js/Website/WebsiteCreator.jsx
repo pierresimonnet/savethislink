@@ -9,7 +9,6 @@ export default function WebsiteCreator({ onAddItem }) {
     url: "",
     title: "",
     description: "",
-    comment: "",
   });
 
   const handleFormSubmit = (e) => {
@@ -34,14 +33,9 @@ export default function WebsiteCreator({ onAddItem }) {
 
       return;
     }
-    if (comment.length <= 0) {
-      setErrors({ ...errors, comment: "please enter a comment" });
-
-      return;
-    }
 
     onAddItem(url, title, description, comment);
-    setErrors({ ...errors, url: "", title: "", description: "", comment: "" });
+    setErrors({ ...errors, url: "", title: "", description: "" });
 
     urlRef.current.value = "";
     titleRef.current.value = "";
@@ -102,12 +96,6 @@ export default function WebsiteCreator({ onAddItem }) {
           ></textarea>
           {errors.comment && <span>{errors.comment}</span>}
         </div>
-        <input
-          type="hidden"
-          id="website__token"
-          name="website[_token]"
-          value="AyP0KXnfMrDUhmIuHVCijNln0bgqVnCiPvhDtJEfvkU"
-        />
       </div>
       <button className="btn">Save</button>
     </form>

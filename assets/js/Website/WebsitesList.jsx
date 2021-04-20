@@ -6,6 +6,7 @@ export default function WebsitesList({
   onRowClick,
   onDeleteItem,
   isLoaded,
+  isSavingNewItem,
 }) {
   const handleDeleteClick = (e, id) => {
     e.preventDefault();
@@ -27,12 +28,28 @@ export default function WebsitesList({
 
   return (
     <tbody>
+      {isSavingNewItem && (
+        <tr>
+          <td
+            colSpan="7"
+            className="text-center"
+            style={{
+              opacity: 0.5,
+            }}
+          >
+            Saving into the database ...
+          </td>
+        </tr>
+      )}
       {websites.map((website) => {
         return (
           <tr
             key={website.id}
             className={highlightedRowId === website.id ? "info" : ""}
             onClick={(e) => onRowClick(website.id)}
+            style={{
+              opacity: website.isDeleting ? 0.3 : 1,
+            }}
           >
             <td>{website.id}</td>
             <td>{website.url}</td>
@@ -41,11 +58,9 @@ export default function WebsitesList({
             <td>{website.image}</td>
             <td>{website.comment}</td>
             <td>
-              <a href="#">show</a>
-              <a href="#">&#128394;</a>
-              <a href="#" onClick={(e) => handleDeleteClick(e, website.id)}>
+              <button onClick={(e) => handleDeleteClick(e, website.id)}>
                 &#128465;
-              </a>
+              </button>
             </td>
           </tr>
         );

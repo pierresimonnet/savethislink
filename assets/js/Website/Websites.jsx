@@ -9,11 +9,16 @@ export default function Websites({
   onAddItem,
   onDeleteItem,
   isLoaded,
+  isSavingNewItem,
+  successMessage,
 }) {
   return (
     <div>
       <h1>Website index</h1>
-
+      {successMessage && (
+        <div className="alert alert-success">{successMessage}</div>
+      )}
+      <WebsiteCreator onAddItem={onAddItem} />
       <table className="table">
         <thead>
           <tr>
@@ -32,9 +37,9 @@ export default function Websites({
           onRowClick={onRowClick}
           onDeleteItem={onDeleteItem}
           isLoaded={isLoaded}
+          isSavingNewItem={isSavingNewItem}
         />
       </table>
-      <WebsiteCreator onAddItem={onAddItem} />
     </div>
   );
 }
