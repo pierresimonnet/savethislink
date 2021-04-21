@@ -8,7 +8,11 @@ use Doctrine\ORM\Mapping as ORM;
 use Symfony\Component\Validator\Constraints as Assert;
 
 /**
- * @ApiResource()
+ * @ApiResource(
+ *      attributes={
+ *          "pagination_items_per_page"=10
+ *      },
+ * )
  * @ORM\Entity(repositoryClass=WebsiteRepository::class)
  */
 class Website

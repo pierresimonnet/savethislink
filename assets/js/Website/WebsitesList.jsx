@@ -1,70 +1,65 @@
-import React from "react";
+import React, { memo } from "react";
+import { WebsiteItem } from "./WebsiteItem";
 
-export default function WebsitesList({
-  websites,
-  highlightedRowId,
-  onRowClick,
-  onDeleteItem,
-  isLoaded,
-  isSavingNewItem,
-}) {
-  const handleDeleteClick = (e, id) => {
-    e.preventDefault();
-
-    onDeleteItem(id);
-  };
-
-  if (!isLoaded) {
+export const WebsitesList = memo(
+  ({
+    websites,
+    highlightedRowId,
+    onLoadMore,
+    onRowClick,
+    isLoaded,
+    onDeleteItem,
+    hasMore,
+  }) => {
     return (
-      <tbody>
-        <tr>
-          <td colSpan="7" className="text-center">
-            Loading...
-          </td>
-        </tr>
-      </tbody>
+      <>
+        <table className="table">
+          <thead>
+            <tr>
+              <th>Id</th>
+              <th>Url</th>
+              <th>Title</th>
+              <th>Description</th>
+              <th>Image</th>
+              <th>Comment</th>
+              <th>actions</th>
+            </tr>
+          </thead>
+          <tbody>
+            {!isLoaded && (
+              <tr>
+                <td colSpan="7" className="text-center">
+                  Loading...
+                </td>
+              </tr>
+            )}
+            {isLoaded && websites.length === 0 ? (
+              <tr>
+                <td colSpan="7" className="text-center">
+                  No data...
+                </td>
+              </tr>
+            ) : (
+              websites.map((website) => {
+                return (
+                  <WebsiteItem
+                    key={website.id}
+                    website={website}
+                    highlightedRowId={highlightedRowId}
+                    onRowClick={onRowClick}
+                    onDeleteItem={onDeleteItem}
+                  />
+                );
+              })
+            )}
+          </tbody>
+        </table>
+        {hasMore && (
+          <button disabled={!isLoaded} onClick={onLoadMore}>
+            Load more
+          </button>
+        )}
+      </>
     );
   }
-
-  return (
-    <tbody>
-      {isSavingNewItem && (
-        <tr>
-          <td
-            colSpan="7"
-            className="text-center"
-            style={{
-              opacity: 0.5,
-            }}
-          >
-            Saving into the database ...
-          </td>
-        </tr>
-      )}
-      {websites.map((website) => {
-        return (
-          <tr
-            key={website.id}
-            className={highlightedRowId === website.id ? "info" : ""}
-            onClick={(e) => onRowClick(website.id)}
-            style={{
-              opacity: website.isDeleting ? 0.3 : 1,
-            }}
-          >
-            <td>{website.id}</td>
-            <td>{website.url}</td>
-            <td>{website.title}</td>
-            <td>{website.description}</td>
-            <td>{website.image}</td>
-            <td>{website.comment}</td>
-            <td>
-              <button onClick={(e) => handleDeleteClick(e, website.id)}>
-                &#128465;
-              </button>
-            </td>
-          </tr>
-        );
-      })}
-    </tbody>
-  );
-}
+);

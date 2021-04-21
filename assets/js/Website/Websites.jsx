@@ -1,45 +1,86 @@
-import React from "react";
-import WebsitesList from "./WebsitesList";
-import WebsiteCreator from "./WebsiteCreator";
+import React, { memo, useCallback, useEffect, useState } from "react";
+import { WebsitesList } from "./WebsitesList";
+import { WebsiteForm } from "./WebsiteForm";
+import { useFetch } from "../api/websites_api";
+import useModal from "../component/useModal";
+import Modal from "../component/modal";
 
-export default function Websites({
-  websites,
-  highlightedRowId,
-  onRowClick,
-  onAddItem,
-  onDeleteItem,
-  isLoaded,
-  isSavingNewItem,
-  successMessage,
-}) {
+export const Websites = memo(({}) => {
+  const { isShowing, toggle } = useModal();
+  const [highlightedRowId, setHighlightedRowId] = useState(null);
+  const [successMessage, setSuccessMessage] = useState("");
+  const [
+    successMessageTimeoutHandle,
+    setSuccessMessageTimeoutHandle,
+  ] = useState(0);
+
+  const {
+    load: fetchApi,
+    items: websites,
+    setItems: setWebsites,
+    isLoaded,
+    count,
+    hasMore,
+  } = useFetch("/api/websites");
+
+  const handleRowClick = (id) => {
+    setHighlightedRowId(id);
+  };
+
+  const handleLoadMore = useCallback(() => {
+    let more = true;
+    fetchApi(more);
+  });
+
+  const handleAddItem = (website) => {
+    setWebsites((websites) => [...websites, website]);
+    displaySuccessMessage("Website saved !");
+  };
+
+  const handleDeleteItem = (item) => {
+    setWebsites((websites) => websites.filter((site) => site !== item));
+    displaySuccessMessage("Website deleted !");
+  };
+
+  const displaySuccessMessage = (message) => {
+    setSuccessMessage(message);
+    clearTimeout(successMessageTimeoutHandle);
+    setSuccessMessageTimeoutHandle(
+      setTimeout(() => {
+        setSuccessMessage("");
+        setSuccessMessageTimeoutHandle(0);
+      }, 3000)
+    );
+  };
+
+  useEffect(() => {
+    fetchApi();
+
+    return () => {
+      clearTimeout(successMessageTimeoutHandle);
+    };
+  }, []);
+
   return (
     <div>
-      <h1>Website index</h1>
       {successMessage && (
         <div className="alert alert-success">{successMessage}</div>
       )}
-      <WebsiteCreator onAddItem={onAddItem} />
-      <table className="table">
-        <thead>
-          <tr>
-            <th>Id</th>
-            <th>Url</th>
-            <th>Title</th>
-            <th>Description</th>
-            <th>Image</th>
-            <th>Comment</th>
-            <th>actions</th>
-          </tr>
-        </thead>
-        <WebsitesList
-          websites={websites}
-          highlightedRowId={highlightedRowId}
-          onRowClick={onRowClick}
-          onDeleteItem={onDeleteItem}
-          isLoaded={isLoaded}
-          isSavingNewItem={isSavingNewItem}
-        />
-      </table>
+      <div>
+        <button onClick={toggle}>New</button>
+        <Modal isShowing={isShowing} hide={toggle} title="Create a new entry">
+          <WebsiteForm onAddItem={handleAddItem} />
+        </Modal>
+      </div>
+      <WebsitesList
+        websites={websites}
+        highlightedRowId={highlightedRowId}
+        onLoadMore={handleLoadMore}
+        onRowClick={handleRowClick}
+        onDeleteItem={handleDeleteItem}
+        isLoaded={isLoaded}
+        hasMore={hasMore}
+      />
     </div>
   );
-}
+});
