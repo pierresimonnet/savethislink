@@ -4,59 +4,40 @@ import { WebsiteItem } from "./WebsiteItem";
 export const WebsitesList = memo(
   ({
     websites,
-    highlightedRowId,
     onLoadMore,
-    onRowClick,
-    isLoaded,
+    isLoading,
     onDeleteItem,
+    onUpdateItem,
     hasMore,
   }) => {
     return (
       <>
-        <table className="table">
-          <thead>
-            <tr>
-              <th>Id</th>
-              <th>Url</th>
-              <th>Title</th>
-              <th>Description</th>
-              <th>Image</th>
-              <th>Comment</th>
-              <th>actions</th>
-            </tr>
-          </thead>
-          <tbody>
-            {!isLoaded && (
-              <tr>
-                <td colSpan="7" className="text-center">
-                  Loading...
-                </td>
-              </tr>
-            )}
-            {isLoaded && websites.length === 0 ? (
-              <tr>
-                <td colSpan="7" className="text-center">
-                  No data...
-                </td>
-              </tr>
-            ) : (
-              websites.map((website) => {
-                return (
-                  <WebsiteItem
-                    key={website.id}
-                    website={website}
-                    highlightedRowId={highlightedRowId}
-                    onRowClick={onRowClick}
-                    onDeleteItem={onDeleteItem}
-                  />
-                );
-              })
-            )}
-          </tbody>
-        </table>
+        <div className="table">
+          {isLoading && (
+            <p colSpan="7" className="text-center">
+              Loading...
+            </p>
+          )}
+          {!isLoading && websites.length === 0 ? (
+            <p colSpan="7" className="text-center">
+              No data...
+            </p>
+          ) : (
+            websites.map((website) => {
+              return (
+                <WebsiteItem
+                  key={website.id}
+                  website={website}
+                  onDeleteItem={onDeleteItem}
+                  onUpdateItem={onUpdateItem}
+                />
+              );
+            })
+          )}
+        </div>
         {hasMore && (
-          <button disabled={!isLoaded} onClick={onLoadMore}>
-            Load more
+          <button disabled={isLoading} onClick={onLoadMore}>
+            {isLoading ? "Loading..." : "Load more"}
           </button>
         )}
       </>

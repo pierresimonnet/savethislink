@@ -1,45 +1,87 @@
-import React, { memo, useCallback } from "react";
+import React, { memo, useCallback, useState } from "react";
 import { usePost } from "../api/websites_api";
+import useModal from "../component/useModal";
+import Modal from "../component/modal";
+import { WebsiteForm } from "./WebsiteForm";
 
-export const WebsiteItem = memo(
-  ({ website, highlightedRowId, onRowClick, onDeleteItem }) => {
-    const onDeleteCallback = useCallback(() => {
-      onDeleteItem(website);
-    }, [website]);
+const VIEW = "VIEW";
+const EDIT = "EDIT";
 
-    const { load: deleteItem, loading } = usePost(
-      website["@id"],
-      "DELETE",
-      onDeleteCallback
-    );
+export const WebsiteItem = memo(({ website, onDeleteItem, onUpdateItem }) => {
+  const { isShowing: isShowingDelete, toggle: toggleDelete } = useModal();
+  const [state, setState] = useState(VIEW);
 
-    const handleDeleteClick = (e, website) => {
-      e.preventDefault();
+  const onDeleteCallback = useCallback(() => {
+    onDeleteItem(website);
+  }, [website]);
 
-      website.isDeleting = true;
-      deleteItem(website);
-    };
+  const handleDeleteClick = (e, website) => {
+    e.preventDefault();
+    website.isDeleting = true;
+    deleteItem(website);
+  };
 
-    return (
-      <tr
-        className={highlightedRowId === website.id ? "info" : ""}
-        onClick={(e) => onRowClick(website.id)}
-        style={{
-          opacity: website.isDeleting ? 0.3 : 1,
-        }}
-      >
-        <td>{website.id}</td>
-        <td>{website.url}</td>
-        <td>{website.title}</td>
-        <td>{website.description}</td>
-        <td>{website.image}</td>
-        <td>{website.comment}</td>
-        <td>
-          <button onClick={(e) => handleDeleteClick(e, website)}>
-            &#128465;
-          </button>
-        </td>
-      </tr>
-    );
-  }
-);
+  const { load: deleteItem, loading } = usePost(
+    website["@id"],
+    "DELETE",
+    onDeleteCallback
+  );
+
+  const handleEdit = useCallback(
+    (updatedItem) => {
+      onUpdateItem(updatedItem, website);
+      toggleEdit();
+    },
+    [website]
+  );
+
+  const toggleEdit = useCallback(() => {
+    setState((state) => (state === VIEW ? EDIT : VIEW));
+  }, []);
+
+  return (
+    <div
+      style={{
+        opacity: website.isDeleting ? 0.3 : 1,
+      }}
+    >
+      {state === VIEW ? (
+        <div>
+          <p>{website.id}</p>
+          <p>{website.url}</p>
+          <p>{website.title}</p>
+          <p>{website.description}</p>
+          <p>{website.image}</p>
+          <p>{website.comment}</p>
+        </div>
+      ) : (
+        <WebsiteForm
+          onAddItem={handleEdit}
+          website={website}
+          onCancel={toggleEdit}
+        />
+      )}
+      {state !== EDIT && (
+        <div>
+          <button onClick={toggleEdit}>&#9999;&#65039;</button>
+          <button onClick={toggleDelete}>&#128465;</button>
+          {isShowingDelete && (
+            <Modal
+              isShowing={isShowingDelete}
+              hide={toggleDelete}
+              title="Are you sure ?"
+            >
+              <button
+                disabled={loading}
+                onClick={(e) => handleDeleteClick(e, website)}
+              >
+                &#128465;
+              </button>
+              <button onClick={toggleDelete}>Cancel</button>
+            </Modal>
+          )}
+        </div>
+      )}
+    </div>
+  );
+});

@@ -2,12 +2,8 @@ import React, { memo, useCallback, useEffect, useState } from "react";
 import { WebsitesList } from "./WebsitesList";
 import { WebsiteForm } from "./WebsiteForm";
 import { useFetch } from "../api/websites_api";
-import useModal from "../component/useModal";
-import Modal from "../component/modal";
 
 export const Websites = memo(({}) => {
-  const { isShowing, toggle } = useModal();
-  const [highlightedRowId, setHighlightedRowId] = useState(null);
   const [successMessage, setSuccessMessage] = useState("");
   const [
     successMessageTimeoutHandle,
@@ -18,29 +14,32 @@ export const Websites = memo(({}) => {
     load: fetchApi,
     items: websites,
     setItems: setWebsites,
-    isLoaded,
+    isLoading,
     count,
     hasMore,
   } = useFetch("/api/websites");
-
-  const handleRowClick = (id) => {
-    setHighlightedRowId(id);
-  };
 
   const handleLoadMore = useCallback(() => {
     let more = true;
     fetchApi(more);
   });
 
-  const handleAddItem = (website) => {
-    setWebsites((websites) => [...websites, website]);
+  const handleAddItem = useCallback((website) => {
+    setWebsites((websites) => [website, ...websites]);
     displaySuccessMessage("Website saved !");
-  };
+  }, []);
 
-  const handleDeleteItem = (item) => {
+  const handleUpdateItem = useCallback((newItem, oldItem) => {
+    setWebsites((websites) =>
+      websites.map((item) => (item === oldItem ? newItem : item))
+    );
+    displaySuccessMessage("Website updated !");
+  }, []);
+
+  const handleDeleteItem = useCallback((item) => {
     setWebsites((websites) => websites.filter((site) => site !== item));
     displaySuccessMessage("Website deleted !");
-  };
+  }, []);
 
   const displaySuccessMessage = (message) => {
     setSuccessMessage(message);
@@ -67,18 +66,14 @@ export const Websites = memo(({}) => {
         <div className="alert alert-success">{successMessage}</div>
       )}
       <div>
-        <button onClick={toggle}>New</button>
-        <Modal isShowing={isShowing} hide={toggle} title="Create a new entry">
-          <WebsiteForm onAddItem={handleAddItem} />
-        </Modal>
+        <WebsiteForm onAddItem={handleAddItem} />
       </div>
       <WebsitesList
         websites={websites}
-        highlightedRowId={highlightedRowId}
         onLoadMore={handleLoadMore}
-        onRowClick={handleRowClick}
         onDeleteItem={handleDeleteItem}
-        isLoaded={isLoaded}
+        onUpdateItem={handleUpdateItem}
+        isLoading={isLoading}
         hasMore={hasMore}
       />
     </div>

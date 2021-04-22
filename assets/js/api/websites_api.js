@@ -31,12 +31,13 @@ function checkStatus(response) {
 
 export function useFetch(url) {
   const [items, setItems] = useState([]);
-  const [isLoaded, setIsLoaded] = useState(false);
+  const [isLoading, setIsLoading] = useState(false);
   const [count, setCount] = useState(0);
   const [next, setNext] = useState(null);
 
   const load = useCallback(
     async (more = false) => {
+      setIsLoading(true);
       try {
         const response = await fetchJson(more ? next : url);
         setItems((items) => [...items, ...response["hydra:member"]]);
@@ -49,29 +50,29 @@ export function useFetch(url) {
       } catch (error) {
         console.error(response);
       }
-      setIsLoaded(true);
+      setIsLoading(false);
     },
     [url, next]
   );
 
-  return { load, items, setItems, isLoaded, count, hasMore: next !== null };
+  return { load, items, setItems, isLoading, count, hasMore: next !== null };
 }
 
 export function usePost(url, method = "POST", callback = null) {
-  const [isSavingNewItem, setIsSavingNewItem] = useState(false);
+  const [isSaving, setIsSaving] = useState(false);
   const [errors, setErrors] = useState({});
 
   const load = useCallback(
     async (data = null) => {
-      setIsSavingNewItem(true);
+      setIsSaving(true);
       try {
         const response = await fetchJson(url, method, data);
-        setIsSavingNewItem(false);
+        setIsSaving(false);
         if (callback) {
           callback(response);
         }
       } catch (error) {
-        setIsSavingNewItem(false);
+        setIsSaving(false);
         error.response.json().then((errorsData) => {
           if (errorsData.violations) {
             setErrors(
@@ -98,5 +99,5 @@ export function usePost(url, method = "POST", callback = null) {
     [errors]
   );
 
-  return { load, isSavingNewItem, errors, clearErrors };
+  return { load, isSaving, errors, clearErrors };
 }

@@ -1,4 +1,4 @@
-import React, { memo, useCallback, useRef } from "react";
+import React, { memo, useCallback, useEffect, useRef } from "react";
 import { usePost } from "../api/websites_api";
 
 export const WebsiteForm = memo(
@@ -11,16 +11,19 @@ export const WebsiteForm = memo(
     const onSuccess = useCallback(
       (website) => {
         onAddItem(website);
-        urlRef.current.value = "";
-        titleRef.current.value = "";
-        descriptionRef.current.value = "";
-        commentRef.current.value = "";
+        if (urlRef.current) {
+          urlRef.current.value = "";
+          titleRef.current.value = "";
+          descriptionRef.current.value = "";
+          commentRef.current.value = "";
+        }
       },
-      [onAddItem]
+      [onAddItem, urlRef, titleRef, descriptionRef, commentRef]
     );
+
     const url = website ? website["@id"] : "/api/websites";
     const method = website ? "PUT" : "POST";
-    const { load: createNew, isSavingNewItem, errors, clearErrors } = usePost(
+    const { load: createNew, isSaving, errors, clearErrors } = usePost(
       url,
       method,
       onSuccess
@@ -30,22 +33,42 @@ export const WebsiteForm = memo(
       clearErrors(e.target.name);
     };
 
-    const handleFormSubmit = useCallback((e) => {
-      e.preventDefault();
-      const data = {
-        url: urlRef.current.value,
-        title: titleRef.current.value,
-        description: descriptionRef.current.value,
-        comment: commentRef.current.value,
-      };
+    const handleFormSubmit = useCallback(
+      (e) => {
+        e.preventDefault();
+        const data = {
+          url: urlRef.current.value,
+          title: titleRef.current.value,
+          description: descriptionRef.current.value,
+          comment: commentRef.current.value,
+        };
 
-      createNew(data);
-    });
+        createNew(data);
+      },
+      [createNew, urlRef, titleRef, descriptionRef, commentRef]
+    );
+
+    useEffect(() => {
+      if (website) {
+        if (website.url && urlRef.current) {
+          urlRef.current.value = website.url;
+        }
+        if (website.title && titleRef.current) {
+          titleRef.current.value = website.title;
+        }
+        if (website.description && descriptionRef.current) {
+          descriptionRef.current.value = website.description;
+        }
+        if (website.comment && commentRef.current) {
+          commentRef.current.value = website.comment;
+        }
+      }
+    }, [website]);
 
     return (
       <>
-        {isSavingNewItem && <div>Saving into the database...</div>}
-        <form onSubmit={handleFormSubmit} noValidate>
+        {isSaving && <div>Saving into the database...</div>}
+        <form method="post" onSubmit={handleFormSubmit} noValidate>
           <div>
             <div className={`${errors["url"] ? "has-error" : ""}`}>
               <label htmlFor="website_url" className="required">
@@ -102,9 +125,14 @@ export const WebsiteForm = memo(
               {errors["comment"] && <span>{errors["comment"]}</span>}
             </div>
           </div>
-          <button className="btn" type="submit" disabled={isSavingNewItem}>
-            Save
+          <button type="submit" disabled={isSaving}>
+            {website === null ? "Add" : "Edit"}
           </button>
+          {onCancel && (
+            <button type="submit" onClick={onCancel}>
+              Cancel
+            </button>
+          )}
         </form>
       </>
     );
