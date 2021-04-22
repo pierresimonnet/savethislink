@@ -8,6 +8,7 @@ const VIEW = "VIEW";
 const EDIT = "EDIT";
 
 export const WebsiteItem = memo(({ website, onDeleteItem, onUpdateItem }) => {
+  const date = new Date(website.createdAt);
   const { isShowing: isShowingDelete, toggle: toggleDelete } = useModal();
   const [state, setState] = useState(VIEW);
 
@@ -47,7 +48,13 @@ export const WebsiteItem = memo(({ website, onDeleteItem, onUpdateItem }) => {
     >
       {state === VIEW ? (
         <div>
-          <p>{website.id}</p>
+          <p>
+            {website.id} by {website.author.username} on{" "}
+            {date.toLocaleString(undefined, {
+              dateStyle: "short",
+              timeStyle: "short",
+            })}
+          </p>
           <a href={website.url}>{website.url}</a>
           <p>{website.title}</p>
           <p>{website.description}</p>
