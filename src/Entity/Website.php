@@ -37,22 +37,12 @@ class Website
     private $url;
 
     /**
-     * @ORM\Column(type="string", length=255)
-     * @Assert\NotBlank
-     * @Assert\Length(
-     *      min = 2,
-     *      max = 255
-     * )
+     * @ORM\Column(type="string", length=255, nullable=true)
      */
     private $title;
 
     /**
-     * @ORM\Column(type="string", length=255)
-     * @Assert\NotBlank
-     * @Assert\Length(
-     *      min = 2,
-     *      max = 255
-     * )
+     * @ORM\Column(type="string", length=255, nullable=true)
      */
     private $description;
 
@@ -63,9 +53,6 @@ class Website
 
     /**
      * @ORM\Column(type="text", nullable=true)
-     * @Assert\Length(
-     *      min = 2
-     * )
      */
     private $comment;
 

@@ -4,8 +4,6 @@ import { usePost } from "../api/websites_api";
 export const WebsiteForm = memo(
   ({ onAddItem, onCancel = null, website = null }) => {
     const urlRef = useRef(null);
-    const titleRef = useRef(null);
-    const descriptionRef = useRef(null);
     const commentRef = useRef(null);
 
     const onSuccess = useCallback(
@@ -13,12 +11,10 @@ export const WebsiteForm = memo(
         onAddItem(website);
         if (urlRef.current) {
           urlRef.current.value = "";
-          titleRef.current.value = "";
-          descriptionRef.current.value = "";
           commentRef.current.value = "";
         }
       },
-      [onAddItem, urlRef, titleRef, descriptionRef, commentRef]
+      [onAddItem, urlRef, commentRef]
     );
 
     const url = website ? website["@id"] : "/api/websites";
@@ -38,26 +34,18 @@ export const WebsiteForm = memo(
         e.preventDefault();
         const data = {
           url: urlRef.current.value,
-          title: titleRef.current.value,
-          description: descriptionRef.current.value,
           comment: commentRef.current.value,
         };
 
         createNew(data);
       },
-      [createNew, urlRef, titleRef, descriptionRef, commentRef]
+      [createNew, urlRef, commentRef]
     );
 
     useEffect(() => {
       if (website) {
         if (website.url && urlRef.current) {
           urlRef.current.value = website.url;
-        }
-        if (website.title && titleRef.current) {
-          titleRef.current.value = website.title;
-        }
-        if (website.description && descriptionRef.current) {
-          descriptionRef.current.value = website.description;
         }
         if (website.comment && commentRef.current) {
           commentRef.current.value = website.comment;
@@ -83,33 +71,6 @@ export const WebsiteForm = memo(
                 onChange={handleChange}
               />
               {errors["url"] && <span>{errors["url"]}</span>}
-            </div>
-            <div className={`${errors["title"] ? "has-error" : ""}`}>
-              <label htmlFor="website_title" className="required">
-                Title
-              </label>
-              <input
-                type="text"
-                id="website_title"
-                name="title"
-                required="required"
-                ref={titleRef}
-                onChange={handleChange}
-              />
-              {errors["title"] && <span>{errors["title"]}</span>}
-            </div>
-            <div className={`${errors["description"] ? "has-error" : ""}`}>
-              <label htmlFor="website_description" className="required">
-                Description
-              </label>
-              <textarea
-                id="website_description"
-                name="description"
-                required="required"
-                ref={descriptionRef}
-                onChange={handleChange}
-              ></textarea>
-              {errors["description"] && <span>{errors["description"]}</span>}
             </div>
             <div className={`${errors["comment"] ? "has-error" : ""}`}>
               <label htmlFor="website_comment" className="required">

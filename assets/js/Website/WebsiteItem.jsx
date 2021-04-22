@@ -48,7 +48,7 @@ export const WebsiteItem = memo(({ website, onDeleteItem, onUpdateItem }) => {
       {state === VIEW ? (
         <div>
           <p>{website.id}</p>
-          <p>{website.url}</p>
+          <a href={website.url}>{website.url}</a>
           <p>{website.title}</p>
           <p>{website.description}</p>
           <p>{website.image}</p>
