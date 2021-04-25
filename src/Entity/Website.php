@@ -76,6 +76,12 @@ class Website
      */
     private $author;
 
+    /**
+     * @ORM\ManyToOne(targetEntity=Theme::class, inversedBy="websites")
+     * @ORM\JoinColumn(nullable=false)
+     */
+    private $theme;
+
     public function __construct()
     {
         $this->createdAt = new \DateTimeImmutable();
@@ -166,6 +172,18 @@ class Website
     public function setAuthor(?User $author): self
     {
         $this->author = $author;
+
+        return $this;
+    }
+
+    public function getTheme(): ?Theme
+    {
+        return $this->theme;
+    }
+
+    public function setTheme(?Theme $theme): self
+    {
+        $this->theme = $theme;
 
         return $this;
     }

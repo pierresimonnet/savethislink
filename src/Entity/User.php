@@ -47,9 +47,15 @@ class User implements UserInterface
      */
     private $websites;
 
+    /**
+     * @ORM\OneToMany(targetEntity=Theme::class, mappedBy="owner", orphanRemoval=true)
+     */
+    private $themes;
+
     public function __construct()
     {
         $this->websites = new ArrayCollection();
+        $this->themes = new ArrayCollection();
     }
 
     public function getId(): ?int
@@ -152,6 +158,36 @@ class User implements UserInterface
             // set the owning side to null (unless already changed)
             if ($website->getAuthor() === $this) {
                 $website->setAuthor(null);
+            }
+        }
+
+        return $this;
+    }
+
+    /**
+     * @return Collection|Theme[]
+     */
+    public function getThemes(): Collection
+    {
+        return $this->themes;
+    }
+
+    public function addTheme(Theme $theme): self
+    {
+        if (!$this->themes->contains($theme)) {
+            $this->themes[] = $theme;
+            $theme->setOwner($this);
+        }
+
+        return $this;
+    }
+
+    public function removeTheme(Theme $theme): self
+    {
+        if ($this->themes->removeElement($theme)) {
+            // set the owning side to null (unless already changed)
+            if ($theme->getOwner() === $this) {
+                $theme->setOwner(null);
             }
         }
 
