@@ -10,8 +10,31 @@ use Doctrine\ORM\Mapping as ORM;
 use Symfony\Component\Serializer\Annotation\Groups;
 
 /**
- * @ApiResource()
+ * @ApiResource(
+ *      collectionOperations={
+ *          "get", 
+ *          "post"={"security"="is_granted('ROLE_USER')"}
+ *      },
+ *      itemOperations={
+ *          "get", 
+ *          "put"={
+ *              "security"="is_granted('THEME_EDIT', object)",
+ *              "security_message"="Only the author can edit a theme"
+ *          }, 
+ *          "delete"={
+ *              "security"="is_granted('THEME_DELETE', object)",
+ *              "security_message"="Only the author can delete a theme"
+ *          }
+ *      },
+ *      normalizationContext={"groups"={"theme:read"}},
+ *      denormalizationContext={"groups"={"theme:write"}},
+ *      attributes={
+ *          "order"={"id": "DESC"},
+ *          "pagination_items_per_page"=10
+ *      },
+ * )
  * @ORM\Entity(repositoryClass=ThemeRepository::class)
+ * @ORM\EntityListeners({"App\Doctrine\ThemeSetOwnerListener"})
  */
 class Theme
 {
@@ -19,29 +42,32 @@ class Theme
      * @ORM\Id
      * @ORM\GeneratedValue
      * @ORM\Column(type="integer")
-     * @Groups({"website:read"})
+     * @Groups({"theme:read", "website:read"})
      */
     private $id;
 
     /**
      * @ORM\Column(type="string", length=255)
-     * @Groups({"website:read"})
+     * @Groups({"theme:read", "theme:write", "website:read"})
      */
     private $title;
 
     /**
      * @ORM\Column(type="text", nullable=true)
+     * @Groups({"theme:read", "theme:write"})
      */
     private $description;
 
     /**
      * @ORM\Column(type="datetime")
+     * @Groups({"theme:read"})
      */
     private $createdAt;
 
     /**
      * @ORM\ManyToOne(targetEntity=User::class, inversedBy="themes")
      * @ORM\JoinColumn(nullable=false)
+     * @Groups({"theme:read"})
      */
     private $owner;
 

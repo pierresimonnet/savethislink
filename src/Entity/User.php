@@ -21,13 +21,13 @@ class User implements UserInterface
      * @ORM\Id
      * @ORM\GeneratedValue
      * @ORM\Column(type="integer")
-     * @Groups({"website:read"})
+     * @Groups({"website:read", "theme:read"})
      */
     private $id;
 
     /**
      * @ORM\Column(type="string", length=180, unique=true)
-     * @Groups({"website:read"})
+     * @Groups({"website:read", "theme:read"})
      */
     private $username;
 

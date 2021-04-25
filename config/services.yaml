@@ -32,3 +32,7 @@ services:
   App\Doctrine\WebsiteSetAuthorListener:
     tags:
       - { name: doctrine.orm.entity_listener, lazy: true }
+
+  App\Doctrine\ThemeSetOwnerListener:
+    tags:
+      - { name: doctrine.orm.entity_listener, lazy: true }
