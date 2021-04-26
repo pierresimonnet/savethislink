@@ -8,5 +8,8 @@
 
 {% block javascripts %}
     {{ parent() }}
+    <script>
+        window.USER = {{ app.user ? app.user.id : 0 }}
+    </script>
     {{ encore_entry_script_tags('website') }}
 {% endblock %}

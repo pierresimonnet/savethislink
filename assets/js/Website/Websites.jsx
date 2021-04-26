@@ -3,7 +3,7 @@ import { WebsitesList } from "./WebsitesList";
 import { WebsiteForm } from "./WebsiteForm";
 import { useFetch } from "../api/websites_api";
 
-export const Websites = memo(({}) => {
+export const Websites = memo(({ user }) => {
   const [successMessage, setSuccessMessage] = useState("");
   const [
     successMessageTimeoutHandle,
@@ -65,10 +65,9 @@ export const Websites = memo(({}) => {
       {successMessage && (
         <div className="alert alert-success">{successMessage}</div>
       )}
-      <div>
-        <WebsiteForm onAddItem={handleAddItem} />
-      </div>
+      {user && <WebsiteForm onAddItem={handleAddItem} user={user} />}
       <WebsitesList
+        user={user}
         websites={websites}
         onLoadMore={handleLoadMore}
         onDeleteItem={handleDeleteItem}

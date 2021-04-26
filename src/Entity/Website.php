@@ -7,6 +7,7 @@ use App\Repository\WebsiteRepository;
 use Doctrine\ORM\Mapping as ORM;
 use Symfony\Component\Validator\Constraints as Assert;
 use Symfony\Component\Serializer\Annotation\Groups;
+use App\Validator\ThemeOwner;
 
 /**
  * @ApiResource(
@@ -79,6 +80,10 @@ class Website
     /**
      * @ORM\ManyToOne(targetEntity=Theme::class, inversedBy="websites")
      * @ORM\JoinColumn(nullable=false)
+     * @Groups({"website:read", "website:write"})
+     * @Assert\NotBlank
+     * @Assert\Valid()
+     * @ThemeOwner
      */
     private $theme;
 

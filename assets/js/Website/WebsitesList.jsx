@@ -9,6 +9,7 @@ export const WebsitesList = memo(
     onDeleteItem,
     onUpdateItem,
     hasMore,
+    user,
   }) => {
     return (
       <>
@@ -26,6 +27,7 @@ export const WebsitesList = memo(
             websites.map((website) => {
               return (
                 <WebsiteItem
+                  userId={user}
                   key={website.id}
                   website={website}
                   onDeleteItem={onDeleteItem}
