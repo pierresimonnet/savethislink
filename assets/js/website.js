@@ -1,8 +1,5 @@
 import React from "react";
 import { render } from "react-dom";
-import WebsiteApp from "./Website/WebsiteApp";
+import ItemApp from "./items/ItemApp";
 
-render(
-  <WebsiteApp user={window.USER} />,
-  document.getElementById("website-app")
-);
+render(<ItemApp user={window.USER} />, document.getElementById("website-app"));
