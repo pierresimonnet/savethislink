@@ -3,6 +3,6 @@ import { render } from "react-dom";
 import ItemApp from "./items/ItemApp";
 
 render(
-  <ItemApp user={window.USER} ressource="websites" />,
-  document.getElementById("website-app")
+  <ItemApp user={window.USER} ressource="themes" />,
+  document.getElementById("theme-app")
 );

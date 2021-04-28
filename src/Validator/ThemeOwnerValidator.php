@@ -2,7 +2,6 @@
 
 namespace App\Validator;
 
-use App\Repository\ThemeRepository;
 use Symfony\Component\Security\Core\Security;
 use Symfony\Component\Validator\Constraint;
 use Symfony\Component\Validator\ConstraintValidator;
@@ -10,12 +9,10 @@ use Symfony\Component\Validator\ConstraintValidator;
 class ThemeOwnerValidator extends ConstraintValidator
 {
     private $security;
-    private $themeRepository;
 
-    public function __construct(Security $security, ThemeRepository $themeRepository)
+    public function __construct(Security $security)
     {
         $this->security = $security;
-        $this->themeRepository = $themeRepository;
     }
 
     public function validate($value, Constraint $constraint)
@@ -26,9 +23,8 @@ class ThemeOwnerValidator extends ConstraintValidator
             return;
         }
 
-        $isOwner = $this->themeRepository->findOneBy(['owner' => $this->security->getUser()]) === $value;
-
-        if ($isOwner) {
+        /** @var \App\Entity\Theme $value */
+        if ($this->security->getUser() === $value->getOwner()) {
             return;
         }
 

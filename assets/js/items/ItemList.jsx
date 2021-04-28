@@ -11,6 +11,7 @@ const ItemList = memo(
     onEditItem,
     onRemoveItem,
     user,
+    ressource,
   }) => {
     return (
       <div>
@@ -31,6 +32,7 @@ const ItemList = memo(
                 edit={onEditItem}
                 remove={onRemoveItem}
                 user={user}
+                ressource={ressource}
               />
             ))
           )}

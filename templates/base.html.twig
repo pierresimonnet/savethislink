@@ -11,6 +11,9 @@
         {% endblock %}
 
         {% block javascripts %}
+            <script>
+                window.USER = {{ app.user ? app.user.id : null }}
+            </script>
             {{ encore_entry_script_tags('app') }}
         {% endblock %}
     </head>
