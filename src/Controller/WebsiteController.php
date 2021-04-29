@@ -2,6 +2,7 @@
 
 namespace App\Controller;
 
+use App\Entity\Theme;
 use App\Entity\Website;
 use App\Form\WebsiteType;
 use App\Repository\WebsiteRepository;
@@ -21,10 +22,14 @@ class WebsiteController extends AbstractController
         ]);
     }
 
-    #[Route('/new', name: 'website_new', methods: ['GET', 'POST'])]
-    public function new(Request $request): Response
+    #[Route('/new/{slug}', name: 'website_new', methods: ['GET', 'POST'])]
+    public function new(Request $request, Theme $theme): Response
     {
+        $this->denyAccessUnlessGranted('THEME_CREATE_CONTENT', $theme);
+        
         $website = new Website();
+        $website->setTheme($theme);
+        
         $form = $this->createForm(WebsiteType::class, $website);
         $form->handleRequest($request);
 

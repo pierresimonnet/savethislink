@@ -6,14 +6,14 @@ use Symfony\Component\Security\Core\Authentication\Token\TokenInterface;
 use Symfony\Component\Security\Core\Authorization\Voter\Voter;
 use Symfony\Component\Security\Core\User\UserInterface;
 
-class ContentVoter extends Voter
+class ThemeVoter extends Voter
 {
     protected function supports($attribute, $subject)
     {
         // replace with your own logic
         // https://symfony.com/doc/current/security/voters.html
-        return in_array($attribute, ['CONTENT_CREATE', 'CONTENT_EDIT', 'CONTENT_DELETE'])
-            && $subject instanceof \App\Entity\Website;
+        return in_array($attribute, ['THEME_CREATE_CONTENT', 'THEME_EDIT', 'THEME_DELETE'])
+            && $subject instanceof \App\Entity\Theme;
     }
 
     protected function voteOnAttribute($attribute, $subject, TokenInterface $token)
@@ -23,19 +23,16 @@ class ContentVoter extends Voter
         if (!$user instanceof UserInterface) {
             return false;
         }
-        
-        /** @var \App\Entity\Website $subject */
+
+        /** @var \App\Entity\Theme $subject */
         switch ($attribute) {
-            case 'CONTENT_CREATE':
-                if ($subject->getTheme()->getOwner() === $user) {
+            case 'THEME_CREATE_CONTENT':
+            case 'THEME_EDIT':
+                if ($subject->getOwner() === $user) {
                     return true;
                 }
-            case 'CONTENT_EDIT':
-                if ($subject->getAuthor() === $user) {
-                    return true;
-                }
-            case 'CONTENT_DELETE':
-                if ($subject->getAuthor() === $user) {
+            case 'THEME_DELETE':
+                if ($subject->getOwner() === $user) {
                     return true;
                 }
                 

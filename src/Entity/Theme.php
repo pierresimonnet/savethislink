@@ -37,7 +37,7 @@ use ApiPlatform\Core\Bridge\Doctrine\Orm\Filter\SearchFilter;
  * )
  * @ApiFilter(SearchFilter::class, properties={"title": "partial", "description": "partial", "owner": "exact"})
  * @ORM\Entity(repositoryClass=ThemeRepository::class)
- * @ORM\EntityListeners({"App\Doctrine\ThemeSetOwnerListener"})
+ * @ORM\EntityListeners({"App\Doctrine\ThemeSetSlugListener", "App\Doctrine\ThemeSetOwnerListener"})
  */
 class Theme
 {
@@ -78,6 +78,12 @@ class Theme
      * @ORM\OneToMany(targetEntity=Website::class, mappedBy="theme", orphanRemoval=true)
      */
     private $websites;
+
+    /**
+     * @ORM\Column(type="string", length=255)
+     * @Groups({"theme:read", "website:read"})
+     */
+    private $slug;
 
     public function __construct()
     {
@@ -164,6 +170,18 @@ class Theme
                 $website->setTheme(null);
             }
         }
+
+        return $this;
+    }
+
+    public function getSlug(): ?string
+    {
+        return $this->slug;
+    }
+
+    public function setSlug(string $slug): self
+    {
+        $this->slug = $slug;
 
         return $this;
     }

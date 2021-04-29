@@ -13,7 +13,7 @@ use App\Validator\ThemeOwner;
  * @ApiResource(
  *      collectionOperations={
  *          "get", 
- *          "post"={"security"="is_granted('ROLE_USER')"}
+ *          "post"={"security"="is_granted('CONTENT_CREATE', object)"}
  *      },
  *      itemOperations={
  *          "get", 

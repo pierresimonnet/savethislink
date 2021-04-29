@@ -42,7 +42,7 @@ class ThemeController extends AbstractController
         ]);
     }
 
-    #[Route('/{id}', name: 'theme_show', methods: ['GET'])]
+    #[Route('/{slug}', name: 'theme_show', methods: ['GET'])]
     public function show(Theme $theme): Response
     {
         return $this->render('theme/show.html.twig', [

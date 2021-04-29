@@ -47,9 +47,15 @@ const Item = memo(({ item, edit, remove, user, ressource }) => {
       <Card>
         {ressource === "websites" && (
           <>
-            <CardHeader>{item.theme.title}</CardHeader>
+            <CardHeader>
+              <a href={`/themes/${item.theme.slug}`}>{item.theme.title}</a>
+            </CardHeader>
             <CardBody>
-              <CardTitle tag="h5">{item.url}</CardTitle>
+              <CardTitle tag="h5">
+                <a href={item.url} target="_blank" rel="noopener noreferrer">
+                  {item.url}
+                </a>
+              </CardTitle>
               <CardText>{item.comment}</CardText>
             </CardBody>
             {item.author.id === user && (
@@ -68,7 +74,9 @@ const Item = memo(({ item, edit, remove, user, ressource }) => {
         {ressource === "themes" && (
           <>
             <CardBody>
-              <CardTitle tag="h5">{item.title}</CardTitle>
+              <CardTitle tag="h5">
+                <a href={`/themes/${item.slug}`}>{item.title}</a>
+              </CardTitle>
               <CardSubtitle tag="h6" className="mb-2 text-muted">
                 {item.owner.username}
               </CardSubtitle>
@@ -76,10 +84,12 @@ const Item = memo(({ item, edit, remove, user, ressource }) => {
             </CardBody>
             {item.owner.id === user && (
               <CardFooter className="text-muted">
+                <a href={`/websites/new/${item.slug}`}>
+                  <Button>&#43; Add</Button>
+                </a>
                 <Button onClick={toggleEdit} disabled={isSaving}>
                   &#9999;&#65039; edit
                 </Button>
-
                 <Button onClick={toggleDelete} disabled={isSaving}>
                   &#128465; delete
                 </Button>

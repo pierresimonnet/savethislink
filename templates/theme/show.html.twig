@@ -4,7 +4,7 @@
 
 {% block body %}
     <h1>Theme</h1>
-
+    <a href="{{ path('theme_index') }}">back to list</a>
     <table class="table">
         <tbody>
             <tr>
@@ -25,10 +25,13 @@
             </tr>
         </tbody>
     </table>
-
-    <a href="{{ path('theme_index') }}">back to list</a>
-
     <a href="{{ path('theme_edit', {'id': theme.id}) }}">edit</a>
-
     {{ include('theme/_delete_form.html.twig') }}
+    <a href="{{ path('website_new', {'slug': theme.slug}) }}">Add a website</a>
+    {% for website in theme.getWebsites() %}
+        <p>website.url</p>
+        <a href="{{ path('website_edit', {'id': website.id}) }}">Edit</a>
+    {% else %}
+        <p>no websites</p>
+    {% endfor %}
 {% endblock %}
