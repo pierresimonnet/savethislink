@@ -3,6 +3,7 @@ import {
   Card,
   CardImg,
   CardText,
+  CardHeader,
   CardBody,
   CardFooter,
   CardTitle,
@@ -46,11 +47,9 @@ const Item = memo(({ item, edit, remove, user, ressource }) => {
       <Card>
         {ressource === "websites" && (
           <>
+            <CardHeader>{item.theme.title}</CardHeader>
             <CardBody>
               <CardTitle tag="h5">{item.url}</CardTitle>
-              <CardSubtitle tag="h6" className="mb-2 text-muted">
-                {item.theme.title}
-              </CardSubtitle>
               <CardText>{item.comment}</CardText>
             </CardBody>
             {item.author.id === user && (

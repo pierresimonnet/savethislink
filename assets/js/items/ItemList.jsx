@@ -1,6 +1,5 @@
 import React, { memo } from "react";
 import Item from "./Item";
-import { Spinner } from "reactstrap";
 
 const ItemList = memo(
   ({
@@ -19,7 +18,13 @@ const ItemList = memo(
           className="itemsContainer"
           style={{ display: "flex", flexWrap: "wrap" }}
         >
-          {isLoading && <Spinner color="secondary" />}
+          {isLoading && (
+            <div className="d-flex justify-content-center">
+              <div className="spinner-border" role="status">
+                <span className="visually-hidden">Loading...</span>
+              </div>
+            </div>
+          )}
           {!isLoading && items.length === 0 ? (
             <p colSpan="7" className="text-center">
               No data

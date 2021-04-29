@@ -65,10 +65,10 @@ const ItemApp = ({ user, ressource }) => {
   return (
     <>
       <div className="header text-center">
-        <h3>Item List</h3>
+        <h3>{ressource}</h3>
         {user && (
           <button onClick={toggle} className="btn btn-primary">
-            Create item
+            Create
           </button>
         )}
       </div>

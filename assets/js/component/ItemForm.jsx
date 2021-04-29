@@ -62,6 +62,7 @@ const ItemForm = memo(({ onSave, item = null, user, toggle }) => {
           ref={themeRef}
           error={errors["theme"]}
           user={user}
+          onChange={handleChange}
           selected={item ? item.theme["@id"] : ""}
         >
           Choose a theme

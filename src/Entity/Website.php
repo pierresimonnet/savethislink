@@ -81,8 +81,8 @@ class Website
      * @ORM\ManyToOne(targetEntity=Theme::class, inversedBy="websites")
      * @ORM\JoinColumn(nullable=false)
      * @Groups({"website:read", "website:write"})
-     * @Assert\NotBlank
      * @Assert\Valid()
+     * @Assert\NotBlank
      * @ThemeOwner
      */
     private $theme;
