@@ -24,6 +24,8 @@ class ThemeController extends AbstractController
     #[Route('/new', name: 'theme_new', methods: ['GET', 'POST'])]
     public function new(Request $request): Response
     {
+        $this->denyAccessUnlessGranted('ROLE_USER');
+
         $theme = new Theme();
         $form = $this->createForm(ThemeType::class, $theme);
         $form->handleRequest($request);
@@ -53,6 +55,8 @@ class ThemeController extends AbstractController
     #[Route('/{id}/edit', name: 'theme_edit', methods: ['GET', 'POST'])]
     public function edit(Request $request, Theme $theme): Response
     {
+        $this->denyAccessUnlessGranted('THEME_EDIT', $theme);
+
         $form = $this->createForm(ThemeType::class, $theme);
         $form->handleRequest($request);
 
@@ -71,6 +75,8 @@ class ThemeController extends AbstractController
     #[Route('/{id}', name: 'theme_delete', methods: ['POST'])]
     public function delete(Request $request, Theme $theme): Response
     {
+        $this->denyAccessUnlessGranted('THEME_DELETE', $theme);
+
         if ($this->isCsrfTokenValid('delete'.$theme->getId(), $request->request->get('_token'))) {
             $entityManager = $this->getDoctrine()->getManager();
             $entityManager->remove($theme);

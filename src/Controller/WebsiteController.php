@@ -59,6 +59,8 @@ class WebsiteController extends AbstractController
     #[Route('/{id}/edit', name: 'website_edit', methods: ['GET', 'POST'])]
     public function edit(Request $request, Website $website): Response
     {
+        $this->denyAccessUnlessGranted('CONTENT_EDIT', $website);
+
         $form = $this->createForm(WebsiteType::class, $website);
         $form->handleRequest($request);
 
@@ -78,6 +80,8 @@ class WebsiteController extends AbstractController
     #[Route('/{id}', name: 'website_delete', methods: ['POST'])]
     public function delete(Request $request, Website $website): Response
     {
+        $this->denyAccessUnlessGranted('CONTENT_DELETE', $website);
+        
         if ($this->isCsrfTokenValid('delete'.$website->getId(), $request->request->get('_token'))) {
             $entityManager = $this->getDoctrine()->getManager();
             $entityManager->remove($website);

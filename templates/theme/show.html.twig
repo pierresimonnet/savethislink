@@ -3,14 +3,9 @@
 {% block title %}Theme{% endblock %}
 
 {% block body %}
-    <h1>Theme</h1>
     <a href="{{ path('theme_index') }}">back to list</a>
     <table class="table">
         <tbody>
-            <tr>
-                <th>Id</th>
-                <td>{{ theme.id }}</td>
-            </tr>
             <tr>
                 <th>Title</th>
                 <td>{{ theme.title }}</td>
@@ -20,17 +15,20 @@
                 <td>{{ theme.description }}</td>
             </tr>
             <tr>
-                <th>CreatedAt</th>
-                <td>{{ theme.createdAt ? theme.createdAt|date('Y-m-d H:i:s') : '' }}</td>
+                <th>Owner</th>
+                <td>{{ theme.owner.username }}</td>
             </tr>
         </tbody>
     </table>
-    <a href="{{ path('theme_edit', {'id': theme.id}) }}">edit</a>
-    {{ include('theme/_delete_form.html.twig') }}
-    <a href="{{ path('website_new', {'slug': theme.slug}) }}">Add a website</a>
+    
+    {% if app.user and app.user == theme.owner %}
+        <a href="{{ path('theme_edit', {'id': theme.id}) }}">edit</a>
+        {{ include('theme/_delete_form.html.twig') }}
+        <a href="{{ path('website_new', {'slug': theme.slug}) }}">Add a website</a>
+    {% endif %}
+
     {% for website in theme.getWebsites() %}
-        <p>website.url</p>
-        <a href="{{ path('website_edit', {'id': website.id}) }}">Edit</a>
+        <p>website card here</p>
     {% else %}
         <p>no websites</p>
     {% endfor %}
