@@ -52,14 +52,14 @@ class User implements UserInterface
     private $password;
 
     /**
-     * @ORM\OneToMany(targetEntity=Website::class, mappedBy="author", orphanRemoval=true)
-     */
-    private $websites;
-
-    /**
      * @ORM\OneToMany(targetEntity=Theme::class, mappedBy="owner", orphanRemoval=true)
      */
     private $themes;
+
+    /**
+     * @ORM\OneToMany(targetEntity=Website::class, mappedBy="owner", orphanRemoval=true)
+     */
+    private $websites;
 
     public function __construct()
     {
@@ -144,36 +144,6 @@ class User implements UserInterface
     }
 
     /**
-     * @return Collection|Website[]
-     */
-    public function getWebsites(): Collection
-    {
-        return $this->websites;
-    }
-
-    public function addWebsite(Website $website): self
-    {
-        if (!$this->websites->contains($website)) {
-            $this->websites[] = $website;
-            $website->setAuthor($this);
-        }
-
-        return $this;
-    }
-
-    public function removeWebsite(Website $website): self
-    {
-        if ($this->websites->removeElement($website)) {
-            // set the owning side to null (unless already changed)
-            if ($website->getAuthor() === $this) {
-                $website->setAuthor(null);
-            }
-        }
-
-        return $this;
-    }
-
-    /**
      * @return Collection|Theme[]
      */
     public function getThemes(): Collection
@@ -197,6 +167,36 @@ class User implements UserInterface
             // set the owning side to null (unless already changed)
             if ($theme->getOwner() === $this) {
                 $theme->setOwner(null);
+            }
+        }
+
+        return $this;
+    }
+
+    /**
+     * @return Collection|Website[]
+     */
+    public function getWebsites(): Collection
+    {
+        return $this->websites;
+    }
+
+    public function addWebsite(Website $website): self
+    {
+        if (!$this->websites->contains($website)) {
+            $this->websites[] = $website;
+            $website->setOwner($this);
+        }
+
+        return $this;
+    }
+
+    public function removeWebsite(Website $website): self
+    {
+        if ($this->websites->removeElement($website)) {
+            // set the owning side to null (unless already changed)
+            if ($website->getOwner() === $this) {
+                $website->setOwner(null);
             }
         }
 

@@ -34,9 +34,9 @@ use App\Validator\ThemeOwner;
  *      },
  * )
  * @ORM\Entity(repositoryClass=WebsiteRepository::class)
- * @ORM\EntityListeners({"App\Doctrine\WebsiteSetAuthorListener"})
+ * @ORM\EntityListeners({"App\Doctrine\WebsiteSetOwnerListener"})
  */
-class Website
+class Website implements UserOwnedInterface
 {
     /**
      * @ORM\Id
@@ -71,13 +71,6 @@ class Website
     private $createdAt;
 
     /**
-     * @ORM\ManyToOne(targetEntity=User::class, inversedBy="websites")
-     * @ORM\JoinColumn(nullable=false)
-     * @Groups({"website:read"})
-     */
-    private $author;
-
-    /**
      * @ORM\ManyToOne(targetEntity=Theme::class, inversedBy="websites")
      * @ORM\JoinColumn(nullable=false)
      * @Groups({"website:read", "website:write"})
@@ -86,6 +79,13 @@ class Website
      * @ThemeOwner
      */
     private $theme;
+
+    /**
+     * @ORM\ManyToOne(targetEntity=User::class, inversedBy="websites")
+     * @ORM\JoinColumn(nullable=false)
+     * @Groups({"website:read"})
+     */
+    private $owner;
 
     public function __construct()
     {
@@ -169,18 +169,6 @@ class Website
         return $this;
     }
 
-    public function getAuthor(): ?User
-    {
-        return $this->author;
-    }
-
-    public function setAuthor(?User $author): self
-    {
-        $this->author = $author;
-
-        return $this;
-    }
-
     public function getTheme(): ?Theme
     {
         return $this->theme;
@@ -189,6 +177,18 @@ class Website
     public function setTheme(?Theme $theme): self
     {
         $this->theme = $theme;
+
+        return $this;
+    }
+
+    public function getOwner(): ?User
+    {
+        return $this->owner;
+    }
+
+    public function setOwner(?User $owner): self
+    {
+        $this->owner = $owner;
 
         return $this;
     }

@@ -39,7 +39,7 @@ use ApiPlatform\Core\Bridge\Doctrine\Orm\Filter\SearchFilter;
  * @ORM\Entity(repositoryClass=ThemeRepository::class)
  * @ORM\EntityListeners({"App\Doctrine\ThemeSetSlugListener", "App\Doctrine\ThemeSetOwnerListener"})
  */
-class Theme
+class Theme implements UserOwnedInterface
 {
     /**
      * @ORM\Id

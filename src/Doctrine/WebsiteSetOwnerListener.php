@@ -6,7 +6,7 @@ use App\Entity\User;
 use App\Entity\Website;
 use Symfony\Component\Security\Core\Security;
 
-class WebsiteSetAuthorListener
+class WebsiteSetOwnerListener
 {
     private Security $security;
 
@@ -17,7 +17,7 @@ class WebsiteSetAuthorListener
 
     public function prePersist(Website $content): void
     {
-        if ($content->getAuthor()) {
+        if ($content->getOwner()) {
             return;
         }
 
@@ -25,7 +25,7 @@ class WebsiteSetAuthorListener
             /** @var User $user */
             $user = $this->security->getUser();
 
-            $content->setAuthor($user);
+            $content->setOwner($user);
         }
     }
 }
