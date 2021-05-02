@@ -69,7 +69,7 @@ const ItemApp = ({ user, ressource }) => {
       <div className="header text-center">
         <h3>{ressource}</h3>
         {user && (
-          <button onClick={toggle} className="btn btn-primary">
+          <button onClick={toggle} className="button-primary button-big">
             Create
           </button>
         )}

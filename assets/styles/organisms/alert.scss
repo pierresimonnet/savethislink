@@ -1,0 +1,28 @@
+.alertContainer {
+  position: fixed;
+  bottom: 16px;
+  right: 16px;
+}
+
+.alert {
+  padding: 6px 8px;
+  border-radius: var(--radius);
+  width: 100%;
+}
+
+.alert-success {
+  background-color: var(--success);
+}
+
+.alert-warning {
+  background-color: var(--warning);
+}
+
+.alert-error {
+  background-color: var(--error);
+  color: var(--color-light);
+}
+
+.alert-info {
+  background-color: var(--info);
+}

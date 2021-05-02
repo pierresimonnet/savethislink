@@ -152,6 +152,14 @@ class Theme implements UserOwnedInterface
         return $this->websites;
     }
 
+    /**
+     * @Groups({"theme:read"})
+     */
+    public function getWebsitesCount(): int
+    {
+        return $this->websites->count();
+    }
+
     public function addWebsite(Website $website): self
     {
         if (!$this->websites->contains($website)) {

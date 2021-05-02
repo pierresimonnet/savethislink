@@ -1,23 +1,39 @@
-//@import "~bootstrap/scss/bootstrap";
 // Variables
 // Static variables
 $font: "Arial", sans-serif;
 // Dynamic variables
 :root {
+  --primary: #be01be;
+  --secondary: #4901be;
+  --color-dark: #111111;
+  --color-light: #fdfdfd;
+  --color-muted: #757575;
   --background: #f5f4f8;
+  --success: #76ff5b;
+  --warning: #fff155;
+  --error: #ff4664;
+  --info: #ededf0;
+  --radius: 8px;
 }
 
 // Tools
-//@import "tools/reset";
+@import "tools/reset";
+@import "tools/typography";
+@import "tools/mixin";
 
 // Atomes
+@import "atomes/button.scss";
+@import "atomes/pill.scss";
 
 // Molecules
 
 // Organisms
+@import "organisms/alert.scss";
 @import "organisms/modal.scss";
+@import "organisms/card.scss";
 
 // Templates
+@import "templates/layout.scss";
 
 html {
   height: 100%;

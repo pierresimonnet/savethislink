@@ -1,0 +1,12 @@
+a {
+  text-decoration: none;
+  color: inherit;
+}
+
+a.decorated {
+  text-decoration: underline;
+}
+
+.text-muted {
+  color: var(--color-muted);
+}

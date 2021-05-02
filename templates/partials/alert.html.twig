@@ -1,0 +1,7 @@
+{% for label, messages in app.flashes %}
+    <div class="listMargin-sm alertContainer">
+    {% for message in messages %}
+        <div class="alert alert-"{{label}}>{{ message }}</div>
+    {% endfor %}
+    </div>
+{% endfor %}  

@@ -5,6 +5,7 @@ const useModal = () => {
 
   function toggle() {
     setIsShowing(!isShowing);
+    document.body.classList.toggle("modal-isopen");
   }
 
   return { isShowing, toggle };

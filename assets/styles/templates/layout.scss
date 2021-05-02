@@ -1,0 +1,38 @@
+:root {
+  --container: calc(100% - 40px);
+  --container-max: 1000px;
+  --padding: 21px;
+}
+
+%container-margin,
+.container-margin {
+  width: calc(100% - var(--padding) * 2);
+  max-width: var(--container);
+  margin-left: auto;
+  margin-right: auto;
+}
+
+%container-padding,
+.container-padding {
+  width: 100%;
+  padding-left: calc(50% - var(--container) / 2);
+  padding-right: calc(50% - var(--container) / 2);
+}
+
+.d-flex {
+  display: flex;
+}
+
+.justify-flex-end {
+  justify-content: flex-end;
+}
+
+.space-between {
+  justify-content: space-between;
+}
+
+@media only screen and (min-width: 1040px) {
+  :root {
+    --container: 1000px;
+  }
+}

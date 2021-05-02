@@ -13,8 +13,8 @@ const ItemList = memo(
     ressource,
   }) => {
     return (
-      <div>
-        <div className="itemsContainer">
+      <>
+        <div className="itemsContainer listMargin-lg">
           {isLoading && (
             <div className="d-flex justify-content-center">
               <div className="spinner-border" role="status">
@@ -44,7 +44,7 @@ const ItemList = memo(
             {isLoading ? "Loading..." : "Load more"}
           </button>
         )}
-      </div>
+      </>
     );
   }
 );

@@ -1,0 +1,23 @@
+button {
+  border: none;
+  font-size: inherit;
+  cursor: pointer;
+  padding: 0;
+  background-color: unset;
+}
+
+.button {
+  @include cta();
+}
+
+.button-primary {
+  @include cta($bg: var(--primary), $color: var(--color-light));
+}
+
+.button-secondary {
+  @include cta($bg: var(--secondary), $color: var(--color-light));
+}
+
+.button-big {
+  text-transform: uppercase;
+}
