@@ -31,11 +31,11 @@ class ContentVoter extends Voter
                     return true;
                 }
             case 'CONTENT_EDIT':
-                if ($subject->getAuthor() === $user) {
+                if ($subject->getOwner() === $user) {
                     return true;
                 }
             case 'CONTENT_DELETE':
-                if ($subject->getAuthor() === $user) {
+                if ($subject->getOwner() === $user) {
                     return true;
                 }
                 

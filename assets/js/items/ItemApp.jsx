@@ -1,7 +1,7 @@
 import React, { useCallback, useEffect, useState } from "react";
 import FormModal from "../component/FormModal";
 import { useFetch } from "../api/websites_api";
-import { Alert } from "reactstrap";
+import Alert from "../component/Alert";
 import ItemList from "./ItemList";
 
 const ItemApp = ({ user, ressource }) => {
@@ -72,7 +72,7 @@ const ItemApp = ({ user, ressource }) => {
           </button>
         )}
       </div>
-      {successMessage && <Alert color="success">{successMessage}</Alert>}
+      {successMessage && <Alert type="success" message={successMessage} />}
       <ItemList
         ressource={ressource}
         isLoading={isLoading}
@@ -89,7 +89,9 @@ const ItemApp = ({ user, ressource }) => {
         onSave={saveItem}
         user={user}
         ressource={ressource}
-      />
+      >
+        Create a new item
+      </FormModal>
     </>
   );
 };

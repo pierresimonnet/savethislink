@@ -14,10 +14,7 @@ const ItemList = memo(
   }) => {
     return (
       <div>
-        <div
-          className="itemsContainer"
-          style={{ display: "flex", flexWrap: "wrap" }}
-        >
+        <div className="itemsContainer">
           {isLoading && (
             <div className="d-flex justify-content-center">
               <div className="spinner-border" role="status">

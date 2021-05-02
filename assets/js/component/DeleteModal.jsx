@@ -1,7 +1,7 @@
 import React, { memo } from "react";
 import { Button, Modal, ModalHeader, ModalFooter } from "reactstrap";
 
-const DeleteModal = memo(({ modal, toggle, onDelete, item }) => {
+const DeleteModal = memo(({ modal, toggle, onDelete, item, children }) => {
   const handleDelete = () => {
     onDelete(item);
     toggle();
@@ -10,7 +10,7 @@ const DeleteModal = memo(({ modal, toggle, onDelete, item }) => {
   return (
     <div>
       <Modal isOpen={modal} toggle={toggle}>
-        <ModalHeader toggle={toggle}>Delete item</ModalHeader>
+        <ModalHeader toggle={toggle}>{children}</ModalHeader>
         <ModalFooter>
           <Button color="primary" onClick={handleDelete}>
             Delete

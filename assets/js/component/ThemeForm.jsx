@@ -25,6 +25,11 @@ const ThemeForm = memo(({ onSave, item = null, user, toggle }) => {
     onSuccess
   );
 
+  const handleCancel = (e) => {
+    e.preventDefault();
+    toggle();
+  };
+
   const handleChange = (e) => {
     clearErrors(e.target.name);
   };
@@ -83,7 +88,8 @@ const ThemeForm = memo(({ onSave, item = null, user, toggle }) => {
           disabled={isSaving}
         >
           {item === null ? "Add" : "Save"}
-        </button>{" "}
+        </button>
+        <button onClick={handleCancel}>Cancel</button>
       </form>
     </div>
   );
