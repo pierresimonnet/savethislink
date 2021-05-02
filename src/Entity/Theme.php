@@ -21,11 +21,11 @@ use ApiPlatform\Core\Bridge\Doctrine\Orm\Filter\SearchFilter;
  *          "get", 
  *          "put"={
  *              "security"="is_granted('THEME_EDIT', object)",
- *              "security_message"="Only the author can edit a theme"
+ *              "security_message"="Only the owner of the theme can edit it"
  *          }, 
  *          "delete"={
  *              "security"="is_granted('THEME_DELETE', object)",
- *              "security_message"="Only the author can delete a theme"
+ *              "security_message"="Only the owner of the theme can delete it"
  *          }
  *      },
  *      normalizationContext={"groups"={"theme:read"}},

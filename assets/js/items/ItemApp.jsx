@@ -1,12 +1,16 @@
 import React, { useCallback, useEffect, useState } from "react";
-import FormModal from "../component/FormModal";
 import { useFetch } from "../api/websites_api";
 import Alert from "../component/Alert";
 import ItemList from "./ItemList";
+import useModal from "../component/useModal";
+import Modal from "../component/Modal";
+import ItemForm from "../component/ItemForm";
+import ThemeForm from "../component/ThemeForm";
 
 const ItemApp = ({ user, ressource }) => {
-  const [modal, setModal] = useState(false);
   const [successMessage, setSuccessMessage] = useState("");
+  const { isShowing, toggle } = useModal();
+
   const [
     successMessageTimeoutHandle,
     setSuccessMessageTimeoutHandle,
@@ -20,8 +24,6 @@ const ItemApp = ({ user, ressource }) => {
     count,
     hasMore,
   } = useFetch(`/api/${ressource}`);
-
-  const toggle = () => setModal(!modal);
 
   const handleLoadMore = useCallback(() => {
     let more = true;
@@ -83,15 +85,16 @@ const ItemApp = ({ user, ressource }) => {
         onRemoveItem={removeItem}
         user={user}
       />
-      <FormModal
-        modal={modal}
-        toggle={toggle}
-        onSave={saveItem}
-        user={user}
-        ressource={ressource}
-      >
-        Create a new item
-      </FormModal>
+      {ressource === "websites" && (
+        <Modal isShowing={isShowing} hide={toggle} title="Create a new website">
+          <ItemForm onSave={saveItem} user={user} toggle={toggle} />
+        </Modal>
+      )}
+      {ressource === "themes" && (
+        <Modal isShowing={isShowing} hide={toggle} title="Create a new theme">
+          <ThemeForm onSave={saveItem} user={user} toggle={toggle} />
+        </Modal>
+      )}
     </>
   );
 };

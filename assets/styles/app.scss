@@ -1,4 +1,4 @@
-@import "~bootstrap/scss/bootstrap";
+//@import "~bootstrap/scss/bootstrap";
 // Variables
 // Static variables
 $font: "Arial", sans-serif;
@@ -9,6 +9,15 @@ $font: "Arial", sans-serif;
 
 // Tools
 //@import "tools/reset";
+
+// Atomes
+
+// Molecules
+
+// Organisms
+@import "organisms/modal.scss";
+
+// Templates
 
 html {
   height: 100%;

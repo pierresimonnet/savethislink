@@ -1,14 +1,14 @@
-import React, { memo, useCallback, useState } from "react";
+import React, { memo, useCallback } from "react";
 import { usePost } from "../api/websites_api";
-import DeleteModal from "../component/DeleteModal";
-import FormModal from "../component/FormModal";
 import { ThemeCard, WebsiteCard } from "../component/Card";
+import useModal from "../component/useModal";
+import Modal from "../component/Modal";
+import ItemForm from "../component/ItemForm";
+import ThemeForm from "../component/ThemeForm";
 
 const Item = memo(({ item, edit, remove, user, ressource }) => {
-  const [formModal, setFormModal] = useState(false);
-  const [deleteModal, setDeleteModal] = useState(false);
-  const toggleEdit = () => setFormModal(!formModal);
-  const toggleDelete = () => setDeleteModal(!deleteModal);
+  const { isShowing: isShowingEditModal, toggle: toggleEdit } = useModal();
+  const { isShowing: isShowingDeleteModal, toggle: toggleDelete } = useModal();
 
   const handleEdit = (newItem) => {
     edit(newItem, item);
@@ -35,41 +35,66 @@ const Item = memo(({ item, edit, remove, user, ressource }) => {
       }}
     >
       {ressource === "websites" && (
-        <WebsiteCard
-          website={item}
-          user={user}
-          toggleEdit={toggleEdit}
-          toggleDelete={toggleDelete}
-          isSaving={isSaving}
-        />
+        <>
+          <WebsiteCard
+            website={item}
+            user={user}
+            toggleEdit={toggleEdit}
+            toggleDelete={toggleDelete}
+            isSaving={isSaving}
+          />
+          <Modal
+            isShowing={isShowingEditModal}
+            hide={toggleEdit}
+            title="Edit this website"
+          >
+            <ItemForm
+              onSave={handleEdit}
+              item={item}
+              user={user}
+              toggle={toggleEdit}
+            />
+          </Modal>
+          <Modal
+            isShowing={isShowingDeleteModal}
+            hide={toggleDelete}
+            title="Delete this website"
+          >
+            <button onClick={handleDelete}>Delete</button>
+          </Modal>
+        </>
       )}
       {ressource === "themes" && (
-        <ThemeCard
-          theme={item}
-          user={user}
-          toggleEdit={toggleEdit}
-          toggleDelete={toggleDelete}
-          isSaving={isSaving}
-        />
+        <>
+          <ThemeCard
+            theme={item}
+            user={user}
+            toggleEdit={toggleEdit}
+            toggleDelete={toggleDelete}
+            isSaving={isSaving}
+          />
+
+          <Modal
+            isShowing={isShowingEditModal}
+            hide={toggleEdit}
+            title="Edit this theme"
+          >
+            <ThemeForm
+              onSave={handleEdit}
+              item={item}
+              user={user}
+              toggle={toggleEdit}
+            />
+          </Modal>
+          <Modal
+            isShowing={isShowingDeleteModal}
+            hide={toggleDelete}
+            title="Delete this theme"
+          >
+            <button onClick={handleDelete}>Delete</button>
+          </Modal>
+        </>
       )}
-      <FormModal
-        modal={formModal}
-        toggle={toggleEdit}
-        onSave={handleEdit}
-        item={item}
-        user={user}
-        ressource={ressource}
-      >
-        Update this item
-      </FormModal>
-      <DeleteModal
-        modal={deleteModal}
-        toggle={toggleDelete}
-        onDelete={handleDelete}
-        item={item}
-      >
-        Delete this item
-      </DeleteModal>
     </div>
   );
 });

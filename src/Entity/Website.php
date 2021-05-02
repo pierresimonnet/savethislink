@@ -13,17 +13,19 @@ use App\Validator\ThemeOwner;
  * @ApiResource(
  *      collectionOperations={
  *          "get", 
- *          "post"={"security"="is_granted('CONTENT_CREATE', object)"}
+ *          "post"={
+ *              "security_post_denormalize"="is_granted('CONTENT_CREATE', object)",
+ *              "security_post_denormalize_message"="Only the owner of the theme can create a website"}
  *      },
  *      itemOperations={
  *          "get", 
  *          "put"={
  *              "security"="is_granted('CONTENT_EDIT', object)",
- *              "security_message"="Only the author can edit a website"
+ *              "security_message"="Only the owner of the website can edit it"
  *          }, 
  *          "delete"={
  *              "security"="is_granted('CONTENT_DELETE', object)",
- *              "security_message"="Only the author can delete a website"
+ *              "security_message"="Only the owner of the website can delete it"
  *          }
  *      },
  *      normalizationContext={"groups"={"website:read"}},
