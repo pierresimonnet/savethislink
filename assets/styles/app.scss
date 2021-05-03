@@ -16,6 +16,7 @@ $font: "Arial", sans-serif;
   --error: #ff4664;
   --info: #ededf0;
   --radius: 8px;
+  --topBarHeight: 42px;
 }
 
 // Tools
@@ -33,6 +34,7 @@ $font: "Arial", sans-serif;
 @import "molecules/card.scss";
 
 // Organisms
+@import "organisms/nav.scss";
 @import "organisms/modal.scss";
 @import "organisms/form.scss";
 

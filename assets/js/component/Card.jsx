@@ -22,12 +22,12 @@ export const ThemeCard = memo(
         {theme.owner.id === user && (
           <div className="card-footer">
             <ul className="d-flex justify-flex-end">
-              <li className="nav-item">
+              <li>
                 <a href={`/websites/new/${theme.slug}`} className="button">
                   &#43; Add
                 </a>
               </li>
-              <li className="nav-item">
+              <li>
                 <button
                   onClick={toggleEdit}
                   disabled={isSaving}
@@ -36,7 +36,7 @@ export const ThemeCard = memo(
                   &#9999;&#65039; Edit
                 </button>
               </li>
-              <li className="nav-item">
+              <li>
                 <button
                   onClick={toggleDelete}
                   disabled={isSaving}
@@ -78,7 +78,7 @@ export const WebsiteCard = memo(
         {website.owner.id === user && (
           <div className="card-footer">
             <ul className="d-flex justify-flex-end">
-              <li className="nav-item">
+              <li>
                 <button
                   onClick={toggleEdit}
                   disabled={isSaving}
@@ -87,7 +87,7 @@ export const WebsiteCard = memo(
                   &#9999;&#65039; Edit
                 </button>
               </li>
-              <li className="nav-item">
+              <li>
                 <button
                   onClick={toggleDelete}
                   disabled={isSaving}

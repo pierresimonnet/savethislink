@@ -19,9 +19,14 @@
     </head>
     <body>
         {% include "partials/nav.html.twig" %}
+
         <main class="container-margin">
             {% include "partials/alert.html.twig" %}
             {% block body %}{% endblock %}
         </main>
+
+        <footer class="text-center">
+            <a href={{ path("app_home") }}>Sitename</a>
+        </footer>
     </body>
 </html>
