@@ -9,6 +9,8 @@ $font: "Arial", sans-serif;
   --color-light: #fdfdfd;
   --color-muted: #757575;
   --background: #f5f4f8;
+  --background-muted: #ececec;
+  --border: #757575;
   --success: #76ff5b;
   --warning: #fff155;
   --error: #ff4664;
@@ -24,13 +26,15 @@ $font: "Arial", sans-serif;
 // Atomes
 @import "atomes/button.scss";
 @import "atomes/pill.scss";
+@import "atomes/input.scss";
 
 // Molecules
+@import "molecules/alert.scss";
+@import "molecules/card.scss";
 
 // Organisms
-@import "organisms/alert.scss";
 @import "organisms/modal.scss";
-@import "organisms/card.scss";
+@import "organisms/form.scss";
 
 // Templates
 @import "templates/layout.scss";

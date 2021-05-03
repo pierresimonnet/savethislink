@@ -10,3 +10,61 @@ a.decorated {
 .text-muted {
   color: var(--color-muted);
 }
+
+.text-center {
+  text-align: center;
+}
+
+.hero-title {
+  font-size: 42px;
+  font-weight: bold;
+  margin-bottom: 1.4rem;
+}
+
+.hero-text {
+  font-size: 22px;
+  line-height: 1.6;
+}
+
+h1,
+.h1 {
+  font-size: 22px;
+  font-weight: bold;
+  margin-bottom: 1.4rem;
+}
+
+h2,
+.h2 {
+  font-size: 20px;
+  font-weight: bold;
+  margin-bottom: 1.2rem;
+}
+
+h3,
+.h3 {
+  font-size: 18px;
+  font-weight: bold;
+  margin-bottom: 1rem;
+}
+
+h4,
+.h4 {
+  font-weight: bold;
+  margin-bottom: 1rem;
+}
+
+.section-title {
+  font-size: 18px;
+  font-weight: bold;
+  margin-bottom: 1rem;
+}
+
+.emoji-big {
+  font-size: 3rem;
+}
+
+@media only screen and (min-width: 1040px) {
+  .hero-title {
+    font-size: 52px;
+  }
+}

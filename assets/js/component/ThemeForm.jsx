@@ -1,5 +1,6 @@
 import React, { memo, useCallback, useEffect, useRef } from "react";
 import { usePost } from "../api/websites_api";
+import { Text, Textarea } from "../component/Field";
 
 const ThemeForm = memo(({ onSave, item = null, user, toggle }) => {
   const titleRef = useRef(null);
@@ -58,38 +59,34 @@ const ThemeForm = memo(({ onSave, item = null, user, toggle }) => {
     <div>
       {isSaving && <div>Saving into the database...</div>}
       <form>
-        <div className="form-group">
-          <label htmlFor="title">Title</label>
-          <input
-            type="text"
-            name="title"
-            id="title"
-            className="form-control"
-            ref={titleRef}
-            onChange={handleChange}
-          />
-          {errors["title"] && <span>{errors["title"]}</span>}
-        </div>
-        <div className="form-group">
-          <label htmlFor="description">Description</label>
-          <textarea
-            name="description"
-            id="description"
-            rows="5"
-            className="form-control"
-            ref={descriptionRef}
-            onChange={handleChange}
-          ></textarea>
-          {errors["description"] && <span>{errors["description"]}</span>}
-        </div>
-        <button
-          className="btn btn-primary"
-          onClick={handleSubmit}
-          disabled={isSaving}
+        <Text
+          name="title"
+          error={errors["title"]}
+          onChange={handleChange}
+          ref={titleRef}
         >
-          {item === null ? "Add" : "Save"}
-        </button>
-        <button onClick={handleCancel}>Cancel</button>
+          Title
+        </Text>
+        <Textarea
+          name="description"
+          error={errors["description"]}
+          onChange={handleChange}
+          ref={descriptionRef}
+        >
+          Description
+        </Textarea>
+        <div className="d-flex justify-flex-end">
+          <button
+            className="button-primary"
+            onClick={handleSubmit}
+            disabled={isSaving}
+          >
+            {item === null ? "Add" : "Save"}
+          </button>
+          <button onClick={handleCancel} className="button-secondary">
+            Cancel
+          </button>
+        </div>
       </form>
     </div>
   );

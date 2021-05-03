@@ -1,0 +1,11 @@
+form > * + * {
+  margin-top: 1rem;
+}
+
+@media only screen and (min-width: 1040px) {
+  .form-bordered {
+    border: 1px solid var(--border);
+    border-radius: 20px;
+    box-shadow: shadow(30);
+  }
+}

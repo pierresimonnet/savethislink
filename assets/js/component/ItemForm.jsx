@@ -1,6 +1,7 @@
 import React, { memo, useCallback, useEffect, useRef } from "react";
 import { usePost } from "../api/websites_api";
 import { CustomSelect } from "../component/CustomSelect";
+import { Url, Textarea } from "../component/Field";
 
 const ItemForm = memo(({ onSave, item = null, user, toggle }) => {
   const themeRef = useRef(null);
@@ -72,38 +73,34 @@ const ItemForm = memo(({ onSave, item = null, user, toggle }) => {
         >
           Choose a theme
         </CustomSelect>
-        <div className="form-group">
-          <label htmlFor="url">Url</label>
-          <input
-            type="url"
-            name="url"
-            id="url"
-            className="form-control"
-            ref={urlRef}
-            onChange={handleChange}
-          />
-          {errors["url"] && <span>{errors["url"]}</span>}
-        </div>
-        <div className="form-group">
-          <label htmlFor="comment">Comment</label>
-          <textarea
-            name="comment"
-            id="comment"
-            rows="5"
-            className="form-control"
-            ref={commentRef}
-            onChange={handleChange}
-          ></textarea>
-          {errors["comment"] && <span>{errors["url"]}</span>}
-        </div>
-        <button
-          className="btn btn-primary"
-          onClick={handleSubmit}
-          disabled={isSaving}
+        <Url
+          name="url"
+          error={errors["url"]}
+          onChange={handleChange}
+          ref={urlRef}
         >
-          {item === null ? "Add" : "Save"}
-        </button>
-        <button onClick={handleCancel}>Cancel</button>
+          Url
+        </Url>
+        <Textarea
+          name="comment"
+          error={errors["comment"]}
+          onChange={handleChange}
+          ref={commentRef}
+        >
+          Comment
+        </Textarea>
+        <div className="d-flex justify-flex-end">
+          <button
+            className="button-primary"
+            onClick={handleSubmit}
+            disabled={isSaving}
+          >
+            {item === null ? "Add" : "Save"}
+          </button>
+          <button onClick={handleCancel} className="button-secondary">
+            Cancel
+          </button>
+        </div>
       </form>
     </div>
   );

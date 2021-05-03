@@ -66,8 +66,8 @@ const ItemApp = ({ user, ressource }) => {
 
   return (
     <>
-      <div className="header text-center">
-        <h3>{ressource}</h3>
+      <div className="hero-section text-center">
+        <h1>{ressource}</h1>
         {user && (
           <button onClick={toggle} className="button-primary button-big">
             Create

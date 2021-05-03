@@ -15,7 +15,7 @@ button {
 }
 
 .button-secondary {
-  @include cta($bg: var(--secondary), $color: var(--color-light));
+  @include cta($bg: var(--background-muted));
 }
 
 .button-big {
