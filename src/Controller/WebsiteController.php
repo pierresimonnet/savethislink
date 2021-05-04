@@ -37,9 +37,10 @@ class WebsiteController extends AbstractController
             $entityManager = $this->getDoctrine()->getManager();
             $entityManager->persist($website);
             $entityManager->flush();
+
             $this->addFlash('success', "Website saved !");
 
-            return $this->redirectToRoute('website_index');
+            return $this->redirectToRoute('theme_show', ['slug' => $website->getTheme()->getSlug()]);
         }
 
         return $this->render('website/new.html.twig', [

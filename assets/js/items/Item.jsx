@@ -1,10 +1,10 @@
-import React, { memo, useCallback } from "react";
-import { usePost } from "../api/websites_api";
+import React, { memo } from "react";
 import { ThemeCard, WebsiteCard } from "../component/Card";
 import useModal from "../component/useModal";
 import Modal from "../component/Modal";
 import ItemForm from "../component/ItemForm";
 import ThemeForm from "../component/ThemeForm";
+import DeleteForm from "../component/DeleteForm";
 
 const Item = memo(({ item, edit, remove, user, ressource }) => {
   const { isShowing: isShowingEditModal, toggle: toggleEdit } = useModal();
@@ -14,26 +14,12 @@ const Item = memo(({ item, edit, remove, user, ressource }) => {
     edit(newItem, item);
   };
 
-  const onDeleteCallback = useCallback(() => {
-    remove(item);
-  }, [item]);
-
-  const { load: deleteItem, isSaving } = usePost(
-    item["@id"],
-    "DELETE",
-    onDeleteCallback
-  );
-
   const handleDelete = (item) => {
-    deleteItem(item);
+    remove(item);
   };
 
   return (
-    <div
-      style={{
-        opacity: isSaving ? 0.3 : 1,
-      }}
-    >
+    <div>
       {ressource === "websites" && (
         <>
           <WebsiteCard
@@ -41,7 +27,6 @@ const Item = memo(({ item, edit, remove, user, ressource }) => {
             user={user}
             toggleEdit={toggleEdit}
             toggleDelete={toggleDelete}
-            isSaving={isSaving}
           />
           <Modal
             isShowing={isShowingEditModal}
@@ -60,7 +45,11 @@ const Item = memo(({ item, edit, remove, user, ressource }) => {
             hide={toggleDelete}
             title="Delete this website"
           >
-            <button onClick={handleDelete}>Delete</button>
+            <DeleteForm
+              onRemove={handleDelete}
+              item={item}
+              toggle={toggleDelete}
+            />
           </Modal>
         </>
       )}
@@ -71,7 +60,6 @@ const Item = memo(({ item, edit, remove, user, ressource }) => {
             user={user}
             toggleEdit={toggleEdit}
             toggleDelete={toggleDelete}
-            isSaving={isSaving}
           />
 
           <Modal
@@ -91,7 +79,11 @@ const Item = memo(({ item, edit, remove, user, ressource }) => {
             hide={toggleDelete}
             title="Delete this theme"
           >
-            <button onClick={handleDelete}>Delete</button>
+            <DeleteForm
+              onRemove={handleDelete}
+              item={item}
+              toggle={toggleDelete}
+            />
           </Modal>
         </>
       )}
