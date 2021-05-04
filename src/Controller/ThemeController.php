@@ -3,6 +3,7 @@
 namespace App\Controller;
 
 use App\Entity\Theme;
+use App\Entity\Website;
 use App\Form\ThemeType;
 use App\Repository\ThemeRepository;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
@@ -50,6 +51,12 @@ class ThemeController extends AbstractController
         return $this->render('theme/show.html.twig', [
             'theme' => $theme,
         ]);
+    }
+
+    #[Route('/{slug}/new', name: 'theme_additem', methods: ['GET'])]
+    public function addItem(Theme $theme): Response
+    {
+        return $this->redirectToRoute('website_new', ['slug' => $theme->getSlug()]);
     }
 
     #[Route('/{id}/edit', name: 'theme_edit', methods: ['GET', 'POST'])]

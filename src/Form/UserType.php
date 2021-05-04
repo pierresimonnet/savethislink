@@ -2,26 +2,20 @@
 
 namespace App\Form;
 
-use App\Entity\Theme;
+use App\Entity\User;
 use Symfony\Component\Form\AbstractType;
-use Symfony\Component\Form\Extension\Core\Type\TextareaType;
 use Symfony\Component\Form\Extension\Core\Type\TextType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
 
-class ThemeType extends AbstractType
+class UserType extends AbstractType
 {
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
         $builder
-            ->add('title', TextType::class, [
+            ->add('username', TextType::class, [
                 'attr' => ['class' => 'input input-text'], 
-                'label' => 'Theme title',
-                'required' => true
-            ])
-            ->add('description', TextareaType::class, [
-                'attr' => ['class' => 'input input-textarea'], 
-                'label' => 'Description of the theme',
+                'label' => 'Your username',
                 'required' => true
             ])
         ;
@@ -30,7 +24,7 @@ class ThemeType extends AbstractType
     public function configureOptions(OptionsResolver $resolver)
     {
         $resolver->setDefaults([
-            'data_class' => Theme::class,
+            'data_class' => User::class,
         ]);
     }
 }

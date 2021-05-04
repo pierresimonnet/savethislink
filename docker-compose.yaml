@@ -15,4 +15,4 @@ services:
       # See https://docs.docker.com/compose/compose-file/#ports for more information.
       - "5432"
     volumes:
-      - db-data:/var/lib/mysql
+      - db-data:/var/lib/postgresql

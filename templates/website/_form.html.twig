@@ -1,4 +1,32 @@
 {{ form_start(form, {'attr': {'novalidate': 'novalidate'}}) }}
-    {{ form_widget(form) }}
-    <button class="btn">{{ button_label|default('Save') }}</button>
+    <div class="input-group">
+        {{ form_label(form.theme) }}
+        {{ form_widget(form.theme) }}
+        <div class="help-text">{{ form_help(form.theme) }}</div>
+        <div class="input-error">
+            {{ form_errors(form.theme) }}
+        </div>
+    </div>
+
+    <div class="input-group">
+        {{ form_label(form.url) }}
+        {{ form_widget(form.url) }}
+        <div class="help-text">{{ form_help(form.url) }}</div>
+        <div class="input-error">
+            {{ form_errors(form.url) }}
+        </div>
+    </div>
+
+    <div class="input-group">
+        {{ form_label(form.comment) }}
+        {{ form_widget(form.comment) }}
+        <div class="help-text">{{ form_help(form.comment) }}</div>
+        <div class="input-error">
+            {{ form_errors(form.comment) }}
+        </div>
+    </div>
+
+    <div class="d-flex justify-flex-center">
+        <button class="button-primary">{{ button_label|default('Save') }}</button>
+    </div>
 {{ form_end(form) }}

@@ -3,5 +3,13 @@
 {% block title %}User page{% endblock %}
 
 {% block body %}
+    <h1>{{ user.username }}</h1>
+
+    {% if app.user == user %}
+        <a href="{{ path('account_edit', {'id': app.user.id }) }}">Edit my profile</a>
+        <a href="{{ path('app_logout', {'id': app.user.id }) }}">Log out</a>
+    {% endif %}
+
+    <h2>Themes</h2>
     <div id='app' data-ressource="themes" data-owner={{ user.id }}></div>
 {% endblock %}
