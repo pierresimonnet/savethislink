@@ -8,6 +8,8 @@ use Doctrine\ORM\Mapping as ORM;
 use Symfony\Component\Validator\Constraints as Assert;
 use Symfony\Component\Serializer\Annotation\Groups;
 use App\Validator\ThemeOwner;
+use ApiPlatform\Core\Annotation\ApiFilter;
+use ApiPlatform\Core\Bridge\Doctrine\Orm\Filter\SearchFilter;
 
 /**
  * @ApiResource(
@@ -35,6 +37,7 @@ use App\Validator\ThemeOwner;
  *          "pagination_items_per_page"=10
  *      },
  * )
+ * @ApiFilter(SearchFilter::class, properties={"url": "partial", "theme": "exact", "owner": "exact"})
  * @ORM\Entity(repositoryClass=WebsiteRepository::class)
  * @ORM\EntityListeners({"App\Doctrine\WebsiteSetOwnerListener"})
  */

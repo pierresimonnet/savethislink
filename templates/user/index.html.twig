@@ -3,10 +3,5 @@
 {% block title %}User page{% endblock %}
 
 {% block body %}
-    <div id='theme-app'></div>
-{% endblock %}
-
-{% block javascripts %}
-    {{ parent() }}
-    {{ encore_entry_script_tags('theme') }}
+    <div id='app' data-ressource="themes" data-owner={{ user.id }}></div>
 {% endblock %}

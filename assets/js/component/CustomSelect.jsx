@@ -13,18 +13,18 @@ export const CustomSelect = forwardRef(
 
     return (
       <div className={`input-group ${error ? "has-error" : ""}`}>
+        {children && <label htmlFor={name}>{children}</label>}
         <select
           className="input input-select input-radius-min"
           name={name}
           id={name}
           ref={ref}
-          defaultValue={selected}
           onChange={onChange}
+          defaultValue={selected}
         >
-          <option>{children}</option>
           {isLoading && <option value="">Loading...</option>}
           {options.map((option) => (
-            <option value={option["@id"]} key={option.id}>
+            <option value={option.id} key={option.id}>
               {option.title}
             </option>
           ))}

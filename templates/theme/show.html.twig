@@ -27,9 +27,5 @@
         <a href="{{ path('website_new', {'slug': theme.slug}) }}">Add a website</a>
     {% endif %}
 
-    {% for website in theme.getWebsites() %}
-        <p>website card here</p>
-    {% else %}
-        <p>no websites</p>
-    {% endfor %}
+    <div id='app' data-ressource="websites" data-theme={{ theme.id }}></div>
 {% endblock %}

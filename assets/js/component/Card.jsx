@@ -60,7 +60,7 @@ export const WebsiteCard = memo(
         <div className="card-body">
           <div>
             <div className="pill">
-              <a href={`/websites/${website.theme.slug}`}>
+              <a href={`/themes/${website.theme.slug}`}>
                 {website.theme.title}
               </a>
             </div>

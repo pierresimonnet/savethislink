@@ -7,7 +7,7 @@ import Modal from "../component/Modal";
 import ItemForm from "../component/ItemForm";
 import ThemeForm from "../component/ThemeForm";
 
-const ItemApp = ({ user, ressource }) => {
+const ItemApp = ({ user, ressource, theme = null, owner = null }) => {
   const [successMessage, setSuccessMessage] = useState("");
   const { isShowing, toggle } = useModal();
 
@@ -16,6 +16,14 @@ const ItemApp = ({ user, ressource }) => {
     setSuccessMessageTimeoutHandle,
   ] = useState(0);
 
+  let url = `/api/${ressource}`;
+  if (theme) {
+    url += `?theme=/api/themes/${theme}`;
+  }
+  if (owner) {
+    url += `?owner=/api/users/${owner}`;
+  }
+
   const {
     load: fetchApi,
     items,
@@ -23,7 +31,7 @@ const ItemApp = ({ user, ressource }) => {
     isLoading,
     count,
     hasMore,
-  } = useFetch(`/api/${ressource}`);
+  } = useFetch(url);
 
   const handleLoadMore = useCallback(() => {
     let more = true;
@@ -87,7 +95,12 @@ const ItemApp = ({ user, ressource }) => {
       />
       {ressource === "websites" && (
         <Modal isShowing={isShowing} hide={toggle} title="Create a new website">
-          <ItemForm onSave={saveItem} user={user} toggle={toggle} />
+          <ItemForm
+            onSave={saveItem}
+            user={user}
+            toggle={toggle}
+            theme={theme}
+          />
         </Modal>
       )}
       {ressource === "themes" && (

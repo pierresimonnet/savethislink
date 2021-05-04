@@ -3,7 +3,7 @@ import { usePost } from "../api/websites_api";
 import { CustomSelect } from "../component/CustomSelect";
 import { Url, Textarea } from "../component/Field";
 
-const ItemForm = memo(({ onSave, item = null, user, toggle }) => {
+const ItemForm = memo(({ onSave, user, toggle, item = null, theme = null }) => {
   const themeRef = useRef(null);
   const urlRef = useRef(null);
   const commentRef = useRef(null);
@@ -41,7 +41,7 @@ const ItemForm = memo(({ onSave, item = null, user, toggle }) => {
   const handleSubmit = (e) => {
     e.preventDefault();
     const data = {
-      theme: themeRef.current.value,
+      theme: "/api/themes/" + themeRef.current.value,
       url: urlRef.current.value,
       comment: commentRef.current.value,
     };
@@ -69,7 +69,7 @@ const ItemForm = memo(({ onSave, item = null, user, toggle }) => {
           error={errors["theme"]}
           user={user}
           onChange={handleChange}
-          selected={item ? item.theme["@id"] : ""}
+          selected={item ? item.theme.id : theme ? theme : ""}
         >
           Choose a theme
         </CustomSelect>

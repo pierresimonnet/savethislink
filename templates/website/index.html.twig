@@ -3,10 +3,5 @@
 {% block title %}Website index{% endblock %}
 
 {% block body %}
-    <div id='website-app'></div>
-{% endblock %}
-
-{% block javascripts %}
-    {{ parent() }}
-    {{ encore_entry_script_tags('website') }}
+    <div id='app' data-ressource="websites"></div>
 {% endblock %}

@@ -12,3 +12,4 @@ import "./styles/app.scss";
 import "./bootstrap";
 
 import "./js/module/nav";
+import "./js/itemApp";
