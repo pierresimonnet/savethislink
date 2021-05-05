@@ -1,9 +1,8 @@
 .pill {
   color: var(--secondary);
   border: 1px solid var(--secondary);
-  padding: 4px 8px;
+  padding: 2px 8px;
   border-radius: 23px;
-  margin-right: 8px;
   margin-bottom: 4px;
-  display: inline-block;
+  width: max-content;
 }

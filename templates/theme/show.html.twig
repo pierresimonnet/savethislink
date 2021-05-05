@@ -10,7 +10,5 @@
         <a href="{{ path('theme_edit', {'id': theme.id}) }}" class="button-secondary">{{ icon('edit') }} <span>Edit</span></a>
         {{ include('theme/_delete_form.html.twig') }}
     {% endif %}
-
-    <h2>Websites in {{ theme.title }}</h2>    
     <div id='app' data-ressource="websites" data-theme={{ theme.id }}></div>
 {% endblock %}

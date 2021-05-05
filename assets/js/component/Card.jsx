@@ -105,14 +105,10 @@ export const WebsiteCard = memo(
     return (
       <div className="card">
         <div className="card-body">
-          <div>
-            <div className="pill">
-              <a href={`/themes/${website.theme.slug}`}>
-                {website.theme.title}
-              </a>
-            </div>
-            <LinkPreview website={website} />
+          <div className="pill">
+            <a href={`/themes/${website.theme.slug}`}>{website.theme.title}</a>
           </div>
+          <LinkPreview website={website} />
           <p className="card-text">{website.comment}</p>
         </div>
         {website.owner.id === user && (
