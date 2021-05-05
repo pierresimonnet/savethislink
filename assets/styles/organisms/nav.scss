@@ -22,6 +22,15 @@
   padding: 0 calc(var(--topBarHeight) / 2);
 }
 
+.navbar-auth {
+  min-width: var(--topBarHeight);
+  padding: 0 calc(var(--topBarHeight) / 2);
+}
+
+.navbar-username {
+  display: none;
+}
+
 .navbar-nav-wrapper {
   position: fixed;
   top: var(--topBarHeight);
@@ -67,6 +76,10 @@
 @media screen and (min-width: 768px) {
   .navbar-toggler {
     display: none;
+  }
+
+  .navbar-username {
+    display: inline;
   }
 
   .navbar {

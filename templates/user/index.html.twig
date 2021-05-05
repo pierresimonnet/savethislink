@@ -6,8 +6,10 @@
     <h1>{{ user.username }}</h1>
 
     {% if app.user == user %}
-        <a href="{{ path('account_edit', {'id': app.user.id }) }}">Edit my profile</a>
-        <a href="{{ path('app_logout', {'id': app.user.id }) }}">Log out</a>
+        <div class="d-flex">
+            <a href="{{ path('account_edit', {'id': app.user.id }) }}" class="button-secondary">Edit my profile</a>
+            <a href="{{ path('app_logout', {'id': app.user.id }) }}" class="button-secondary">Log out</a>
+        </div>
     {% endif %}
 
     <h2>Themes</h2>

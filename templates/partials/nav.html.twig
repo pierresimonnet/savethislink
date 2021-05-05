@@ -10,9 +10,11 @@
             </li>
         </ul>
     </div>
+    <div class="navbar-auth d-flex flex-centered">
     {% if app.user %}
-        <a class="nav-item" href="{{ path("user_profile", {username: app.user.username}) }}" {{ isActive('profile') }}>{{ icon('account') }}</a>
+        <a class="d-flex flex-centered" href="{{ path("user_profile", {username: app.user.username}) }}" {{ isActive('profile') }}>{{ icon('account') }}<span class="navbar-username">{{ app.user.username }}</span></a>
     {% else %}
-        <a class="nav-item" href="{{ path("app_login") }}">login</a>
+        <a class="d-flex flex-centered" href="{{ path("app_login") }}">login</a>
     {% endif %}
+    </div>
 </nav>
