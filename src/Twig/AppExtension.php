@@ -22,6 +22,7 @@ class AppExtension extends AbstractExtension
     {
         return [
             new TwigFunction('isActive', [$this, 'navIsActive'], ['is_safe' => ['html'], 'needs_context' => true]),
+            new TwigFunction('icon', [$this, 'svgToIcon'], ['is_safe' => ['html']]),
         ];
     }
 
@@ -32,5 +33,17 @@ class AppExtension extends AbstractExtension
         }
         
         return '';
+    }
+
+    public function svgToIcon(string $id, ?int $size = 24): string
+    {
+        $attributes = '';
+        if ($size) {
+            $attributes = "width=\"{$size}\" height=\"{$size}\"";
+        }
+
+        return <<<HTML
+        <svg class="icon icon-{$id}" {$attributes} aria-hidden="true"><use xlink:href="/sprite.svg#{$id}"></use></svg>
+        HTML;
     }
 }

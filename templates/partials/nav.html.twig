@@ -1,6 +1,6 @@
 <nav class="navbar">
     <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#js-nav" aria-controls="js-nav" aria-expanded="false" aria-label="Toggle navigation" id="js-toggleBtn">
-        <span class="navbar-toggler-icon">&#129386;</span>
+        <span class="navbar-toggler-icon">{{ icon('menu') }}</span>
     </button>
     <a class="navbar-brand" href={{ path("app_home") }}>Shareintel</a>
     <div class="navbar-nav-wrapper" id="js-nav">
@@ -11,7 +11,7 @@
         </ul>
     </div>
     {% if app.user %}
-        <a class="nav-item" href="{{ path("user_profile", {username: app.user.username}) }}" {{ isActive('profile') }}>{{ app.user.username }}</a>
+        <a class="nav-item" href="{{ path("user_profile", {username: app.user.username}) }}" {{ isActive('profile') }}>{{ icon('account') }}</a>
     {% else %}
         <a class="nav-item" href="{{ path("app_login") }}">login</a>
     {% endif %}

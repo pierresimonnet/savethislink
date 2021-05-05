@@ -7,7 +7,7 @@
     <p>By {{ theme.owner.username }}</p>
     <p>{{ theme.description }}</p>
     {% if app.user and app.user == theme.owner %}
-        <a href="{{ path('theme_edit', {'id': theme.id}) }}" class="button-secondary">Edit</a>
+        <a href="{{ path('theme_edit', {'id': theme.id}) }}" class="button-secondary">{{ icon('edit') }} Edit</a>
         {{ include('theme/_delete_form.html.twig') }}
     {% endif %}
 
