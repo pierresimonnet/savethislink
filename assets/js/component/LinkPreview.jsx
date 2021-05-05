@@ -1,14 +1,14 @@
 import React, { memo } from "react";
 
-const LinkPreview = memo(({ url }) => {
+const LinkPreview = memo(({ website }) => {
   return (
     <a
-      href={url}
+      href={website.url}
       target="_blank"
       rel="noopener noreferrer"
       className="card-title"
     >
-      {url}
+      {website.shortUrl}
     </a>
   );
 });

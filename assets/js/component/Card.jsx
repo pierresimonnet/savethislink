@@ -111,7 +111,7 @@ export const WebsiteCard = memo(
                 {website.theme.title}
               </a>
             </div>
-            <LinkPreview url={website.url} />
+            <LinkPreview website={website} />
           </div>
           <p className="card-text">{website.comment}</p>
         </div>

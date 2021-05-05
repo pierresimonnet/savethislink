@@ -107,6 +107,18 @@ class Website implements UserOwnedInterface
         return $this->url;
     }
 
+    /**
+     * @Groups({"website:read"})
+     */
+    public function getShortUrl(): ?string
+    {
+        if (strlen($this->url) < 54) {
+            return $this->url;
+        }
+
+        return substr($this->url, 0, 54).'...';
+    }
+
     public function setUrl(string $url): self
     {
         $this->url = $url;

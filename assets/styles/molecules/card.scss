@@ -33,3 +33,9 @@
 .card-text {
   margin-top: 12px;
 }
+
+.card-title,
+.card-subtitle,
+.card-text {
+  word-wrap: break-word;
+}
