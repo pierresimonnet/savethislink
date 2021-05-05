@@ -6,6 +6,10 @@ button {
   background-color: unset;
 }
 
+button + * {
+  margin-left: 8px;
+}
+
 .button {
   @include cta();
 }
