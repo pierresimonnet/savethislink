@@ -17,9 +17,7 @@ const ItemList = memo(
         <div className="itemsContainer listMargin-lg">
           {isLoading && (
             <div className="d-flex justify-content-center">
-              <div className="spinner-border" role="status">
-                <span className="visually-hidden">Loading...</span>
-              </div>
+              <span className="visually-hidden">Loading...</span>
             </div>
           )}
           {!isLoading && items.length === 0 ? (
@@ -40,9 +38,11 @@ const ItemList = memo(
           )}
         </div>
         {hasMore && (
-          <button disabled={isLoading} onClick={onLoadMore}>
-            {isLoading ? "Loading..." : "Load more"}
-          </button>
+          <div className="d-flex justify-flex-center mt-1">
+            <button disabled={isLoading} onClick={onLoadMore}>
+              {isLoading ? "Loading..." : "Load more"}
+            </button>
+          </div>
         )}
       </>
     );

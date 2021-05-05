@@ -74,8 +74,8 @@ const ItemApp = ({ user, ressource, theme = null, owner = null }) => {
 
   return (
     <>
-      <div className="d-flex justify-flex-center mb-1">
-        {user && (
+      {user && (
+        <div className="d-flex justify-flex-center mb-1">
           <button onClick={toggle} className="button-primary">
             <svg
               xmlns="http://www.w3.org/2000/svg"
@@ -94,8 +94,8 @@ const ItemApp = ({ user, ressource, theme = null, owner = null }) => {
                 : "Create a new theme"}
             </span>
           </button>
-        )}
-      </div>
+        </div>
+      )}
       {successMessage && <Alert type="success" message={successMessage} />}
       <ItemList
         ressource={ressource}
