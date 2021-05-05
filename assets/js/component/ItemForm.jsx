@@ -71,7 +71,7 @@ const ItemForm = memo(({ onSave, user, toggle, item = null, theme = null }) => {
           onChange={handleChange}
           selected={item ? item.theme.id : theme ? theme : ""}
         >
-          Choose a theme
+          Choose your theme
         </CustomSelect>
         <Url
           name="url"

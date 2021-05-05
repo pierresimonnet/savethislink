@@ -9,7 +9,6 @@
     {% if app.user and app.user == theme.owner %}
         <a href="{{ path('theme_edit', {'id': theme.id}) }}" class="button-secondary">Edit</a>
         {{ include('theme/_delete_form.html.twig') }}
-        <a href="{{ path('theme_additem', {'slug': theme.slug}) }}" class="button-primary">Add a website</a>
     {% endif %}
 
     <h2>Websites in {{ theme.title }}</h2>    

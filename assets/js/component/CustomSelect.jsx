@@ -20,11 +20,14 @@ export const CustomSelect = forwardRef(
           id={name}
           ref={ref}
           onChange={onChange}
-          defaultValue={selected}
         >
           {isLoading && <option value="">Loading...</option>}
           {options.map((option) => (
-            <option value={option.id} key={option.id}>
+            <option
+              value={option.id}
+              key={option.id}
+              selected={option.id === parseInt(selected)}
+            >
               {option.title}
             </option>
           ))}

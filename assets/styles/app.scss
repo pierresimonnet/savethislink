@@ -41,12 +41,7 @@ $font: "Arial", sans-serif;
 // Templates
 @import "templates/layout.scss";
 
-html {
-  height: 100%;
-}
-
 body {
-  height: 100%;
   font-family: $font;
   background-color: var(--background);
 }
