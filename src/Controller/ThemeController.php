@@ -18,6 +18,7 @@ class ThemeController extends AbstractController
     public function index(ThemeRepository $themeRepository): Response
     {
         return $this->render('theme/index.html.twig', [
+            'menu' => 'explore',
             'themes' => $themeRepository->findAll(),
         ]);
     }

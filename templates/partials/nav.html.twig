@@ -6,13 +6,13 @@
     <div class="navbar-nav-wrapper" id="js-nav">
         <ul class="navbar-nav">
             <li class="nav-item">
-                <a class="nav-link" href={{ path("theme_index") }}>Explore themes</a>
+                <a class="nav-link" href="{{ path("theme_index") }}" {{ isActive('explore') }}>Explore themes</a>
             </li>
         </ul>
     </div>
     {% if app.user %}
-        <a class="nav-item" href={{ path("user_profile", {username: app.user.username}) }}>{{ app.user.username }}</a>
+        <a class="nav-item" href="{{ path("user_profile", {username: app.user.username}) }}" {{ isActive('profile') }}>{{ app.user.username }}</a>
     {% else %}
-        <a class="nav-item" href={{ path("app_login") }}>login</a>
+        <a class="nav-item" href="{{ path("app_login") }}">login</a>
     {% endif %}
 </nav>
