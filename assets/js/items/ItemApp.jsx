@@ -66,7 +66,6 @@ const ItemApp = ({ user, ressource, theme = null, owner = null }) => {
 
   useEffect(() => {
     fetchApi();
-
     return () => {
       clearTimeout(successMessageTimeoutHandle);
     };
@@ -74,7 +73,7 @@ const ItemApp = ({ user, ressource, theme = null, owner = null }) => {
 
   return (
     <>
-      {user && (
+      {(user && !owner) || user === owner ? (
         <div className="d-flex justify-flex-center mb-1">
           <button onClick={toggle} className="button-primary">
             <svg
@@ -95,7 +94,7 @@ const ItemApp = ({ user, ressource, theme = null, owner = null }) => {
             </span>
           </button>
         </div>
-      )}
+      ) : null}
       {successMessage && <Alert type="success" message={successMessage} />}
       <ItemList
         ressource={ressource}

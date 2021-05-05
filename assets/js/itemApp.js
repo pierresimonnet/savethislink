@@ -6,7 +6,7 @@ if (document.getElementById("app")) {
   const app = document.getElementById("app");
   const ressource = app.dataset.ressource;
   const theme = app.dataset.theme;
-  const owner = app.dataset.owner;
+  const owner = parseInt(app.dataset.owner);
 
   render(
     <ItemApp
