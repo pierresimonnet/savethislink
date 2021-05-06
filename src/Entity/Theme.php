@@ -10,6 +10,8 @@ use Doctrine\ORM\Mapping as ORM;
 use Symfony\Component\Serializer\Annotation\Groups;
 use ApiPlatform\Core\Annotation\ApiFilter;
 use ApiPlatform\Core\Bridge\Doctrine\Orm\Filter\SearchFilter;
+use ApiPlatform\Core\Bridge\Doctrine\Orm\Filter\OrderFilter;
+use ApiPlatform\Core\Serializer\Filter\PropertyFilter;
 use Symfony\Component\Validator\Constraints as Assert;
 
 /**
@@ -32,11 +34,13 @@ use Symfony\Component\Validator\Constraints as Assert;
  *      normalizationContext={"groups"={"theme:read"}},
  *      denormalizationContext={"groups"={"theme:write"}},
  *      attributes={
- *          "order"={"id": "DESC"},
+ *          "order"={"createdAt": "DESC"},
  *          "pagination_items_per_page"=10
  *      },
  * )
  * @ApiFilter(SearchFilter::class, properties={"title": "partial", "description": "partial", "owner": "exact"})
+ * @ApiFilter(OrderFilter::class, properties={"websitesCount"})
+ * @ApiFilter(PropertyFilter::class)
  * @ORM\Entity(repositoryClass=ThemeRepository::class)
  * @ORM\EntityListeners({"App\Doctrine\ThemeSetSlugListener", "App\Doctrine\ThemeSetOwnerListener"})
  */
@@ -74,6 +78,12 @@ class Theme implements UserOwnedInterface
     private $createdAt;
 
     /**
+     * @ORM\Column(type="datetime", nullable=true)
+     * @Groups({"theme:read"})
+     */
+    private $updatedAt;
+
+    /**
      * @ORM\ManyToOne(targetEntity=User::class, inversedBy="themes")
      * @ORM\JoinColumn(nullable=false)
      * @Groups({"theme:read"})
@@ -90,6 +100,12 @@ class Theme implements UserOwnedInterface
      * @Groups({"theme:read", "website:read"})
      */
     private $slug;
+
+    /**
+     * @ORM\Column(type="boolean", nullable=true)
+     * @Groups({"theme:read", "theme:write"})
+     */
+    private $open = false;
 
     public function __construct()
     {
@@ -163,7 +179,7 @@ class Theme implements UserOwnedInterface
      */
     public function getWebsitesCount(): int
     {
-        return $this->websites->count();
+        return $this->getWebsites()->count();
     }
 
     public function addWebsite(Website $website): self
@@ -196,6 +212,30 @@ class Theme implements UserOwnedInterface
     public function setSlug(string $slug): self
     {
         $this->slug = $slug;
+
+        return $this;
+    }
+
+    public function getUpdatedAt(): ?\DateTimeInterface
+    {
+        return $this->updatedAt;
+    }
+
+    public function setUpdatedAt(?\DateTimeInterface $updatedAt): self
+    {
+        $this->updatedAt = $updatedAt;
+
+        return $this;
+    }
+
+    public function getOpen(): ?bool
+    {
+        return $this->open;
+    }
+
+    public function setOpen(?bool $open): self
+    {
+        $this->open = $open;
 
         return $this;
     }

@@ -2,7 +2,7 @@ import React, { memo, useCallback, useEffect, useRef } from "react";
 import { usePost } from "../api/websites_api";
 import { Text, Textarea } from "../component/Field";
 
-const ThemeForm = memo(({ onSave, item = null, user, toggle }) => {
+const ThemeForm = memo(({ onSave, item = null, toggle }) => {
   const titleRef = useRef(null);
   const descriptionRef = useRef(null);
 

@@ -66,6 +66,7 @@ const ItemApp = ({ user, ressource, theme = null, owner = null }) => {
 
   useEffect(() => {
     fetchApi();
+
     return () => {
       clearTimeout(successMessageTimeoutHandle);
     };

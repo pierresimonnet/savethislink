@@ -70,3 +70,26 @@ export const Textarea = forwardRef(
     );
   }
 );
+
+export const Checkbox = forwardRef(
+  ({ name, children, help, error, onChange, required }, ref) => {
+    return (
+      <>
+        <div className="input-checkbox">
+          <input
+            type="checkbox"
+            name={name}
+            id={name}
+            ref={ref}
+            onChange={onChange}
+            required={required}
+            className="input"
+          />
+          {children && <label htmlFor={name}>{children}</label>}
+          {help && <div>{help}</div>}
+          {error && <div>{error}</div>}
+        </div>
+      </>
+    );
+  }
+);

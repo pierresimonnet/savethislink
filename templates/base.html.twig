@@ -12,7 +12,7 @@
 
         {% block javascripts %}
             <script>
-                window.USER = {{ app.user ? app.user.id : null }}
+                window.USER = {{ app.user ? app.user.id : 0 }}
             </script>
             {{ encore_entry_script_tags('app') }}
         {% endblock %}
