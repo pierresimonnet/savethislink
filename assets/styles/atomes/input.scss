@@ -24,7 +24,7 @@ textarea {
 }
 
 .input-group label {
-  margin-left: 12px;
+  margin-left: 6px;
   margin-bottom: 4px;
 }
 
@@ -35,6 +35,8 @@ textarea {
 
 .help-text {
   color: var(--color-muted);
+  font-size: 12px;
+  margin-top: 2px;
 }
 
 // Checkbox

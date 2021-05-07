@@ -55,3 +55,12 @@
   border: none;
   background: transparent;
 }
+
+.form-no-modal {
+  background: var(--white);
+  margin: auto;
+  border-radius: 5px;
+  max-width: 500px;
+  width: 90%;
+  padding: 1rem;
+}

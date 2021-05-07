@@ -3,9 +3,10 @@
 {% block title %}Edit your profile{% endblock %}
 
 {% block body %}
-    <h1>Edit your profile</h1>
+    <h1 class="text-center">Edit your profile</h1>
 
-    {{ include('user/_form.html.twig', {'button_label': 'Update'}) }}
-
-    {{ include('user/_delete_form.html.twig') }}
+    <div class="form-no-modal">
+        {{ include('user/_form.html.twig', {'button_label': 'Update'}) }}
+        {{ include('user/_delete_form.html.twig') }}
+    </div>
 {% endblock %}
