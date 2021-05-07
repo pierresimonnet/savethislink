@@ -37,11 +37,7 @@ class ContentVoter extends Voter
                 }
                 break;
             case 'CONTENT_DELETE':
-                if ($subject->getOwner() === $user) {
-                    return true;
-                }
-                
-                if ($this->security->isGranted('ROLE_ADMIN')) {
+                if ($subject->getOwner() === $user || $subject->getTheme()->getOwner() === $user ) {
                     return true;
                 }
                 break;

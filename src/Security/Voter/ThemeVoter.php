@@ -40,10 +40,6 @@ class ThemeVoter extends Voter
                 if ($subject->getOwner() === $user) {
                     return true;
                 }
-                
-                if ($this->security->isGranted('ROLE_ADMIN')) {
-                    return true;
-                }
                 break;
         }
 
