@@ -6,6 +6,7 @@
   height: var(--topBarHeight);
   top: 0;
   background-color: var(--background);
+  z-index: 999;
 }
 
 .navbar-toggler {
@@ -36,7 +37,7 @@
   top: var(--topBarHeight);
   bottom: 0;
   overflow-y: auto;
-  background-color: var(--primary);
+  background-color: var(--background);
   color: var(--white);
   transition: 0.5s ease-in-out;
   width: 100%;

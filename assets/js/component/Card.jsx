@@ -12,7 +12,11 @@ export const ThemeCard = memo(
               {theme.title}
             </a>
             <div className="flex-centered">
-              <span>{theme.open ? "open" : "closed"}</span>
+              <span
+                className={`status status-${theme.open ? "open" : "closed"}`}
+              >
+                {theme.open ? "open" : "closed"}
+              </span>
               <Icon id="link" />
               <span>{theme.websitesCount}</span>
             </div>
