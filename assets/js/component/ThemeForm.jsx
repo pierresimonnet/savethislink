@@ -78,6 +78,7 @@ const ThemeForm = memo(({ onSave, item = null, toggle }) => {
           error={errors["title"]}
           onChange={handleChange}
           ref={titleRef}
+          placeholder="Choose a title for this theme"
         >
           Title
         </Text>
@@ -86,6 +87,7 @@ const ThemeForm = memo(({ onSave, item = null, toggle }) => {
           error={errors["description"]}
           onChange={handleChange}
           ref={descriptionRef}
+          placeholder="What is this theme about ?"
         >
           Description
         </Textarea>

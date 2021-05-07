@@ -66,16 +66,18 @@ const ItemForm = memo(({ onSave, toggle, item = null, theme }) => {
           error={errors["url"]}
           onChange={handleChange}
           ref={urlRef}
+          placeholder="https://..."
         >
-          Url
+          URL of the link
         </Url>
         <Textarea
           name="comment"
           error={errors["comment"]}
           onChange={handleChange}
           ref={commentRef}
+          placeholder="What is this link about ?"
         >
-          Comment
+          Your comment
         </Textarea>
         <div className="d-flex justify-flex-end">
           <button

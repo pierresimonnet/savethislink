@@ -16,16 +16,16 @@ class ThemeType extends AbstractType
     {
         $builder
             ->add('open', CheckboxType::class, [
-                'label' => 'Open',
+                'label' => 'Open to contributions',
             ])
             ->add('title', TextType::class, [
-                'attr' => ['class' => 'input input-text'], 
-                'label' => 'Theme title',
+                'attr' => ['class' => 'input input-text', 'placeholder' => 'Choose a title for this theme'], 
+                'label' => 'Title',
                 'required' => true
             ])
             ->add('description', TextareaType::class, [
-                'attr' => ['class' => 'input input-textarea'], 
-                'label' => 'Description of the theme',
+                'attr' => ['class' => 'input input-textarea', 'placeholder' => 'What is this theme about ?'], 
+                'label' => 'Description',
                 'required' => true
             ])
         ;
