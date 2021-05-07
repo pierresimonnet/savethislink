@@ -36,8 +36,9 @@ class ThemeController extends AbstractController
             $entityManager = $this->getDoctrine()->getManager();
             $entityManager->persist($theme);
             $entityManager->flush();
+            $this->addFlash('success', "New theme saved !");
 
-            return $this->redirectToRoute('theme_index');
+            return $this->redirectToRoute('theme_show', ['slug' => $theme->getSlug()]);
         }
 
         return $this->render('theme/new.html.twig', [
@@ -70,8 +71,9 @@ class ThemeController extends AbstractController
 
         if ($form->isSubmitted() && $form->isValid()) {
             $this->getDoctrine()->getManager()->flush();
+            $this->addFlash('success', "Theme updated !");
 
-            return $this->redirectToRoute('theme_index');
+            return $this->redirectToRoute('theme_show', ['slug' => $theme->getSlug()]);
         }
 
         return $this->render('theme/edit.html.twig', [
@@ -89,6 +91,7 @@ class ThemeController extends AbstractController
             $entityManager = $this->getDoctrine()->getManager();
             $entityManager->remove($theme);
             $entityManager->flush();
+            $this->addFlash('success', "theme deleted !");
         }
 
         return $this->redirectToRoute('theme_index');

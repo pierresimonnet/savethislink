@@ -37,7 +37,7 @@ class WebsiteController extends AbstractController
             $entityManager->persist($website);
             $entityManager->flush();
 
-            $this->addFlash('success', "Website saved !");
+            $this->addFlash('success', "New website saved !");
 
             return $this->redirectToRoute('theme_show', ['slug' => $website->getTheme()->getSlug()]);
         }
@@ -68,7 +68,7 @@ class WebsiteController extends AbstractController
             $this->getDoctrine()->getManager()->flush();
             $this->addFlash('success', "Website updated !");
 
-            return $this->redirectToRoute('website_index');
+            return $this->redirectToRoute('theme_show', ['slug' => $website->getTheme()->getSlug()]);
         }
 
         return $this->render('website/edit.html.twig', [
@@ -89,6 +89,6 @@ class WebsiteController extends AbstractController
             $this->addFlash('success', "Website deleted !");
         }
 
-        return $this->redirectToRoute('website_index');
+        return $this->redirectToRoute('theme_show', ['slug' => $website->getTheme()->getSlug()]);
     }
 }
