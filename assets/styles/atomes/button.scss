@@ -19,7 +19,7 @@ button + * {
 }
 
 .button-primary svg {
-  fill: #fff;
+  fill: var(--white);
 }
 
 .button-secondary {

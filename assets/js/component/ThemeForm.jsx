@@ -64,13 +64,14 @@ const ThemeForm = memo(({ onSave, item = null, toggle }) => {
     <div>
       {isSaving && <div>Saving into the database...</div>}
       <form>
+        {errors && <div className="input-error">{errors[""]}</div>}
         <Checkbox
           name="open"
           error={errors["open"]}
           onChange={handleChange}
           ref={openRef}
         >
-          Open
+          Open to contributions
         </Checkbox>
         <Text
           name="title"
