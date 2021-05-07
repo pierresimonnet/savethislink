@@ -8,6 +8,7 @@ use Doctrine\ORM\Mapping as ORM;
 use Symfony\Component\Validator\Constraints as Assert;
 use Symfony\Component\Serializer\Annotation\Groups;
 use App\Validator\ThemeOwner;
+use App\Validator\UniqueUrl;
 use ApiPlatform\Core\Annotation\ApiFilter;
 use ApiPlatform\Core\Bridge\Doctrine\Orm\Filter\SearchFilter;
 
@@ -40,6 +41,7 @@ use ApiPlatform\Core\Bridge\Doctrine\Orm\Filter\SearchFilter;
  * @ApiFilter(SearchFilter::class, properties={"url": "partial", "theme": "exact", "owner": "exact"})
  * @ORM\Entity(repositoryClass=WebsiteRepository::class)
  * @ORM\EntityListeners({"App\Doctrine\WebsiteSetOwnerListener"})
+ * @UniqueUrl
  */
 class Website implements UserOwnedInterface
 {
