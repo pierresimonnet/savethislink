@@ -17,6 +17,7 @@ class ThemeType extends AbstractType
         $builder
             ->add('open', CheckboxType::class, [
                 'label' => 'Open to contributions',
+                'required' => false
             ])
             ->add('title', TextType::class, [
                 'attr' => ['class' => 'input input-text', 'placeholder' => 'Choose a title for this theme'], 

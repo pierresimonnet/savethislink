@@ -25,4 +25,10 @@ class ThemeSetSlugListener
             $theme->setSlug($slug);
         }
     }
+
+    public function preUpdate(Theme $theme): void
+    {
+        $slug = $this->slugger->slug($theme->getTitle())->lower();
+        $theme->setSlug($slug);
+    }
 }
