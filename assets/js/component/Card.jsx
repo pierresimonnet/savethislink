@@ -7,12 +7,12 @@ export const ThemeCard = memo(
     return (
       <div className="card">
         <div className="card-body">
-          <div className="d-flex space-between">
+          <div className="d-flex space-between align-start">
             <a href={`/themes/${theme.slug}`} className="card-title">
               {theme.title}
             </a>
             <div className="flex-centered">
-              {theme.open ? "open" : "closed"}
+              <span>{theme.open ? "open" : "closed"}</span>
               <Icon id="link" />
               <span>{theme.websitesCount}</span>
             </div>

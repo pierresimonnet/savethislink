@@ -75,7 +75,7 @@ const ItemApp = ({ user, ressource, theme = null, owner = null, open = 0 }) => {
 
   return (
     <>
-      {(user && !owner) || user === owner || open === 1 ? (
+      {(user && !owner) || user === owner || (user && open === 1) ? (
         <div className="d-flex justify-flex-center mb-1">
           <button onClick={toggle} className="button-primary">
             <Icon id="add" />

@@ -3,7 +3,7 @@ import Icon from "./Icon";
 
 const LinkPreview = memo(({ website }) => {
   return (
-    <div className="flex-vertical-centered">
+    <div className="d-flex flex-vertical-centered">
       <Icon id="link" />
       <a
         href={website.url}

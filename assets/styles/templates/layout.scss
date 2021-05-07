@@ -34,7 +34,6 @@
 }
 
 .flex-vertical-centered {
-  display: flex;
   align-items: center;
 }
 
@@ -48,6 +47,10 @@
 
 .space-between {
   justify-content: space-between;
+}
+
+.align-start {
+  align-items: flex-start;
 }
 
 footer {
