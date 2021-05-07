@@ -7,7 +7,6 @@ use App\Repository\WebsiteRepository;
 use Doctrine\ORM\Mapping as ORM;
 use Symfony\Component\Validator\Constraints as Assert;
 use Symfony\Component\Serializer\Annotation\Groups;
-use App\Validator\ThemeOwner;
 use App\Validator\UniqueUrl;
 use ApiPlatform\Core\Annotation\ApiFilter;
 use ApiPlatform\Core\Bridge\Doctrine\Orm\Filter\SearchFilter;
@@ -83,7 +82,6 @@ class Website implements UserOwnedInterface
      * @Groups({"website:read", "website:write"})
      * @Assert\Valid()
      * @Assert\NotBlank
-     * @ThemeOwner
      */
     private $theme;
 
