@@ -8,7 +8,7 @@ import ItemForm from "../component/ItemForm";
 import ThemeForm from "../component/ThemeForm";
 import Icon from "../component/Icon";
 
-const ItemApp = ({ user, ressource, theme = null, owner = null }) => {
+const ItemApp = ({ user, ressource, theme = null, owner = null, open = 0 }) => {
   const [successMessage, setSuccessMessage] = useState("");
   const { isShowing, toggle } = useModal();
 
@@ -75,7 +75,7 @@ const ItemApp = ({ user, ressource, theme = null, owner = null }) => {
 
   return (
     <>
-      {(user && !owner) || user === owner ? (
+      {(user && !owner) || user === owner || open === 1 ? (
         <div className="d-flex justify-flex-center mb-1">
           <button onClick={toggle} className="button-primary">
             <Icon id="add" />
@@ -100,12 +100,7 @@ const ItemApp = ({ user, ressource, theme = null, owner = null }) => {
       />
       {ressource === "websites" && (
         <Modal isShowing={isShowing} hide={toggle} title="Add a new link">
-          <ItemForm
-            onSave={saveItem}
-            user={user}
-            toggle={toggle}
-            theme={theme}
-          />
+          <ItemForm onSave={saveItem} toggle={toggle} theme={theme} />
         </Modal>
       )}
       {ressource === "themes" && (

@@ -8,7 +8,7 @@ use Symfony\Component\Validator\ConstraintValidator;
 
 class ThemeOwnerValidator extends ConstraintValidator
 {
-    private $security;
+    private Security $security;
 
     public function __construct(Security $security)
     {
@@ -24,7 +24,7 @@ class ThemeOwnerValidator extends ConstraintValidator
         }
 
         /** @var \App\Entity\Theme $value */
-        if ($this->security->getUser() === $value->getOwner()) {
+        if ($this->security->getUser() === $value->getOwner() || $value->getOpen()) {
             return;
         }
 

@@ -13,6 +13,7 @@ use ApiPlatform\Core\Bridge\Doctrine\Orm\Filter\SearchFilter;
 use ApiPlatform\Core\Bridge\Doctrine\Orm\Filter\OrderFilter;
 use ApiPlatform\Core\Serializer\Filter\PropertyFilter;
 use Symfony\Component\Validator\Constraints as Assert;
+use Symfony\Bridge\Doctrine\Validator\Constraints\UniqueEntity;
 
 /**
  * @ApiResource(
@@ -43,6 +44,7 @@ use Symfony\Component\Validator\Constraints as Assert;
  * @ApiFilter(PropertyFilter::class)
  * @ORM\Entity(repositoryClass=ThemeRepository::class)
  * @ORM\EntityListeners({"App\Doctrine\ThemeSetSlugListener", "App\Doctrine\ThemeSetOwnerListener"})
+ * @UniqueEntity(fields={"title"}, message="There is already a theme with this title")
  */
 class Theme implements UserOwnedInterface
 {

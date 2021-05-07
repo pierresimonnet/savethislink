@@ -1,10 +1,8 @@
 import React, { memo, useCallback, useEffect, useRef } from "react";
 import { usePost } from "../api/websites_api";
-import { CustomSelect } from "../component/CustomSelect";
 import { Url, Textarea } from "../component/Field";
 
-const ItemForm = memo(({ onSave, user, toggle, item = null, theme = null }) => {
-  const themeRef = useRef(null);
+const ItemForm = memo(({ onSave, toggle, item = null, theme }) => {
   const urlRef = useRef(null);
   const commentRef = useRef(null);
 
@@ -12,13 +10,12 @@ const ItemForm = memo(({ onSave, user, toggle, item = null, theme = null }) => {
     (item) => {
       onSave(item);
       if (urlRef.current && commentRef.current) {
-        themeRef.current.value = "";
         urlRef.current.value = "";
         commentRef.current.value = "";
       }
       toggle();
     },
-    [onSave, themeRef, urlRef, commentRef]
+    [onSave, urlRef, commentRef]
   );
 
   const url = item ? item["@id"] : "/api/websites";
@@ -41,7 +38,7 @@ const ItemForm = memo(({ onSave, user, toggle, item = null, theme = null }) => {
   const handleSubmit = (e) => {
     e.preventDefault();
     const data = {
-      theme: "/api/themes/" + themeRef.current.value,
+      theme: `/api/themes/${item ? item.theme.id : theme}`,
       url: urlRef.current.value,
       comment: commentRef.current.value,
     };
@@ -63,16 +60,7 @@ const ItemForm = memo(({ onSave, user, toggle, item = null, theme = null }) => {
     <div>
       {isSaving && <div>Saving into the database...</div>}
       <form>
-        <CustomSelect
-          name="theme"
-          ref={themeRef}
-          error={errors["theme"]}
-          user={user}
-          onChange={handleChange}
-          selected={item ? item.theme.id : theme ? theme : ""}
-        >
-          Choose your theme
-        </CustomSelect>
+        {errors && <div className="input-error">{errors[""]}</div>}
         <Url
           name="url"
           error={errors["url"]}

@@ -1,5 +1,16 @@
 {{ form_start(form) }}
     <div class="input-group">
+        <div class="input-checkbox">
+            {{ form_widget(form.open) }}
+            {{ form_label(form.open) }}
+        </div>
+        <div class="help-text">{{ form_help(form.open) }}</div>
+        <div class="input-error">
+            {{ form_errors(form.open) }}
+        </div>
+    </div>
+
+    <div class="input-group">
         {{ form_label(form.title) }}
         {{ form_widget(form.title) }}
         <div class="help-text">{{ form_help(form.title) }}</div>

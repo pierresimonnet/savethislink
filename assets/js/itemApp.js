@@ -7,6 +7,7 @@ if (document.getElementById("app")) {
   const ressource = app.dataset.ressource;
   const theme = app.dataset.theme;
   const owner = parseInt(app.dataset.owner);
+  const open = parseInt(app.dataset.open);
 
   render(
     <ItemApp
@@ -14,6 +15,7 @@ if (document.getElementById("app")) {
       ressource={ressource}
       theme={theme}
       owner={owner}
+      open={open}
     />,
     app
   );

@@ -3,16 +3,19 @@
 namespace App\Validator;
 
 use App\Repository\WebsiteRepository;
+use Symfony\Component\Security\Core\Security;
 use Symfony\Component\Validator\Constraint;
 use Symfony\Component\Validator\ConstraintValidator;
 
 class UniqueUrlValidator extends ConstraintValidator
 {
     private WebsiteRepository $websiteRepository;
+    private Security $security;
 
-    public function __construct(WebsiteRepository $websiteRepository)
+    public function __construct(WebsiteRepository $websiteRepository, Security $security)
     {
         $this->websiteRepository = $websiteRepository;
+        $this->security = $security;
     }
 
     public function validate($value, Constraint $constraint)
@@ -24,7 +27,9 @@ class UniqueUrlValidator extends ConstraintValidator
         }
 
         /** @var \App\Entity\Website $value */
-        if(!$this->websiteRepository->findOneBy(['url' => $value->getUrl(), 'theme' => $value->getTheme()])){
+        $existingWebsite = $this->websiteRepository->findOneBy(['url' => $value->getUrl(), 'theme' => $value->getTheme()]);
+
+        if(!$existingWebsite || $existingWebsite === $value){
             return;
         }   
         

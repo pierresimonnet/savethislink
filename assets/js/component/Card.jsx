@@ -12,6 +12,7 @@ export const ThemeCard = memo(
               {theme.title}
             </a>
             <div className="d-flex flex-centered">
+              {theme.open ? "open" : "closed"}
               <Icon id="link" />
               <span>{theme.websitesCount}</span>
             </div>
@@ -20,42 +21,48 @@ export const ThemeCard = memo(
             By{" "}
             <a href={`/users/${theme.owner.username}`} className="decorated">
               {theme.owner.username}
-            </a>
+            </a>{" "}
+            {theme.owner.id === user ? "(you)" : ""}
           </div>
           <p className="card-text">{theme.description}</p>
         </div>
-        {theme.owner.id === user && (
-          <div className="card-footer">
-            <ul className="d-flex justify-flex-end">
+
+        <div className="card-footer">
+          <ul className="d-flex justify-flex-end">
+            {theme.open || theme.owner.id === user ? (
               <li>
                 <a href={`/websites/new/${theme.slug}`} className="button">
                   <Icon id="add-link" />
                   <span>Add</span>
                 </a>
               </li>
-              <li>
-                <button
-                  onClick={toggleEdit}
-                  disabled={isSaving}
-                  className="button"
-                >
-                  <Icon id="edit" />
-                  <span>Edit</span>
-                </button>
-              </li>
-              <li>
-                <button
-                  onClick={toggleDelete}
-                  disabled={isSaving}
-                  className="button"
-                >
-                  <Icon id="trash" />
-                  <span>Delete</span>
-                </button>
-              </li>
-            </ul>
-          </div>
-        )}
+            ) : null}
+            {theme.owner.id === user && (
+              <>
+                <li>
+                  <button
+                    onClick={toggleEdit}
+                    disabled={isSaving}
+                    className="button"
+                  >
+                    <Icon id="edit" />
+                    <span>Edit</span>
+                  </button>
+                </li>
+                <li>
+                  <button
+                    onClick={toggleDelete}
+                    disabled={isSaving}
+                    className="button"
+                  >
+                    <Icon id="trash" />
+                    <span>Delete</span>
+                  </button>
+                </li>
+              </>
+            )}
+          </ul>
+        </div>
       </div>
     );
   }
@@ -68,6 +75,13 @@ export const WebsiteCard = memo(
         <div className="card-body">
           <div className="pill">
             <a href={`/themes/${website.theme.slug}`}>{website.theme.title}</a>
+          </div>
+          <div className="card-subtitle text-muted">
+            By{" "}
+            <a href={`/users/${website.owner.username}`} className="decorated">
+              {website.owner.username}
+            </a>{" "}
+            {website.owner.id === user ? "(you)" : ""}
           </div>
           <LinkPreview website={website} />
           <p className="card-text">{website.comment}</p>

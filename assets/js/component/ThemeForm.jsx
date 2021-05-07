@@ -1,21 +1,22 @@
 import React, { memo, useCallback, useEffect, useRef } from "react";
 import { usePost } from "../api/websites_api";
-import { Text, Textarea } from "../component/Field";
+import { Text, Textarea, Checkbox } from "../component/Field";
 
 const ThemeForm = memo(({ onSave, item = null, toggle }) => {
+  const openRef = useRef(null);
   const titleRef = useRef(null);
   const descriptionRef = useRef(null);
 
   const onSuccess = useCallback(
     (item) => {
       onSave(item);
-      if (titleRef.current && descriptionRef.current) {
+      if (openRef.current && titleRef.current && descriptionRef.current) {
         titleRef.current.value = "";
         descriptionRef.current.value = "";
       }
       toggle();
     },
-    [onSave, titleRef, descriptionRef]
+    [onSave, openRef, titleRef, descriptionRef]
   );
 
   const url = item ? item["@id"] : "/api/themes";
@@ -38,6 +39,7 @@ const ThemeForm = memo(({ onSave, item = null, toggle }) => {
   const handleSubmit = (e) => {
     e.preventDefault();
     const data = {
+      open: openRef.current.checked,
       title: titleRef.current.value,
       description: descriptionRef.current.value,
     };
@@ -46,6 +48,9 @@ const ThemeForm = memo(({ onSave, item = null, toggle }) => {
 
   useEffect(() => {
     if (item) {
+      if (openRef.current && item.open) {
+        openRef.current.checked = item.open;
+      }
       if (titleRef.current && item.title) {
         titleRef.current.value = item.title;
       }
@@ -59,6 +64,14 @@ const ThemeForm = memo(({ onSave, item = null, toggle }) => {
     <div>
       {isSaving && <div>Saving into the database...</div>}
       <form>
+        <Checkbox
+          name="open"
+          error={errors["open"]}
+          onChange={handleChange}
+          ref={openRef}
+        >
+          Open
+        </Checkbox>
         <Text
           name="title"
           error={errors["title"]}

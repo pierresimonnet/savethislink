@@ -27,7 +27,7 @@ class ContentVoter extends Voter
         /** @var \App\Entity\Website $subject */
         switch ($attribute) {
             case 'CONTENT_CREATE':
-                if ($subject->getTheme()->getOwner() === $user) {
+                if ($subject->getTheme()->getOwner() === $user || $subject->getTheme()->getOpen()) {
                     return true;
                 }
             case 'CONTENT_EDIT':
