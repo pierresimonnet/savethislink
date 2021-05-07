@@ -18,6 +18,10 @@ button + * {
   @include cta($bg: var(--primary), $color: var(--color-light));
 }
 
+.button-primary svg {
+  fill: #fff;
+}
+
 .button-secondary {
   @include cta($bg: var(--background-muted));
 }
