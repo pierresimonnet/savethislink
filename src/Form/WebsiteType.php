@@ -25,16 +25,6 @@ class WebsiteType extends AbstractType
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
         $builder
-            ->add('theme', EntityType::class, [
-                'attr' => ['class' => 'input input-select'], 
-                'label' => 'Choose a theme',
-                'required' => true,
-                'class' => Theme::class,
-                'query_builder' => function(EntityRepository $er) {
-                    return $er->createQueryBuilder('theme')->andWhere('theme.owner = :user')->setParameter('user', $this->security->getUser());
-                },
-                'choice_label' => 'title'
-            ])
             ->add('url', UrlType::class, [
                 'attr' => ['class' => 'input input-text'], 
                 'label' => 'The URL of the website',

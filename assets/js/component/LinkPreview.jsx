@@ -1,15 +1,19 @@
 import React, { memo } from "react";
+import Icon from "./Icon";
 
 const LinkPreview = memo(({ website }) => {
   return (
-    <a
-      href={website.url}
-      target="_blank"
-      rel="noopener noreferrer"
-      className="card-title"
-    >
-      {website.shortUrl}
-    </a>
+    <div className="flex-vertical-centered">
+      <Icon id="link" />
+      <a
+        href={website.url}
+        target="_blank"
+        rel="noopener noreferrer"
+        className="card-title"
+      >
+        {website.shortUrl}
+      </a>
+    </div>
   );
 });
 

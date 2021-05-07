@@ -4,7 +4,7 @@
 
 {% block body %}
     <div class="hero-section">
-        <h1>{{ theme.title }}</h1>
+        <h1>{{ theme.title }}</h1>{% if theme.open %}Open to contribution{% endif %}
         <p class="text-muted">By <a href="{{ path('user_profile', {'username': theme.owner.username}) }}" class="decorated">{{ theme.owner.username }}</a></p>
         <p>{{ theme.description }}</p>
         {% if app.user and app.user == theme.owner %}

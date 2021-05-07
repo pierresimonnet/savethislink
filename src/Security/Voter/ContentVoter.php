@@ -30,10 +30,12 @@ class ContentVoter extends Voter
                 if ($subject->getTheme()->getOwner() === $user || $subject->getTheme()->getOpen()) {
                     return true;
                 }
+                break;
             case 'CONTENT_EDIT':
                 if ($subject->getOwner() === $user) {
                     return true;
                 }
+                break;
             case 'CONTENT_DELETE':
                 if ($subject->getOwner() === $user) {
                     return true;

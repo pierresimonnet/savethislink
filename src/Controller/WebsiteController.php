@@ -27,8 +27,7 @@ class WebsiteController extends AbstractController
     {
         $this->denyAccessUnlessGranted('THEME_CREATE_CONTENT', $theme);
         
-        $website = new Website();
-        $website->setTheme($theme);
+        $website = new Website($theme);
         
         $form = $this->createForm(WebsiteType::class, $website);
         $form->handleRequest($request);

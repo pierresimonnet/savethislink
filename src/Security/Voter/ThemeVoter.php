@@ -27,10 +27,15 @@ class ThemeVoter extends Voter
         /** @var \App\Entity\Theme $subject */
         switch ($attribute) {
             case 'THEME_CREATE_CONTENT':
+                if ($subject->getOwner() === $user || $subject->getOpen()) {
+                    return true;
+                }
+                break;
             case 'THEME_EDIT':
                 if ($subject->getOwner() === $user) {
                     return true;
                 }
+                break;
             case 'THEME_DELETE':
                 if ($subject->getOwner() === $user) {
                     return true;

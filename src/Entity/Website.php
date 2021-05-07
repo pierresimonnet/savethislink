@@ -94,9 +94,10 @@ class Website implements UserOwnedInterface
      */
     private $owner;
 
-    public function __construct()
+    public function __construct(Theme $theme)
     {
         $this->createdAt = new \DateTimeImmutable();
+        $this->theme = $theme;
     }
 
     public function getId(): ?int

@@ -23,14 +23,12 @@
 
 .card-title {
   font-weight: bold;
+  flex: 1;
 }
 
 .card-subtitle {
   font-size: 14px;
-}
-
-.card-text {
-  margin-top: 12px;
+  margin-bottom: 8px;
 }
 
 .card-title,

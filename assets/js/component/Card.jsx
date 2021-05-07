@@ -11,7 +11,7 @@ export const ThemeCard = memo(
             <a href={`/themes/${theme.slug}`} className="card-title">
               {theme.title}
             </a>
-            <div className="d-flex flex-centered">
+            <div className="flex-centered">
               {theme.open ? "open" : "closed"}
               <Icon id="link" />
               <span>{theme.websitesCount}</span>
@@ -76,6 +76,7 @@ export const WebsiteCard = memo(
           <div className="pill">
             <a href={`/themes/${website.theme.slug}`}>{website.theme.title}</a>
           </div>
+          <LinkPreview website={website} />
           <div className="card-subtitle text-muted">
             By{" "}
             <a href={`/users/${website.owner.username}`} className="decorated">
@@ -83,7 +84,6 @@ export const WebsiteCard = memo(
             </a>{" "}
             {website.owner.id === user ? "(you)" : ""}
           </div>
-          <LinkPreview website={website} />
           <p className="card-text">{website.comment}</p>
         </div>
         {website.owner.id === user && (
