@@ -89,7 +89,7 @@ textarea {
 
 .checkbox-toggle label::after {
   transform: translate3d(0, 0, 0);
-  background-color: var(--primary);
+  background-color: var(--white);
 }
 
 .checkbox-toggle input:checked + label::after {

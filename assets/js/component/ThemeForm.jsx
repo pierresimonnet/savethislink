@@ -1,6 +1,6 @@
 import React, { memo, useCallback, useEffect, useRef } from "react";
 import { usePost } from "../api/websites_api";
-import { Text, Textarea, Checkbox } from "../component/Field";
+import { Toggle, Text, Textarea } from "../component/Field";
 
 const ThemeForm = memo(({ onSave, item = null, toggle }) => {
   const openRef = useRef(null);
@@ -65,14 +65,14 @@ const ThemeForm = memo(({ onSave, item = null, toggle }) => {
       {isSaving && <div>Saving into the database...</div>}
       <form>
         {errors && <div className="input-error">{errors[""]}</div>}
-        <Checkbox
+        <Toggle
           name="open"
           error={errors["open"]}
           onChange={handleChange}
           ref={openRef}
         >
           Open to contributions
-        </Checkbox>
+        </Toggle>
         <Text
           name="title"
           error={errors["title"]}
