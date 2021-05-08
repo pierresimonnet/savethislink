@@ -12,7 +12,7 @@ class DefaultController extends AbstractController
     public function index(): Response
     {
         if ($this->getUser()) {
-            return $this->redirectToRoute('theme_index');
+            return $this->redirectToRoute('topic_index');
         }
 
         return $this->render('default/index.html.twig', [
