@@ -10,6 +10,14 @@ button + * {
   margin-left: 8px;
 }
 
+.button-column > * + * {
+  margin-top: 8px;
+}
+
+.button-row > * + * {
+  margin-left: 8px;
+}
+
 .button {
   @include cta();
 }
@@ -23,7 +31,8 @@ button + * {
 }
 
 .button-secondary {
-  @include cta($bg: var(--background-muted));
+  @include cta($padding: 4px 10px);
+  border: 1px solid var(--color-muted);
 }
 
 .button-big {

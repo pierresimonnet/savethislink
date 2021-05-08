@@ -1,8 +1,8 @@
-@mixin cta($bg: unset, $color: inherit) {
+@mixin cta($bg: unset, $color: inherit, $padding: 6px 12px) {
   background-color: $bg;
   color: $color;
   border-radius: 22px;
-  padding: 6px 12px;
+  padding: $padding;
   display: flex;
   justify-content: center;
   align-items: center;

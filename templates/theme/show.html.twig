@@ -9,7 +9,7 @@
         <p class="p-margin">{{ theme.description }}</p>
         <p>This theme is {% if theme.open %}open{% else %}closed{% endif %} to contributions</p>
         {% if app.user and app.user == theme.owner %}
-        <div class="mt-1">
+        <div class="mt-1 d-flex button-row">
             <a href="{{ path('theme_edit', {'id': theme.id}) }}" class="button-secondary">{{ icon('edit') }} <span>Edit</span></a>
             {{ include('theme/_delete_form.html.twig') }}
         </div>
