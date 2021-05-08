@@ -25,7 +25,7 @@ class WebsiteController extends AbstractController
     #[Route('/new/{slug}', name: 'website_new', methods: ['GET', 'POST'])]
     public function new(Request $request, Theme $theme): Response
     {
-        $this->denyAccessUnlessGranted('THEME_CREATE_CONTENT', $theme);
+        $this->denyAccessUnlessGranted('TOPIC_CREATE_CONTENT', $theme);
         
         $website = new Website($theme);
         
@@ -39,7 +39,7 @@ class WebsiteController extends AbstractController
 
             $this->addFlash('success', "New website saved !");
 
-            return $this->redirectToRoute('theme_show', ['slug' => $website->getTheme()->getSlug()]);
+            return $this->redirectToRoute('topic_show', ['slug' => $website->getTheme()->getSlug()]);
         }
 
         return $this->render('website/new.html.twig', [
@@ -68,7 +68,7 @@ class WebsiteController extends AbstractController
             $this->getDoctrine()->getManager()->flush();
             $this->addFlash('success', "Website updated !");
 
-            return $this->redirectToRoute('theme_show', ['slug' => $website->getTheme()->getSlug()]);
+            return $this->redirectToRoute('topic_show', ['slug' => $website->getTheme()->getSlug()]);
         }
 
         return $this->render('website/edit.html.twig', [
@@ -89,6 +89,6 @@ class WebsiteController extends AbstractController
             $this->addFlash('success', "Website deleted !");
         }
 
-        return $this->redirectToRoute('theme_show', ['slug' => $website->getTheme()->getSlug()]);
+        return $this->redirectToRoute('topic_show', ['slug' => $website->getTheme()->getSlug()]);
     }
 }

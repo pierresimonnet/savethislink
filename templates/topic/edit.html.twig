@@ -1,0 +1,11 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Edit topic{% endblock %}
+
+{% block body %}
+    <h1 class="text-center">Edit topic</h1>
+
+    <div class="form-no-modal">
+        {{ include('topic/_form.html.twig', {'button_label': 'Update'}) }}
+    </div>
+{% endblock %}

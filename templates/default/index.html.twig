@@ -1,13 +1,11 @@
 {% extends 'base.html.twig' %}
 
-{% block title %}Shareintel{% endblock %}
-
 {% block body %}
 <div class="hero-section">
     <h1>Create public lists of interesting links</h1>
-    <p>Share links worth checking. Open your list to users contributions and broaden your knowledge.</p>
+    <p>Share links worth checking. Open yours lists to users contributions and broaden your knowledge.</p>
 </div>
-<ul class="button-column">
+<ul class="d-flex button-row">
     <li><a href="{{ path('app_login') }}" class="button-secondary">Login</a></li>
     <li><a href="{{ path('app_register') }}" class="button-primary">Register</a></li>
 </ul>

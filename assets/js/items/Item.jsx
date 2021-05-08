@@ -31,14 +31,14 @@ const Item = memo(({ item, edit, remove, user, ressource }) => {
           <Modal
             isShowing={isShowingEditModal}
             hide={toggleEdit}
-            title="Edit this website"
+            title="Edit this link"
           >
             <ItemForm onSave={handleEdit} item={item} toggle={toggleEdit} />
           </Modal>
           <Modal
             isShowing={isShowingDeleteModal}
             hide={toggleDelete}
-            title="Delete this website"
+            title="Delete this link"
           >
             <DeleteForm
               onRemove={handleDelete}
@@ -60,14 +60,14 @@ const Item = memo(({ item, edit, remove, user, ressource }) => {
           <Modal
             isShowing={isShowingEditModal}
             hide={toggleEdit}
-            title="Edit this theme"
+            title="Edit this topic"
           >
             <ThemeForm onSave={handleEdit} item={item} toggle={toggleEdit} />
           </Modal>
           <Modal
             isShowing={isShowingDeleteModal}
             hide={toggleDelete}
-            title="Delete this theme"
+            title="Delete this topic"
           >
             <DeleteForm
               onRemove={handleDelete}

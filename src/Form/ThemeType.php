@@ -20,12 +20,12 @@ class ThemeType extends AbstractType
                 'required' => false
             ])
             ->add('title', TextType::class, [
-                'attr' => ['class' => 'input input-text', 'placeholder' => 'Choose a title for this theme'], 
+                'attr' => ['class' => 'input input-text', 'placeholder' => 'Choose a title for this topic'], 
                 'label' => 'Title',
                 'required' => true
             ])
             ->add('description', TextareaType::class, [
-                'attr' => ['class' => 'input input-textarea', 'placeholder' => 'What is this theme about ?'], 
+                'attr' => ['class' => 'input input-textarea', 'placeholder' => 'What is this topic about ?'], 
                 'label' => 'Description',
                 'required' => true
             ])

@@ -1,7 +1,7 @@
 import React, { memo, useCallback } from "react";
 import { usePost } from "../api/websites_api";
 
-const DeleteForm = memo(({ onRemove, toggle, item }) => {
+const DeleteForm = memo(({ onRemove, item }) => {
   const onSuccess = useCallback(() => {
     onRemove(item);
   }, []);

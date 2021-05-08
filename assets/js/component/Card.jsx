@@ -8,7 +8,7 @@ export const ThemeCard = memo(
       <div className="card">
         <div className="card-body">
           <div className="d-flex space-between align-start">
-            <a href={`/themes/${theme.slug}`} className="card-title">
+            <a href={`/topics/${theme.slug}`} className="card-title">
               {theme.title}
             </a>
             <div className="flex-centered">
@@ -78,7 +78,7 @@ export const WebsiteCard = memo(
       <div className="card">
         <div className="card-body">
           <div className="pill">
-            <a href={`/themes/${website.theme.slug}`}>{website.theme.title}</a>
+            <a href={`/topics/${website.theme.slug}`}>{website.theme.title}</a>
           </div>
           <LinkPreview website={website} />
           <div className="card-subtitle text-muted">

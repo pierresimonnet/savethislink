@@ -24,11 +24,11 @@ use Symfony\Bridge\Doctrine\Validator\Constraints\UniqueEntity;
  *      itemOperations={
  *          "get", 
  *          "put"={
- *              "security"="is_granted('THEME_EDIT', object)",
+ *              "security"="is_granted('TOPIC_EDIT', object)",
  *              "security_message"="Only the owner of the theme can edit it"
  *          }, 
  *          "delete"={
- *              "security"="is_granted('THEME_DELETE', object)",
+ *              "security"="is_granted('TOPIC_DELETE', object)",
  *              "security_message"="Only the owner of the theme can delete it"
  *          }
  *      },

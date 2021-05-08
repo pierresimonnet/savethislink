@@ -82,7 +82,7 @@ const ItemApp = ({ user, ressource, theme = null, owner = null, open = 0 }) => {
             <span>
               {ressource === "websites"
                 ? "Add a new link"
-                : "Create a new theme"}
+                : "Create a new topic"}
             </span>
           </button>
         </div>
@@ -104,7 +104,7 @@ const ItemApp = ({ user, ressource, theme = null, owner = null, open = 0 }) => {
         </Modal>
       )}
       {ressource === "themes" && (
-        <Modal isShowing={isShowing} hide={toggle} title="Create a new theme">
+        <Modal isShowing={isShowing} hide={toggle} title="Create a new topic">
           <ThemeForm onSave={saveItem} user={user} toggle={toggle} />
         </Modal>
       )}
