@@ -14,7 +14,7 @@ class UniqueUrl extends Constraint
      * Any public properties become valid options for the annotation.
      * Then, use these in your validator class.
      */
-    public $message = 'The link "{{ value }}" has already been posted in this theme.';
+    public $message = 'Le lien "{{ value }}" a déjà été ajouté à ce sujet.';
 
     public function getTargets()
     {

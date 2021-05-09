@@ -27,13 +27,13 @@ class WebsiteType extends AbstractType
         $builder
             ->add('url', UrlType::class, [
                 'attr' => ['class' => 'input input-text', 'placeholder' => 'https://...'], 
-                'label' => 'URL of the link',
+                'label' => 'URL du lien',
                 'required' => true
             ])
             ->add('comment', TextareaType::class, [
-                'attr' => ['class' => 'input input-textarea', 'placeholder' => 'What is this link about ?'], 
-                'label' => 'Your comment',
-                'required' => true
+                'attr' => ['class' => 'input input-textarea', 'placeholder' => 'A propos de quoi est ce lien ?'], 
+                'label' => 'Votre commentaire (optionnel)',
+                'required' => false
             ])
         ;
     }

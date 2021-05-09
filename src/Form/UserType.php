@@ -15,7 +15,7 @@ class UserType extends AbstractType
         $builder
             ->add('username', TextType::class, [
                 'attr' => ['class' => 'input input-text'], 
-                'label' => 'Your username',
+                'label' => 'Nom d\'utilisateur',
                 'required' => true
             ])
         ;

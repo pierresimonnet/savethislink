@@ -34,7 +34,7 @@ class ThemeController extends AbstractController
             $entityManager = $this->getDoctrine()->getManager();
             $entityManager->persist($theme);
             $entityManager->flush();
-            $this->addFlash('success', "New topic saved !");
+            $this->addFlash('success', "Sujet créé");
 
             return $this->redirectToRoute('topic_show', ['slug' => $theme->getSlug()]);
         }
@@ -69,7 +69,7 @@ class ThemeController extends AbstractController
 
         if ($form->isSubmitted() && $form->isValid()) {
             $this->getDoctrine()->getManager()->flush();
-            $this->addFlash('success', "Topic updated !");
+            $this->addFlash('success', "Sujet mis à jour");
 
             return $this->redirectToRoute('topic_show', ['slug' => $theme->getSlug()]);
         }
@@ -89,7 +89,7 @@ class ThemeController extends AbstractController
             $entityManager = $this->getDoctrine()->getManager();
             $entityManager->remove($theme);
             $entityManager->flush();
-            $this->addFlash('success', "topic deleted !");
+            $this->addFlash('success', "Sujet supprimé");
         }
 
         return $this->redirectToRoute('topic_index');

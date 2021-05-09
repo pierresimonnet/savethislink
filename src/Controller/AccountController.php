@@ -34,7 +34,7 @@ class AccountController extends AbstractController
 
         if ($form->isSubmitted() && $form->isValid()) {
             $this->getDoctrine()->getManager()->flush();
-            $this->addFlash("success", "profile updated");
+            $this->addFlash("success", "Profil mis à jour");
             
             return $this->redirectToRoute('user_profile', ['username' => $user->getUsername()]);
         }
@@ -58,7 +58,7 @@ class AccountController extends AbstractController
             $entityManager->remove($user);
             $entityManager->flush();
 
-            $this->addFlash('success', 'Account deleted');
+            $this->addFlash('success', 'Compte supprimé');
         }
 
         return $this->redirectToRoute('app_home');

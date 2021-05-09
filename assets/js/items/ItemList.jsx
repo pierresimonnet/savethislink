@@ -40,7 +40,7 @@ const ItemList = memo(
               onClick={onLoadMore}
               className="button-primary"
             >
-              {isLoading ? "Loading..." : "Load more"}
+              {isLoading ? "Loading..." : "Voir plus"}
             </button>
           </div>
         )}

@@ -58,7 +58,7 @@ const ItemForm = memo(({ onSave, toggle, item = null, theme }) => {
 
   return (
     <div>
-      {isSaving && <div>Saving into the database...</div>}
+      {isSaving && <div>Enregistrement...</div>}
       <form>
         {errors && <div className="input-error">{errors[""]}</div>}
         <Url
@@ -67,17 +67,18 @@ const ItemForm = memo(({ onSave, toggle, item = null, theme }) => {
           onChange={handleChange}
           ref={urlRef}
           placeholder="https://..."
+          required
         >
-          URL of the link
+          URL du lien
         </Url>
         <Textarea
           name="comment"
           error={errors["comment"]}
           onChange={handleChange}
           ref={commentRef}
-          placeholder="What is this link about ?"
+          placeholder="A propos de quoi est ce lien ?"
         >
-          Your comment
+          Votre commentaire (optionnel)
         </Textarea>
         <div className="d-flex justify-flex-end">
           <button
@@ -85,10 +86,10 @@ const ItemForm = memo(({ onSave, toggle, item = null, theme }) => {
             onClick={handleSubmit}
             disabled={isSaving}
           >
-            {item === null ? "Add" : "Save"}
+            {item === null ? "Ajouter" : "Enregistrer"}
           </button>
           <button onClick={handleCancel} className="button-secondary">
-            Cancel
+            Annuler
           </button>
         </div>
       </form>

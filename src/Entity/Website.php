@@ -17,17 +17,17 @@ use ApiPlatform\Core\Bridge\Doctrine\Orm\Filter\SearchFilter;
  *          "get", 
  *          "post"={
  *              "security_post_denormalize"="is_granted('CONTENT_CREATE', object)",
- *              "security_post_denormalize_message"="Only the owner of the theme can create a website"}
+ *              "security_post_denormalize_message"="Seul le créateur du sujet peut ajouter un lien."}
  *      },
  *      itemOperations={
  *          "get", 
  *          "put"={
  *              "security"="is_granted('CONTENT_EDIT', object)",
- *              "security_message"="Only the owner of the website can edit it"
+ *              "security_message"="Seul le créateur du lien peut l'éditer."
  *          }, 
  *          "delete"={
  *              "security"="is_granted('CONTENT_DELETE', object)",
- *              "security_message"="Only the owner of the website can delete it"
+ *              "security_message"="Seul le créateur du lien peut le supprimer."
  *          }
  *      },
  *      normalizationContext={"groups"={"website:read"}},

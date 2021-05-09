@@ -15,18 +15,16 @@ export const ThemeCard = memo(
               <span
                 className={`status status-${theme.open ? "open" : "closed"}`}
               >
-                {theme.open ? "open" : "closed"}
+                {theme.open ? "ouvert" : "fermé"}
               </span>
               <Icon id="link" />
               <span>{theme.websitesCount}</span>
             </div>
           </div>
           <div className="card-subtitle text-muted">
-            By{" "}
             <a href={`/users/${theme.owner.username}`} className="decorated">
               {theme.owner.username}
-            </a>{" "}
-            {theme.owner.id === user ? "(you)" : ""}
+            </a>
           </div>
           <p className="card-text">{theme.description}</p>
         </div>
@@ -37,7 +35,7 @@ export const ThemeCard = memo(
               <li>
                 <a href={`/websites/new/${theme.slug}`} className="button">
                   <Icon id="add-link" />
-                  <span>Add</span>
+                  <span>Ajouter</span>
                 </a>
               </li>
             ) : null}
@@ -50,7 +48,7 @@ export const ThemeCard = memo(
                     className="button"
                   >
                     <Icon id="edit" />
-                    <span>Edit</span>
+                    <span>Editer</span>
                   </button>
                 </li>
                 <li>
@@ -60,7 +58,7 @@ export const ThemeCard = memo(
                     className="button"
                   >
                     <Icon id="trash" />
-                    <span>Delete</span>
+                    <span>Supprimer</span>
                   </button>
                 </li>
               </>
@@ -82,11 +80,9 @@ export const WebsiteCard = memo(
           </div>
           <LinkPreview website={website} />
           <div className="card-subtitle text-muted">
-            By{" "}
             <a href={`/users/${website.owner.username}`} className="decorated">
               {website.owner.username}
-            </a>{" "}
-            {website.owner.id === user ? "(you)" : ""}
+            </a>
           </div>
           <p className="card-text">{website.comment}</p>
         </div>
@@ -100,7 +96,7 @@ export const WebsiteCard = memo(
                   className="button"
                 >
                   <Icon id="edit" />
-                  <span>Edit</span>
+                  <span>Editer</span>
                 </button>
               </li>
               <li>
@@ -110,7 +106,7 @@ export const WebsiteCard = memo(
                   className="button"
                 >
                   <Icon id="trash" />
-                  <span>Delete</span>
+                  <span>Supprimer</span>
                 </button>
               </li>
             </ul>

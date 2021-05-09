@@ -37,7 +37,7 @@ class WebsiteController extends AbstractController
             $entityManager->persist($website);
             $entityManager->flush();
 
-            $this->addFlash('success', "New website saved !");
+            $this->addFlash('success', "Lien ajouté");
 
             return $this->redirectToRoute('topic_show', ['slug' => $website->getTheme()->getSlug()]);
         }
@@ -66,7 +66,7 @@ class WebsiteController extends AbstractController
 
         if ($form->isSubmitted() && $form->isValid()) {
             $this->getDoctrine()->getManager()->flush();
-            $this->addFlash('success', "Website updated !");
+            $this->addFlash('success', "Lien mis à jour");
 
             return $this->redirectToRoute('topic_show', ['slug' => $website->getTheme()->getSlug()]);
         }
@@ -86,7 +86,7 @@ class WebsiteController extends AbstractController
             $entityManager = $this->getDoctrine()->getManager();
             $entityManager->remove($website);
             $entityManager->flush();
-            $this->addFlash('success', "Website deleted !");
+            $this->addFlash('success', "Lien supprimé");
         }
 
         return $this->redirectToRoute('topic_show', ['slug' => $website->getTheme()->getSlug()]);

@@ -1,12 +1,12 @@
 {% extends 'base.html.twig' %}
 
-{% block title %}Edit link{% endblock %}
+{% block title %}Editer lien{% endblock %}
 
 {% block body %}
-    <h1 class="text-center">Edit link</h1>
+    <h1 class="text-center">Editer ce lien</h1>
 
     <div class="form-no-modal">
-        {{ include('website/_form.html.twig', {'button_label': 'Update'}) }}
+        {{ include('website/_form.html.twig', {'button_label': 'Enregistrer'}) }}
         {{ include('website/_delete_form.html.twig') }}
     </div>
 {% endblock %}

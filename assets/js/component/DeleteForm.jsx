@@ -19,9 +19,8 @@ const DeleteForm = memo(({ onRemove, item }) => {
 
   return (
     <div>
-      <p>Are you sure you want to delete this item ?</p>
       <button onClick={handleSubmit} className="button-primary">
-        Delete
+        Supprimer
       </button>
     </div>
   );

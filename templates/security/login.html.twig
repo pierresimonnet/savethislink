@@ -1,13 +1,13 @@
 {% extends 'base.html.twig' %}
 
-{% block title %}Log in!{% endblock %}
+{% block title %}Se connecter{% endblock %}
 
 {% block body %}
-    <h1 class="text-center">Please sign in</h1>
+    <h1 class="text-center">Se connecter</h1>
 
     {% if app.user %}
         <div class="mb-3">
-            You are logged in as {{ app.user.username }}, <a href="{{ path('app_logout') }}">Logout</a>
+            Vous êtes déjà connecté en tant que {{ app.user.username }}, <a href="{{ path('app_logout') }}">Se déconnecter</a>
         </div>
     {% endif %}
 
@@ -18,12 +18,12 @@
             {% endif %}
 
             <div class="input-group">
-                <label for="inputUsername">Username</label>
+                <label for="inputUsername">Nom d'utilisateur</label>
                 <input type="text" value="{{ last_username }}" name="username" id="inputUsername" class="input input-text" required autofocus>
             </div>
 
             <div class="input-group">
-                <label for="inputPassword">Password</label>
+                <label for="inputPassword">Mot de passe</label>
                 <input type="password" name="password" id="inputPassword" class="input input-password" required>
             </div>
 
@@ -44,9 +44,9 @@
 
             <div class="d-flex justify-flex-end">
                 <button class="button-primary" type="submit">
-                    Sign in
+                    Se connecter
                 </button>
-                <a class="button-secondary" href={{ path("app_register") }}>Register</a>
+                <a class="button-secondary" href={{ path("app_register") }}>S'inscrire</a>
             </div>
         </form>
     </div>

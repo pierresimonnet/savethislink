@@ -62,7 +62,7 @@ const ThemeForm = memo(({ onSave, item = null, toggle }) => {
 
   return (
     <div>
-      {isSaving && <div>Saving into the database...</div>}
+      {isSaving && <div>Enregistrement...</div>}
       <form>
         {errors && <div className="input-error">{errors[""]}</div>}
         <Toggle
@@ -71,23 +71,25 @@ const ThemeForm = memo(({ onSave, item = null, toggle }) => {
           onChange={handleChange}
           ref={openRef}
         >
-          Open to contributions
+          Ouvrir aux contributions
         </Toggle>
         <Text
           name="title"
           error={errors["title"]}
           onChange={handleChange}
           ref={titleRef}
-          placeholder="Choose a title for this topic"
+          placeholder="Titre du sujet"
+          required
         >
-          Title
+          Titre
         </Text>
         <Textarea
           name="description"
           error={errors["description"]}
           onChange={handleChange}
           ref={descriptionRef}
-          placeholder="What is this topic about ?"
+          placeholder="A propos de quoi est ce sujet ?"
+          required
         >
           Description
         </Textarea>
@@ -97,10 +99,10 @@ const ThemeForm = memo(({ onSave, item = null, toggle }) => {
             onClick={handleSubmit}
             disabled={isSaving}
           >
-            {item === null ? "Add" : "Save"}
+            {item === null ? "Créer" : "Enregistrer"}
           </button>
           <button onClick={handleCancel} className="button-secondary">
-            Cancel
+            Annuler
           </button>
         </div>
       </form>

@@ -25,11 +25,11 @@ use Symfony\Bridge\Doctrine\Validator\Constraints\UniqueEntity;
  *          "get", 
  *          "put"={
  *              "security"="is_granted('TOPIC_EDIT', object)",
- *              "security_message"="Only the owner of the theme can edit it"
+ *              "security_message"="Seul le créateur du sujet peut l'éditer."
  *          }, 
  *          "delete"={
  *              "security"="is_granted('TOPIC_DELETE', object)",
- *              "security_message"="Only the owner of the theme can delete it"
+ *              "security_message"="Seul le créateur du sujet peut le supprimer."
  *          }
  *      },
  *      normalizationContext={"groups"={"theme:read"}},
@@ -44,7 +44,7 @@ use Symfony\Bridge\Doctrine\Validator\Constraints\UniqueEntity;
  * @ApiFilter(PropertyFilter::class)
  * @ORM\Entity(repositoryClass=ThemeRepository::class)
  * @ORM\EntityListeners({"App\Doctrine\ThemeSetSlugListener", "App\Doctrine\ThemeSetOwnerListener"})
- * @UniqueEntity(fields={"title"}, message="There is already a theme with this title")
+ * @UniqueEntity(fields={"title"}, message="Ce titre existe déjà, choisissez un titre différent.")
  */
 class Theme implements UserOwnedInterface
 {

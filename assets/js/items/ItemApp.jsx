@@ -41,17 +41,17 @@ const ItemApp = ({ user, ressource, theme = null, owner = null, open = 0 }) => {
 
   const saveItem = useCallback((newItem) => {
     setItems((items) => [newItem, ...items]);
-    displaySuccessMessage("Item added !");
+    displaySuccessMessage("Contenu ajouté !");
   });
 
   const editItem = useCallback((newItem, oldItem) => {
     setItems((items) => items.map((i) => (i === oldItem ? newItem : i)));
-    displaySuccessMessage("Item updated !");
+    displaySuccessMessage("Contenu mis à jour !");
   });
 
   const removeItem = useCallback((item) => {
     setItems((items) => items.filter((i) => i !== item));
-    displaySuccessMessage("Item removed !");
+    displaySuccessMessage("Contenu supprimé !");
   });
 
   const displaySuccessMessage = (message) => {
@@ -80,9 +80,7 @@ const ItemApp = ({ user, ressource, theme = null, owner = null, open = 0 }) => {
           <button onClick={toggle} className="button-primary">
             <Icon id="add" />
             <span>
-              {ressource === "websites"
-                ? "Add a new link"
-                : "Create a new topic"}
+              {ressource === "websites" ? "Ajouter un lien" : "Créer un sujet"}
             </span>
           </button>
         </div>
@@ -99,12 +97,12 @@ const ItemApp = ({ user, ressource, theme = null, owner = null, open = 0 }) => {
         user={user}
       />
       {ressource === "websites" && (
-        <Modal isShowing={isShowing} hide={toggle} title="Add a new link">
+        <Modal isShowing={isShowing} hide={toggle} title="Ajouter un lien">
           <ItemForm onSave={saveItem} toggle={toggle} theme={theme} />
         </Modal>
       )}
       {ressource === "themes" && (
-        <Modal isShowing={isShowing} hide={toggle} title="Create a new topic">
+        <Modal isShowing={isShowing} hide={toggle} title="Créer un sujet">
           <ThemeForm onSave={saveItem} user={user} toggle={toggle} />
         </Modal>
       )}
