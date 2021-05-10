@@ -1,4 +1,4 @@
-@mixin cta($bg: unset, $color: inherit, $padding: 6px 12px) {
+@mixin cta($bg: unset, $color: inherit, $padding: 6px) {
   background-color: $bg;
   color: $color;
   border-radius: 22px;

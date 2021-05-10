@@ -1,6 +1,6 @@
 .navbar {
-  display: flex;
-  justify-content: space-between;
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
   position: sticky;
   height: var(--topBarHeight);
   top: 0;
@@ -21,11 +21,12 @@
 }
 
 .navbar-auth {
+  height: 100%;
   min-width: var(--topBarHeight);
-  padding: 0 calc(var(--topBarHeight) / 2);
+  margin-left: auto;
 }
 
-.navbar-username {
+.hidden-on-mobile {
   display: none;
 }
 
@@ -71,15 +72,20 @@
 }
 
 @media screen and (min-width: 768px) {
+  .navbar {
+    display: flex;
+  }
+
   .navbar-toggler {
     display: none;
   }
 
-  .navbar-brand {
+  .navbar-brand,
+  .navbar-auth {
     padding: 0 calc(var(--topBarHeight) / 2);
   }
 
-  .navbar-username {
+  .hidden-on-mobile {
     display: inline;
   }
 

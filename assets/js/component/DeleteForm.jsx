@@ -18,7 +18,7 @@ const DeleteForm = memo(({ onRemove, item }) => {
   };
 
   return (
-    <div>
+    <div className="mt-1 d-flex justify-flex-center">
       <button onClick={handleSubmit} className="button-primary">
         Supprimer
       </button>

@@ -10,12 +10,10 @@ button + * {
   margin-left: 8px;
 }
 
-.button-column > * + * {
-  margin-top: 8px;
-}
-
-.button-row > * + * {
+.button-column > *,
+.button-row > * {
   margin-left: 8px;
+  margin-top: 8px;
 }
 
 .button {
@@ -23,7 +21,11 @@ button + * {
 }
 
 .button-primary {
-  @include cta($bg: var(--primary), $color: var(--color-light));
+  @include cta(
+    $bg: var(--primary),
+    $color: var(--color-light),
+    $padding: 6px 12px
+  );
 }
 
 .button-primary svg {
@@ -37,4 +39,14 @@ button + * {
 
 .button-big {
   text-transform: uppercase;
+}
+
+@media screen and (min-width: 768px) {
+  .button-column > * + * {
+    margin-top: 8px;
+  }
+
+  .button-row > * + * {
+    margin-left: 8px;
+  }
 }

@@ -30,7 +30,7 @@ export const ThemeCard = memo(
         </div>
 
         <div className="card-footer">
-          <ul className="d-flex justify-flex-end">
+          <ul className="d-flex justify-flex-end card-actions">
             {theme.open || theme.owner.id === user ? (
               <li>
                 <a href={`/websites/new/${theme.slug}`} className="button">
@@ -88,7 +88,7 @@ export const WebsiteCard = memo(
         </div>
         {website.owner.id === user && (
           <div className="card-footer">
-            <ul className="d-flex justify-flex-end">
+            <ul className="d-flex justify-flex-end card-actions">
               <li>
                 <button
                   onClick={toggleEdit}

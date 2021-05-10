@@ -6,15 +6,21 @@
   padding: 2px 3px;
   border: 1px solid var(--color-muted);
   flex-wrap: wrap;
-  max-width: 100%;
+  width: 100%;
 }
 
 .copyToClipboard input {
   background: none;
   outline: none;
+  flex: 1 auto;
 }
 
 .copyToClipboard button {
   background: var(--white);
-  flex: 1 auto;
+}
+
+@media screen and (min-width: 768px) {
+  .copyToClipboard {
+    max-width: 340px;
+  }
 }
