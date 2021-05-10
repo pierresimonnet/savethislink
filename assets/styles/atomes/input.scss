@@ -6,12 +6,13 @@
   border: none;
 }
 
-textarea {
-  resize: none;
-}
-
 input {
   @extend %input;
+}
+
+textarea {
+  @extend %input;
+  resize: none;
 }
 
 .input {
