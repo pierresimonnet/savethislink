@@ -35,6 +35,7 @@ $font: "Arial", sans-serif;
 // Molecules
 @import "molecules/alert.scss";
 @import "molecules/card.scss";
+@import "molecules/copyToClipboard.scss";
 
 // Organisms
 @import "organisms/nav.scss";

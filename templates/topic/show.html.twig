@@ -7,7 +7,12 @@
         <h1>{{ theme.title }}</h1>
         <p class="text-muted">By <a href="{{ path('user_profile', {'username': theme.owner.username}) }}" class="decorated">{{ theme.owner.username }}</a></p>
         <p class="p-margin">{{ theme.description }}</p>
-        <p>Ce sujet est {% if theme.open %}ouvert{% else %}fermé{% endif %} aux contributions.</p>
+        <p class="status status-{{ theme.open ? "open" : "closed" }}">Ce sujet est {% if theme.open %}ouvert{% else %}fermé{% endif %} aux contributions.</p>
+        
+        <div id="js-copyToClipboard" class="mt-1 copyToClipboard">
+            <input id="js-copyToClipboard-input" type="text" value="{{ url('topic_show', {'slug': theme.slug}) }}" readonly><button id="js-copyToClipboard-button" class="button-secondary">Copier</button>
+        </div>
+
         {% if app.user and app.user == theme.owner %}
         <div class="mt-1 d-flex button-row">
             <a href="{{ path('topic_edit', {'id': theme.id}) }}" class="button-secondary">{{ icon('edit') }} <span>Editer</span></a>

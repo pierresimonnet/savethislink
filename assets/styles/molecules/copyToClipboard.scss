@@ -1,0 +1,20 @@
+.copyToClipboard {
+  display: flex;
+  width: max-content;
+  border-radius: 22px;
+  overflow: hidden;
+  padding: 2px 3px;
+  border: 1px solid var(--color-muted);
+  flex-wrap: wrap;
+  max-width: 100%;
+}
+
+.copyToClipboard input {
+  background: none;
+  outline: none;
+}
+
+.copyToClipboard button {
+  background: var(--white);
+  flex: 1 auto;
+}

@@ -1,8 +1,12 @@
 <nav class="navbar">
-    <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#js-nav" aria-controls="js-nav" aria-expanded="false" aria-label="Toggle navigation" id="js-toggleBtn">
-        <span class="navbar-toggler-icon">{{ icon('menu') }}</span>
-    </button>
-    <a class="navbar-brand" href={{ path("app_home") }}>Shareintel</a>
+    <div class="navbar-toggler">
+        <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#js-nav" aria-controls="js-nav" aria-expanded="false" aria-label="Toggle navigation" id="js-toggleBtn">
+            <span class="navbar-toggler-icon">{{ icon('menu') }}</span>
+        </button>
+    </div>
+    <div class="navbar-brand">
+        <a href={{ path("app_home") }}>Shareintel</a>
+    </div>
     <div class="navbar-nav-wrapper" id="js-nav">
         <ul class="navbar-nav">
             <li class="nav-item">
@@ -14,7 +18,7 @@
     {% if app.user %}
         <a class="d-flex flex-centered" href="{{ path("user_profile", {username: app.user.username}) }}" {{ isActive('profile') }}>{{ icon('account') }}<span class="navbar-username">{{ app.user.username }}</span></a>
     {% else %}
-        <a class="d-flex flex-centered" href="{{ path("app_login") }}">Se connecter</a>
+        <a class="d-flex flex-centered" href="{{ path("app_login") }}">Connexion</a>
     {% endif %}
     </div>
 </nav>
