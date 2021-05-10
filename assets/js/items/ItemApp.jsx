@@ -84,6 +84,19 @@ const ItemApp = ({ user, ressource, theme = null, owner = null, open = 0 }) => {
             </span>
           </button>
         </div>
+      ) : !user && open === 1 ? (
+        <div className="d-flex justify-flex-center mb-1">
+          <a href="/login" className="button-secondary">
+            Connectez-vous pour{" "}
+            {ressource === "websites" ? "ajouter un lien" : ""}
+          </a>
+        </div>
+      ) : !user && ressource === "themes" ? (
+        <div className="d-flex justify-flex-center mb-1">
+          <a href="/login" className="button-secondary">
+            Connectez-vous pour créer un sujet
+          </a>
+        </div>
       ) : null}
       {successMessage && <Alert type="success" message={successMessage} />}
       <ItemList
