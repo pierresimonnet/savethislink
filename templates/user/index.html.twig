@@ -4,7 +4,7 @@
 
 {% block body %}
     <div class="hero-section">
-        <h1>{{ user.username }}</h1>
+        <h1>Sujets créés par {{ user.username }}</h1>
         {% if app.user == user %}
         <div class="d-flex button-row">
             <a href="{{ path('account_edit', {'id': app.user.id }) }}" class="button-secondary">{{ icon('edit') }}<span>Editer mon profil</span></a>
@@ -14,5 +14,5 @@
         {% endif %}
     </div>
 
-    <div id='app' data-ressource="themes" data-owner={{ user.id }}></div>
+    <div id='app' data-context="user-profile" data-ressource="themes" data-owner={{ user.id }}></div>
 {% endblock %}

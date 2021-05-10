@@ -4,6 +4,7 @@ import ItemApp from "./items/ItemApp";
 
 if (document.getElementById("app")) {
   const app = document.getElementById("app");
+  const context = app.dataset.context;
   const ressource = app.dataset.ressource;
   const theme = app.dataset.theme;
   const owner = parseInt(app.dataset.owner);
@@ -11,6 +12,7 @@ if (document.getElementById("app")) {
 
   render(
     <ItemApp
+      context={context}
       user={window.USER}
       ressource={ressource}
       theme={theme}

@@ -8,7 +8,14 @@ import ItemForm from "../component/ItemForm";
 import ThemeForm from "../component/ThemeForm";
 import Icon from "../component/Icon";
 
-const ItemApp = ({ user, ressource, theme = null, owner = null, open = 0 }) => {
+const ItemApp = ({
+  context = null,
+  user,
+  ressource,
+  theme = null,
+  owner = null,
+  open = 0,
+}) => {
   const [successMessage, setSuccessMessage] = useState("");
   const { isShowing, toggle } = useModal();
 
@@ -91,7 +98,7 @@ const ItemApp = ({ user, ressource, theme = null, owner = null, open = 0 }) => {
             {ressource === "websites" ? "ajouter un lien" : ""}
           </a>
         </div>
-      ) : !user && ressource === "themes" ? (
+      ) : !user && ressource === "themes" && context !== "user-profile" ? (
         <div className="d-flex justify-flex-center mb-1">
           <a href="/login" className="button-secondary">
             Connectez-vous pour créer un sujet
