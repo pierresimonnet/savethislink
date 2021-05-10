@@ -1,0 +1,9 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}{{ parent() }} | Oups!{% endblock %}
+
+{% block body %}
+    <h1 class="page-title">Access denied ! {{ status_code }} {{ status_text }}</h1>
+    <p class="text-muted text-bold emoji-big">乂(´Д`; )</p>
+    <p>You cannot access this page. <a href="{{ path('app_home') }}" class="decorated">Return to the homepage</a></p>
+{% endblock %}
