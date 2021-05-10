@@ -10,6 +10,7 @@ use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
 use Symfony\Component\Security\Core\Authentication\Token\Storage\TokenStorageInterface;
+use Symfony\Component\Security\Core\Exception\AuthenticationException;
 use Symfony\Component\Security\Http\Event\LogoutEvent;
 
 #[Route('/account')]
@@ -28,7 +29,10 @@ class AccountController extends AbstractController
     public function profile(Request $request, User $user): Response
     {        
         $this->denyAccessUnlessGranted('ROLE_USER');
-
+        if ($user !== $this->getUser()) {
+            throw new AuthenticationException();
+        }
+        
         $form = $this->createForm(UserType::class, $user);
         $form->handleRequest($request);
 
@@ -40,7 +44,7 @@ class AccountController extends AbstractController
         }
 
         return $this->render('user/edit.html.twig', [
-            'user' => $this->getUser(),
+            'user' => $user,
             'form' => $form->createView(),
         ]);
     }
@@ -49,6 +53,9 @@ class AccountController extends AbstractController
     public function delete(Request $request, User $user): Response
     {
         $this->denyAccessUnlessGranted('ROLE_USER');
+        if ($user !== $this->getUser()) {
+            throw new AuthenticationException();
+        }
 
         if ($this->isCsrfTokenValid('delete'.$user->getId(), $request->request->get('_token'))) {
             $this->eventDispatcher->dispatch(new LogoutEvent($request, $this->tokenStorage->getToken()));
