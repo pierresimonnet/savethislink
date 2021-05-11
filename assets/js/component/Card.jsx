@@ -99,20 +99,18 @@ export const WebsiteCard = memo(
         </div>
         <div className="card-footer">
           <ul className="d-flex justify-flex-end flex-vertical-centered card-actions">
-            {website.theme.approve &&
-              website.theme.owner.id === user &&
-              website.theme.owner.id !== website.owner.id && (
-                <li>
-                  <button
-                    onClick={toggleCheck}
-                    disabled={isSaving}
-                    className="button"
-                  >
-                    <Icon id="check" />
-                    <span>Vérifier</span>
-                  </button>
-                </li>
-              )}
+            {website.theme.approve && website.theme.owner.id === user && (
+              <li>
+                <button
+                  onClick={toggleCheck}
+                  disabled={isSaving}
+                  className="button"
+                >
+                  <Icon id="check" />
+                  <span>Vérifier</span>
+                </button>
+              </li>
+            )}
             {website.owner.id === user && (
               <>
                 <li>
