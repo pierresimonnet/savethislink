@@ -15,11 +15,6 @@ class ThemeType extends AbstractType
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
         $builder
-            ->add('open', CheckboxType::class, [
-                'label' => 'Ouvrir aux contributions',
-                'help' => 'Si activé, les utilisateurs pourront ajouter des liens à ce sujet.',
-                'required' => false
-            ])
             ->add('title', TextType::class, [
                 'attr' => ['class' => 'input input-text', 'placeholder' => 'Titre du sujet'], 
                 'label' => 'Titre',
@@ -29,6 +24,16 @@ class ThemeType extends AbstractType
                 'attr' => ['class' => 'input input-textarea', 'placeholder' => 'A propos de quoi est ce sujet ?'], 
                 'label' => 'Description',
                 'required' => true
+            ])
+            ->add('open', CheckboxType::class, [
+                'label' => 'Ouvrir aux contributions',
+                'help' => 'Si activé, les utilisateurs pourront ajouter des liens à ce sujet.',
+                'required' => false
+            ])
+            ->add('approve', CheckboxType::class, [
+                'label' => 'Approuver les contributions',
+                'help' => 'Approuver les nouvelles contributions avant leur publication.',
+                'required' => false
             ])
         ;
     }

@@ -94,9 +94,9 @@ export const Checkbox = forwardRef(
 );
 
 export const Toggle = forwardRef(
-  ({ name, children, help, error, onChange, required }, ref) => {
+  ({ name, children, help, error, onChange, required, disabled }, ref) => {
     return (
-      <div className="input-group">
+      <div className={`input-group ${disabled ? "input-disabled" : ""}`}>
         <div className="input-checkbox checkbox-toggle">
           <input
             type="checkbox"
@@ -105,6 +105,7 @@ export const Toggle = forwardRef(
             ref={ref}
             onChange={onChange}
             required={required}
+            disabled={disabled}
           />
           <label htmlFor={name}>{children}</label>
         </div>

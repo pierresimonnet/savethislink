@@ -88,7 +88,7 @@ class Theme implements UserOwnedInterface
     /**
      * @ORM\ManyToOne(targetEntity=User::class, inversedBy="themes")
      * @ORM\JoinColumn(nullable=false)
-     * @Groups({"theme:read"})
+     * @Groups({"theme:read", "website:read"})
      */
     private $owner;
 
@@ -108,6 +108,12 @@ class Theme implements UserOwnedInterface
      * @Groups({"theme:read", "theme:write"})
      */
     private $open = false;
+
+    /**
+     * @ORM\Column(type="boolean", nullable=true)
+     * @Groups({"theme:read", "theme:write", "website:read"})
+     */
+    private $approve = false;
 
     public function __construct()
     {
@@ -238,6 +244,18 @@ class Theme implements UserOwnedInterface
     public function setOpen(?bool $open): self
     {
         $this->open = $open;
+
+        return $this;
+    }
+
+    public function getApprove(): ?bool
+    {
+        return $this->approve;
+    }
+
+    public function setApprove(?bool $approve): self
+    {
+        $this->approve = $approve;
 
         return $this;
     }

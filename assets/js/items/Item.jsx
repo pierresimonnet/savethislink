@@ -5,8 +5,10 @@ import Modal from "../component/Modal";
 import ItemForm from "../component/ItemForm";
 import ThemeForm from "../component/ThemeForm";
 import DeleteForm from "../component/DeleteForm";
+import CheckItemForm from "../component/CheckItemForm";
 
 const Item = memo(({ item, edit, remove, user, ressource }) => {
+  const { isShowing: isShowingCheckModal, toggle: toggleCheck } = useModal();
   const { isShowing: isShowingEditModal, toggle: toggleEdit } = useModal();
   const { isShowing: isShowingDeleteModal, toggle: toggleDelete } = useModal();
 
@@ -27,7 +29,19 @@ const Item = memo(({ item, edit, remove, user, ressource }) => {
             user={user}
             toggleEdit={toggleEdit}
             toggleDelete={toggleDelete}
+            toggleCheck={toggleCheck}
           />
+          <Modal
+            isShowing={isShowingCheckModal}
+            hide={toggleCheck}
+            title="Vérifier ce lien"
+          >
+            <CheckItemForm
+              onSave={handleEdit}
+              item={item}
+              toggle={toggleCheck}
+            />
+          </Modal>
           <Modal
             isShowing={isShowingEditModal}
             hide={toggleEdit}

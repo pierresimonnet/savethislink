@@ -26,6 +26,10 @@ class WebsiteSetOwnerListener
             $user = $this->security->getUser();
 
             $content->setOwner($user);
+
+            if ($content->getTheme()->getOwner() === $user) {
+                $content->setApproved(true);
+            }
         }
     }
 }

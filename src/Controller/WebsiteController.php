@@ -10,6 +10,7 @@ use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
+use Symfony\Component\Translation\Exception\NotFoundResourceException;
 
 #[Route('/websites')]
 class WebsiteController extends AbstractController
@@ -51,6 +52,12 @@ class WebsiteController extends AbstractController
     #[Route('/{id}', name: 'website_show', methods: ['GET'])]
     public function show(Website $website): Response
     {
+        if ($website->getTheme()->getApprove() && 
+            $website->getTheme()->getOwner() !== $this->getUser()
+            ) {
+            throw new NotFoundResourceException();
+        }
+
         return $this->render('website/show.html.twig', [
             'website' => $website,
         ]);

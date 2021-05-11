@@ -32,7 +32,7 @@ class ContentVoter extends Voter
                 }
                 break;
             case 'CONTENT_EDIT':
-                if ($subject->getOwner() === $user) {
+                if ($subject->getOwner() === $user || $subject->getTheme()->getOwner() === $user ) {
                     return true;
                 }
                 break;

@@ -92,6 +92,12 @@ class Website implements UserOwnedInterface
      */
     private $owner;
 
+    /**
+     * @ORM\Column(type="boolean", nullable=true)
+     * @Groups({"website:read", "website:write"})
+     */
+    private $approved = false;
+
     public function __construct(Theme $theme)
     {
         $this->createdAt = new \DateTimeImmutable();
@@ -207,6 +213,18 @@ class Website implements UserOwnedInterface
     public function setOwner(?User $owner): self
     {
         $this->owner = $owner;
+
+        return $this;
+    }
+
+    public function getApproved(): ?bool
+    {
+        return $this->approved;
+    }
+
+    public function setApproved(?bool $approved): self
+    {
+        $this->approved = $approved;
 
         return $this;
     }
