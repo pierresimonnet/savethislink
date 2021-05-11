@@ -48,7 +48,7 @@ class WebsiteIsApprovedExtension implements QueryCollectionExtensionInterface, Q
                     $rootAlias, $rootAlias
                 ))
                 ->setParameter('approved', true)
-                ->setParameter('needApprove', false);
+                ->setParameter('needApprove', false || null);
         } else {
             $queryBuilder
                 ->leftJoin(sprintf('%s.theme', $rootAlias), 'theme')
