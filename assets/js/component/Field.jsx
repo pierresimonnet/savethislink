@@ -74,18 +74,20 @@ export const Textarea = forwardRef(
 export const Checkbox = forwardRef(
   ({ name, children, help, error, onChange, required }, ref) => {
     return (
-      <div className="input-checkbox">
-        <input
-          type="checkbox"
-          name={name}
-          id={name}
-          ref={ref}
-          onChange={onChange}
-          required={required}
-        />
-        {children && <label htmlFor={name}>{children}</label>}
-        {help && <div className="help-text">{help}</div>}
-        {error && <div className="input-error">{error}</div>}
+      <div className="input-group">
+        <div className="input-checkbox">
+          <input
+            type="checkbox"
+            name={name}
+            id={name}
+            ref={ref}
+            onChange={onChange}
+            required={required}
+          />
+          {children && <label htmlFor={name}>{children}</label>}
+          {help && <div className="help-text">{help}</div>}
+          {error && <div className="input-error">{error}</div>}
+        </div>
       </div>
     );
   }
@@ -94,16 +96,18 @@ export const Checkbox = forwardRef(
 export const Toggle = forwardRef(
   ({ name, children, help, error, onChange, required }, ref) => {
     return (
-      <div className="input-checkbox checkbox-toggle">
-        <input
-          type="checkbox"
-          id={name}
-          name={name}
-          ref={ref}
-          onChange={onChange}
-          required={required}
-        />
-        <label htmlFor={name}>{children}</label>
+      <div className="input-group">
+        <div className="input-checkbox checkbox-toggle">
+          <input
+            type="checkbox"
+            id={name}
+            name={name}
+            ref={ref}
+            onChange={onChange}
+            required={required}
+          />
+          <label htmlFor={name}>{children}</label>
+        </div>
         {help && <div className="help-text">{help}</div>}
         {error && <div className="input-error">{error}</div>}
       </div>

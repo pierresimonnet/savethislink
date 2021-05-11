@@ -70,6 +70,7 @@ const ThemeForm = memo(({ onSave, item = null, toggle }) => {
           error={errors["open"]}
           onChange={handleChange}
           ref={openRef}
+          help="Si activé, les utilisateurs pourront ajouter des liens à ce sujet."
         >
           Ouvrir aux contributions
         </Toggle>

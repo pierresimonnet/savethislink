@@ -17,6 +17,7 @@ class ThemeType extends AbstractType
         $builder
             ->add('open', CheckboxType::class, [
                 'label' => 'Ouvrir aux contributions',
+                'help' => 'Si activé, les utilisateurs pourront ajouter des liens à ce sujet.',
                 'required' => false
             ])
             ->add('title', TextType::class, [
