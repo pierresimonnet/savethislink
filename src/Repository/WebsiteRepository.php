@@ -19,6 +19,30 @@ class WebsiteRepository extends ServiceEntityRepository
         parent::__construct($registry, Website::class);
     }
 
+    /**
+     * @return Website[] Returns an array of Website objects
+     */
+    public function findWebsiteByTheme($theme)
+    {
+        return $this->createQueryBuilder('w')
+            ->andWhere('w.theme = :theme')
+            ->setParameter('theme', $theme)
+            ->getQuery()
+            ->getResult();
+    }
+
+    public function findCountWebsiteByTheme($theme): int
+    {
+        return $this->createQueryBuilder('w')
+            ->select('count(w.id)')
+            ->leftJoin('w.theme', 'websitetheme')
+            ->andWhere('websitetheme = :theme')
+            ->andWhere('websitetheme.approve = false OR websitetheme.approve = true AND w.approved = true')
+            ->setParameter('theme', $theme)
+            ->getQuery()
+            ->getSingleScalarResult();
+    }
+
     // /**
     //  * @return Website[] Returns an array of Website objects
     //  */

@@ -10,6 +10,7 @@ use Symfony\Component\Serializer\Annotation\Groups;
 use App\Validator\UniqueUrl;
 use ApiPlatform\Core\Annotation\ApiFilter;
 use ApiPlatform\Core\Bridge\Doctrine\Orm\Filter\SearchFilter;
+use App\Doctrine\WebsiteSetOwnerListener;
 
 /**
  * @ApiResource(
@@ -39,7 +40,7 @@ use ApiPlatform\Core\Bridge\Doctrine\Orm\Filter\SearchFilter;
  * )
  * @ApiFilter(SearchFilter::class, properties={"url": "partial", "theme": "exact", "owner": "exact"})
  * @ORM\Entity(repositoryClass=WebsiteRepository::class)
- * @ORM\EntityListeners({"App\Doctrine\WebsiteSetOwnerListener"})
+ * @ORM\EntityListeners({WebsiteSetOwnerListener::class})
  * @UniqueUrl
  */
 class Website implements UserOwnedInterface

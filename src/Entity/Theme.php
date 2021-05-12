@@ -14,6 +14,9 @@ use ApiPlatform\Core\Bridge\Doctrine\Orm\Filter\OrderFilter;
 use ApiPlatform\Core\Serializer\Filter\PropertyFilter;
 use Symfony\Component\Validator\Constraints as Assert;
 use Symfony\Bridge\Doctrine\Validator\Constraints\UniqueEntity;
+use App\Doctrine\ThemeSetOwnerListener;
+use App\Doctrine\ThemeSetSlugListener;
+use App\Doctrine\ThemeSetWebsiteCountListener;
 
 /**
  * @ApiResource(
@@ -43,7 +46,7 @@ use Symfony\Bridge\Doctrine\Validator\Constraints\UniqueEntity;
  * @ApiFilter(OrderFilter::class, properties={"websitesCount"})
  * @ApiFilter(PropertyFilter::class)
  * @ORM\Entity(repositoryClass=ThemeRepository::class)
- * @ORM\EntityListeners({"App\Doctrine\ThemeSetSlugListener", "App\Doctrine\ThemeSetOwnerListener"})
+ * @ORM\EntityListeners({ThemeSetSlugListener::class, ThemeSetOwnerListener::class, ThemeSetWebsiteCountListener::class})
  * @UniqueEntity(fields={"title"}, message="Ce titre existe déjà, choisissez un titre différent.")
  */
 class Theme implements UserOwnedInterface
@@ -93,7 +96,7 @@ class Theme implements UserOwnedInterface
     private $owner;
 
     /**
-     * @ORM\OneToMany(targetEntity=Website::class, mappedBy="theme", orphanRemoval=true)
+     * @ORM\OneToMany(targetEntity=Website::class, mappedBy="theme", orphanRemoval=true, fetch="EXTRA_LAZY")
      */
     private $websites;
 
@@ -114,6 +117,11 @@ class Theme implements UserOwnedInterface
      * @Groups({"theme:read", "theme:write", "website:read"})
      */
     private $approve = false;
+
+    /**
+     * @Groups({"theme:read"})
+     */
+    private $websitesCount = 0;
 
     public function __construct()
     {
@@ -182,14 +190,6 @@ class Theme implements UserOwnedInterface
         return $this->websites;
     }
 
-    /**
-     * @Groups({"theme:read"})
-     */
-    public function getWebsitesCount(): int
-    {
-        return $this->getWebsites()->count();
-    }
-
     public function addWebsite(Website $website): self
     {
         if (!$this->websites->contains($website)) {
@@ -256,6 +256,18 @@ class Theme implements UserOwnedInterface
     public function setApprove(?bool $approve): self
     {
         $this->approve = $approve;
+
+        return $this;
+    }
+
+    public function getWebsitesCount(): int
+    {
+        return $this->websitesCount;
+    }
+
+    public function setWebsiteCount(int $websitesCount): self
+    {
+        $this->websitesCount = $websitesCount;
 
         return $this;
     }
