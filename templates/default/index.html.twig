@@ -1,12 +1,28 @@
 {% extends 'base.html.twig' %}
 
 {% block body %}
-<div class="hero-section">
-    <h1>Créez vos listes de liens web autour des sujets qui vous intéressent.</h1>
-    <p>Ouvrez vos listes aux contributions des utilisateurs pour découvrir de nouveaux contenus.</p>
-</div>
-<ul class="d-flex button-row">
-    <li><a href="{{ path('app_login') }}" class="button-secondary">Se connecter</a></li>
-    <li><a href="{{ path('app_register') }}" class="button-primary">S'inscrire</a></li>
-</ul>
+    <div class="hero-section">
+        <h1>Créez vos listes de liens web autour des sujets qui vous intéressent.</h1>
+        <p>Ouvrez vos listes aux contributions des utilisateurs pour découvrir de nouveaux contenus.</p>
+        <ul class="d-flex button-row mt-1">
+            <li><a href="{{ path('app_login') }}" class="button-secondary">Se connecter</a></li>
+            <li><a href="{{ path('app_register') }}" class="button-primary">S'inscrire</a></li>
+        </ul>
+    </div>
+
+    <div class="d-flex space-around">
+        <div class="d-flex flex-column">
+            <h3 class="d-flex flex-vertical-centered">{{ icon('shield') }}<span>Modérez vos sujets ouverts.</span></h3>
+            <p class="mb-1">Vérifier les contributions des utilisateurs.</p>
+            <img src="{{ asset('images/moderation_settings.png') }}" alt="moderation settings" loading="lazy" width="400" height="131">
+        </div>
+        <div class="d-flex flex-column flex-vertical-centered">
+            <img src="{{ asset('images/tobeverified_example.png') }}" alt="to be verified example" loading="lazy" width="432" height="259">
+            <img src="{{ asset('images/approvecheck.png') }}" alt="approve check" loading="lazy" width="400" height="121">
+        </div>
+    </div>
+    <div class="flex-centered flex-column mt-2">
+        <h2 class="text-center">Découvrez de nouveaux contenus.</h2>
+        <a href="{{ path('topic_index')}}" class="button-primary">Explorer les sujets</a>
+    </div>
 {% endblock %}
