@@ -6,7 +6,7 @@
         <div class="hero-text">
             <p>&#128451; Créez vos sujets et listez simplement les liens vers les ressources web d'intérets.</p>
             <p class="p-margin">&#128400; Ouvrez vos sujets pour les alimenter avec les contributions des utilisateurs.</p>
-            <p>&#128270; <a href="{{ path('topic_index')}}" class="decorated">Explorer les sujets</a> et découvrez des nouvelles ressources.</p>
+            <p>&#128270; <a href="{{ path('topic_index')}}" class="decorated">Explorez les sujets</a> pour découvrir de nouvelles ressources.</p>
         </div>
         <ul class="d-flex button-row mt-1">
             <li><a href="{{ path('app_login') }}" class="button-secondary">Se connecter</a></li>
@@ -16,8 +16,8 @@
 
     <div class="d-flex space-around">
         <div class="d-flex flex-column">
-            <h3 class="d-flex flex-vertical-centered">{{ icon('shield') }}<span>Modérez vos sujets ouverts.</span></h3>
-            <p class="mb-1">Vérifier les contributions des utilisateurs.</p>
+            <h3 class="d-flex flex-vertical-centered">{{ icon('shield') }}<span>Modérer vos sujets ouverts.</span></h3>
+            <p class="mb-1">Vérifier les contributions des utilisateurs pour vos sujets ouverts afin de le garder cohérent.</p>
             <img src="{{ asset('images/moderation_settings.png') }}" alt="moderation settings" loading="lazy" width="400" height="131">
         </div>
         <div class="d-flex flex-column flex-vertical-centered">
@@ -26,7 +26,7 @@
         </div>
     </div>
     <div class="flex-centered flex-column mt-2">
-        <h2 class="text-center">Découvrez de nouvelles ressources.</h2>
+        <h2 class="text-center">Découvrer de nouvelles ressources.</h2>
         <a href="{{ path('topic_index')}}" class="button-primary">Explorer les sujets</a>
     </div>
 {% endblock %}
