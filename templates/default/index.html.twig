@@ -2,8 +2,12 @@
 
 {% block body %}
     <div class="hero-section">
-        <h1>Créez vos listes de liens web autour des sujets qui vous intéressent.</h1>
-        <p>Ouvrez vos listes aux contributions des utilisateurs pour découvrir de nouveaux contenus.</p>
+        <h1 class="hero-title">Facilitez votre vieille sur le web.</h1>
+        <div class="hero-text">
+            <p>&#128451; Créez vos sujets et listez simplement les liens vers les ressources web d'intérets.</p>
+            <p class="p-margin">&#128400; Ouvrez vos sujets aux contributions des utilisateurs pour alimenter vos sujets.</p>
+            <p>&#128270; <a href="{{ path('topic_index')}}">Explorer les sujets</a> et découvrez des nouvelles ressources.</p>
+        </div>
         <ul class="d-flex button-row mt-1">
             <li><a href="{{ path('app_login') }}" class="button-secondary">Se connecter</a></li>
             <li><a href="{{ path('app_register') }}" class="button-primary">S'inscrire</a></li>
@@ -22,7 +26,7 @@
         </div>
     </div>
     <div class="flex-centered flex-column mt-2">
-        <h2 class="text-center">Découvrez de nouveaux contenus.</h2>
+        <h2 class="text-center">Découvrez de nouvelles ressources.</h2>
         <a href="{{ path('topic_index')}}" class="button-primary">Explorer les sujets</a>
     </div>
 {% endblock %}

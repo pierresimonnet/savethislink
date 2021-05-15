@@ -20,13 +20,13 @@ a.decorated {
 }
 
 .hero-title {
-  font-size: 42px;
+  font-size: 32px;
   font-weight: bold;
   margin-bottom: 1.4rem;
 }
 
 .hero-text {
-  font-size: 22px;
+  font-size: 18px;
   line-height: 1.6;
 }
 
@@ -81,6 +81,6 @@ svg + * {
 
 @media only screen and (min-width: 1040px) {
   .hero-title {
-    font-size: 52px;
+    font-size: 42px;
   }
 }
