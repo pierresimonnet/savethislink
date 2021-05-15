@@ -69,6 +69,12 @@ footer {
   margin-top: 2rem;
 }
 
+@media only screen and (min-width: 768px) {
+  .max-w-50-desktop {
+    max-width: 50%;
+  }
+}
+
 @media only screen and (min-width: 1040px) {
   :root {
     --container: 1000px;
