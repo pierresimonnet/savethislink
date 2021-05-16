@@ -5,7 +5,7 @@
         <meta http-equiv="X-UA-Compatible" content="ie=edge">
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
         <title>{% block title %}Shareintel{% endblock %}</title>
-        <meta name="description" content="Créez vos sujets et listez simplement les liens vers les ressources web d'intérets. Ouvrez vos sujets aux contributions des utilisateurs. Découvrez des nouvelles ressources.">
+        <meta name="description" content="{% block description %}Créez vos sujets et listez simplement les liens vers les ressources web d'intérets. Ouvrez vos sujets aux contributions des utilisateurs. Découvrez des nouvelles ressources.{% endblock %}">
         {% block stylesheets %}
             {{ encore_entry_link_tags('app') }}
         {% endblock %}
@@ -16,6 +16,17 @@
             </script>
             {{ encore_entry_script_tags('app') }}
         {% endblock %}
+
+        <meta property="og:type" content="website">
+        <meta property="og:title" content="{{ block('title') }}"/>
+        <meta property="og:description" content="{{ block('description') }}"/>
+        <meta property="og:site_name" content="Shareintel.com"/>
+        <meta property="og:language" content="fr"/>
+
+        <meta name="twitter:card" content="summary">
+        <meta name="twitter:url" content="{{ app.request.uri }}">
+        <meta name="twitter:title" content="{{ block('title') }}">
+        <meta name="twitter:description" content="{{ block('description') }}">
     </head>
     <body>
         {% include "partials/nav.html.twig" %}
