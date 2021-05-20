@@ -118,3 +118,78 @@ form .help-text {
 .input-disabled label {
   color: var(--color-muted);
 }
+
+.form-switch {
+  position: relative;
+  cursor: pointer;
+}
+
+.form-switch input {
+  position: absolute;
+  top: 0;
+  left: 0;
+  opacity: 0;
+  cursor: pointer;
+  min-height: auto;
+}
+
+.form-switch label {
+  display: flex;
+  align-items: center;
+  justify-content: flex-start;
+  cursor: pointer;
+  margin-bottom: 0 !important;
+}
+
+.switch {
+  flex: none;
+  width: 50px;
+  height: 26px;
+  display: inline-block;
+  background-color: var(--background);
+  border: 1px solid var(--border);
+  box-shadow: 0 1px 4px rgba(213, 222, 233, 0.2);
+  border-radius: 100px;
+  margin-right: calc(1 * var(--space));
+  transition: background-color 0.3s;
+}
+
+.switch::before {
+  content: "";
+  display: block;
+  height: 24px;
+  width: 24px;
+  background: var(--background-light);
+  border: 1px solid var(--border);
+  box-shadow: 0 1px 4px rgba(213, 222, 233, 0.2);
+  border-radius: 100px;
+  transition: transform 0.3s;
+}
+
+.theme-switcher input:checked + label .switch::before {
+  background: var(--primary) !important;
+}
+
+.theme-switcher .icon {
+  position: absolute;
+  left: 5px;
+  top: 5px;
+  width: 16px;
+  height: 16px;
+  fill: var(--warning);
+  opacity: 1;
+  transition: 0.3s;
+}
+
+input:checked + label .switch::before,
+input:checked + label .icon {
+  transform: translateX(24px);
+}
+
+input:checked + label .icon-sun {
+  opacity: 0;
+}
+
+input:not(:checked) + label .icon-moon {
+  opacity: 0;
+}

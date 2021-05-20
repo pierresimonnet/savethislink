@@ -34,11 +34,11 @@
   position: fixed;
   top: var(--topBarHeight);
   bottom: 0;
-  overflow-y: auto;
-  background-color: var(--background);
-  transition: 0.5s ease-in-out;
   width: 100%;
   left: -100%;
+  overflow-y: auto;
+  background-color: var(--background);
+  transition: left 0.5s ease-in-out;
 }
 
 .navbar-nav {
@@ -54,7 +54,6 @@
   display: block;
   height: var(--topBarHeight);
   white-space: nowrap;
-  transition: 0.5s ease-in-out;
   cursor: pointer;
   padding: 0 var(--topBarHeight);
 }

@@ -15,6 +15,7 @@
         </ul>
     </div>
     <div class="navbar-auth d-flex flex-centered">
+        <theme-switcher></theme-switcher>
     {% if app.user %}
         <a class="d-flex flex-centered" href="{{ path("user_profile", {username: app.user.username}) }}" {{ isActive('profile') }}>{{ icon('account') }}<span class="hidden-on-mobile">{{ app.user.username }}</span></a>
     {% else %}

@@ -14,3 +14,4 @@ import "./bootstrap";
 import "./js/module/nav";
 import "./js/module/copyToClipboard";
 import "./js/itemApp";
+import "./js/elements/index";

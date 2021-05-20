@@ -49,4 +49,10 @@ $font: "Arial", sans-serif;
 body {
   font-family: $font;
   background-color: var(--background);
+  color: var(--color-dark);
+}
+
+body.theme-dark {
+  --color-dark: #f0f0f0;
+  --background: #363147;
 }
