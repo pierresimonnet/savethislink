@@ -50,17 +50,19 @@ const ThemeForm = memo(({ onSave, item = null, toggle }) => {
   const handleToggle = (e) => {
     if (e.target.name === "private" && e.target.checked) {
       setIsOpenDisabled(e.target.checked);
+      openRef.current.checked = false;
+      setIsApproveDisabled(e.target.checked);
+      approveRef.current.checked = false;
     } else {
       setIsOpenDisabled(false);
     }
 
     if (e.target.name === "open") {
       setIsApproveDisabled(!e.target.checked);
-    }
 
-    if (!e.target.checked) {
-      openRef.current.checked = false;
-      approveRef.current.checked = false;
+      if (!e.target.checked) {
+        approveRef.current.checked = false;
+      }
     }
   };
 
