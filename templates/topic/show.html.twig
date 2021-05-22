@@ -8,6 +8,7 @@
         <h1>{{ theme.title }}</h1>
         <p class="text-muted">By <a href="{{ path('user_profile', {'username': theme.owner.username}) }}" class="decorated">{{ theme.owner.username }}</a></p>
         <p class="p-margin">{{ theme.description }}</p>
+        {% if theme.private %}<p class="d-flex flex-vertical-centered">{{ icon('lock-closed') }}<span>Ce sujet est privé.</span></p>{% endif %}
         <p class="status status-{{ theme.open ? "open" : "closed" }}">Ce sujet est {% if theme.open %}ouvert{% else %}fermé{% endif %} aux contributions.</p>
         {% if theme.approve %}<p class="d-flex flex-vertical-centered mt-05">{{ icon('shield') }}<span>Ce sujet est modéré.</span></p>{% endif %}
         

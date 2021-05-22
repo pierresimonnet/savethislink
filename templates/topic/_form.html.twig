@@ -19,6 +19,17 @@
 
     <div class="input-group" id="toggle-open">
         <div class="checkbox-toggle input-checkbox">
+            {{ form_widget(form.private) }}
+            {{ form_label(form.private) }}
+        </div>
+        {{ form_help(form.private) }}
+        <div class="input-error">
+            {{ form_errors(form.private) }}
+        </div>
+    </div>
+
+    <div class="input-group" id="toggle-open">
+        <div class="checkbox-toggle input-checkbox">
             {{ form_widget(form.open) }}
             {{ form_label(form.open) }}
         </div>

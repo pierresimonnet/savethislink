@@ -107,6 +107,12 @@ class Theme implements UserOwnedInterface
     private $slug;
 
     /**
+     * @ORM\Column(type="boolean")
+     * @Groups({"theme:read", "theme:write"})
+     */
+    private $private = false;
+
+    /**
      * @ORM\Column(type="boolean", nullable=true)
      * @Groups({"theme:read", "theme:write"})
      */
@@ -268,6 +274,18 @@ class Theme implements UserOwnedInterface
     public function setWebsiteCount(int $websitesCount): self
     {
         $this->websitesCount = $websitesCount;
+
+        return $this;
+    }
+
+    public function getPrivate(): ?bool
+    {
+        return $this->private;
+    }
+
+    public function setPrivate(?bool $private): self
+    {
+        $this->private = $private;
 
         return $this;
     }

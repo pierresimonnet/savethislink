@@ -5,14 +5,17 @@ import { Toggle, Text, Textarea } from "../component/Field";
 const ThemeForm = memo(({ onSave, item = null, toggle }) => {
   const titleRef = useRef(null);
   const descriptionRef = useRef(null);
+  const privateRef = useRef(null);
   const openRef = useRef(null);
   const approveRef = useRef(null);
-  const [isDisabled, setIsDisabled] = useState(true);
+  const [isOpenDisabled, setIsOpenDisabled] = useState(false);
+  const [isApproveDisabled, setIsApproveDisabled] = useState(true);
 
   const onSuccess = useCallback(
     (item) => {
       onSave(item);
       if (
+        privateRef.current &&
         openRef.current &&
         titleRef.current &&
         descriptionRef.current &&
@@ -23,16 +26,17 @@ const ThemeForm = memo(({ onSave, item = null, toggle }) => {
       }
       toggle();
     },
-    [onSave, openRef, titleRef, descriptionRef, approveRef]
+    [onSave, privateRef, openRef, titleRef, descriptionRef, approveRef]
   );
 
   const url = item ? item["@id"] : "/api/themes";
   const method = item ? "PUT" : "POST";
-  const { load: post, isSaving, errors, clearErrors } = usePost(
-    url,
-    method,
-    onSuccess
-  );
+  const {
+    load: post,
+    isSaving,
+    errors,
+    clearErrors,
+  } = usePost(url, method, onSuccess);
 
   const handleCancel = (e) => {
     e.preventDefault();
@@ -44,8 +48,18 @@ const ThemeForm = memo(({ onSave, item = null, toggle }) => {
   };
 
   const handleToggle = (e) => {
-    setIsDisabled(!e.target.checked);
+    if (e.target.name === "private" && e.target.checked) {
+      setIsOpenDisabled(e.target.checked);
+    } else {
+      setIsOpenDisabled(false);
+    }
+
+    if (e.target.name === "open") {
+      setIsApproveDisabled(!e.target.checked);
+    }
+
     if (!e.target.checked) {
+      openRef.current.checked = false;
       approveRef.current.checked = false;
     }
   };
@@ -55,6 +69,7 @@ const ThemeForm = memo(({ onSave, item = null, toggle }) => {
     const data = {
       title: titleRef.current.value,
       description: descriptionRef.current.value,
+      private: privateRef.current.checked,
       open: openRef.current.checked,
       approve: approveRef.current.checked,
     };
@@ -69,9 +84,13 @@ const ThemeForm = memo(({ onSave, item = null, toggle }) => {
       if (descriptionRef.current && item.description) {
         descriptionRef.current.value = item.description;
       }
+      if (privateRef.current && item.private) {
+        privateRef.current.checked = item.private;
+        setIsOpenDisabled(item.private);
+      }
       if (openRef.current && item.open) {
         openRef.current.checked = item.open;
-        setIsDisabled(!item.open);
+        setIsApproveDisabled(!item.open);
       }
       if (approveRef.current && item.approve) {
         approveRef.current.checked = item.approve;
@@ -105,11 +124,21 @@ const ThemeForm = memo(({ onSave, item = null, toggle }) => {
           Description
         </Textarea>
         <Toggle
+          name="private"
+          error={errors["private"]}
+          onChange={handleToggle}
+          ref={privateRef}
+          help="Vous seul pourrez voir ce sujet et y ajouter des liens."
+        >
+          Sujet privé
+        </Toggle>
+        <Toggle
           name="open"
           error={errors["open"]}
           onChange={handleToggle}
           ref={openRef}
-          help="Si activé, les utilisateurs pourront ajouter des liens à ce sujet."
+          help="Les utilisateurs pourront ajouter des liens à ce sujet."
+          disabled={isOpenDisabled}
         >
           Ouvrir aux contributions
         </Toggle>
@@ -117,8 +146,8 @@ const ThemeForm = memo(({ onSave, item = null, toggle }) => {
           name="approve"
           error={errors["approve"]}
           ref={approveRef}
-          help="Approuver les nouvelles contributions avant leur publication."
-          disabled={isDisabled}
+          help="Les nouvelles contributions avant leur publication."
+          disabled={isApproveDisabled}
         >
           Approuver les contributions
         </Toggle>

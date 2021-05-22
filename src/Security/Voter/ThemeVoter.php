@@ -12,7 +12,7 @@ class ThemeVoter extends Voter
     {
         // replace with your own logic
         // https://symfony.com/doc/current/security/voters.html
-        return in_array($attribute, ['TOPIC_CREATE_CONTENT', 'TOPIC_EDIT', 'TOPIC_DELETE'])
+        return in_array($attribute, ['TOPIC_CREATE_CONTENT', 'TOPIC_READ', 'TOPIC_EDIT', 'TOPIC_DELETE'])
             && $subject instanceof \App\Entity\Theme;
     }
 
@@ -31,11 +31,8 @@ class ThemeVoter extends Voter
                     return true;
                 }
                 break;
+            case 'TOPIC_READ':
             case 'TOPIC_EDIT':
-                if ($subject->getOwner() === $user) {
-                    return true;
-                }
-                break;
             case 'TOPIC_DELETE':
                 if ($subject->getOwner() === $user) {
                     return true;

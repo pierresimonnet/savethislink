@@ -48,6 +48,8 @@ class ThemeController extends AbstractController
     #[Route('/{slug}', name: 'topic_show', methods: ['GET'])]
     public function show(Theme $theme): Response
     {
+        $this->denyAccessUnlessGranted('TOPIC_READ', $theme);
+
         return $this->render('topic/show.html.twig', [
             'theme' => $theme,
         ]);

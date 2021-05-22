@@ -25,9 +25,14 @@ class ThemeType extends AbstractType
                 'label' => 'Description',
                 'required' => true
             ])
+            ->add('private', CheckboxType::class, [
+                'label' => 'Sujet privé',
+                'help' => 'Vous seul pourrez voir ce sujet et y ajouter des liens.',
+                'required' => false
+            ])
             ->add('open', CheckboxType::class, [
                 'label' => 'Ouvrir aux contributions',
-                'help' => 'Si activé, les utilisateurs pourront ajouter des liens à ce sujet.',
+                'help' => 'Les utilisateurs pourront ajouter des liens à ce sujet.',
                 'required' => false
             ])
             ->add('approve', CheckboxType::class, [
