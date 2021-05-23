@@ -14,7 +14,7 @@
         </ul>
     </div>
 
-    <div class="d-flex space-around">
+    <div class="d-flex space-between">
         <div class="d-flex flex-column max-w-50-desktop">
             <h3 class="d-flex flex-vertical-centered">{{ icon('shield') }}<span>Modérer vos sujets ouverts.</span></h3>
             <p class="mb-1">Vérifier les contributions des utilisateurs pour vos sujets ouverts afin de le garder cohérent.</p>
@@ -24,6 +24,11 @@
             <img src="{{ asset('images/tobeverified_example.png') }}" alt="to be verified example" loading="lazy" width="432" height="259">
             <img src="{{ asset('images/approvecheck.png') }}" alt="approve check" loading="lazy" width="400" height="121">
         </div>
+    </div>
+     <div class="mt-2">
+        <h3 class="d-flex flex-vertical-centered">{{ icon('lock-closed') }}<span>Créez des sujets privés.</span></h3>
+        <p class="mb-1">Créer aussi des sujets privés accessible seulement par vous.</p>
+        <img src="{{ asset('images/private_settings.png') }}" alt="private settings" loading="lazy" width="400" height="131">
     </div>
     <div class="flex-centered flex-column mt-2">
         <h2 class="text-center">Découvrer de nouvelles ressources.</h2>
