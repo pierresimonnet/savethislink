@@ -32,6 +32,10 @@ class ThemeVoter extends Voter
                 }
                 break;
             case 'TOPIC_READ':
+                if (!$subject->getPrivate() || ($subject->getPrivate() && $subject->getOwner() === $user)) {
+                    return true;
+                }
+                break;
             case 'TOPIC_EDIT':
             case 'TOPIC_DELETE':
                 if ($subject->getOwner() === $user) {
