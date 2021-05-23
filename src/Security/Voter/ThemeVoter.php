@@ -23,7 +23,9 @@ class ThemeVoter extends Voter
         /** @var \App\Entity\Theme $subject */
         switch ($attribute) {
             case 'TOPIC_CREATE_CONTENT':
-                if ($subject->getOwner() === $user || $subject->getOpen()) {
+                if (!$user instanceof UserInterface) {
+                    return false;
+                } elseif ($subject->getOwner() === $user || $subject->getOpen()) {
                     return true;
                 }
                 break;
@@ -34,7 +36,9 @@ class ThemeVoter extends Voter
                 break;
             case 'TOPIC_EDIT':
             case 'TOPIC_DELETE':
-                if ($subject->getOwner() === $user) {
+                if (!$user instanceof UserInterface) {
+                    return false;
+                } elseif ($subject->getOwner() === $user) {
                     return true;
                 }
                 break;
