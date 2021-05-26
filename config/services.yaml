@@ -44,3 +44,7 @@ services:
   App\Doctrine\ThemeSetWebsiteCountListener:
     tags:
       - { name: doctrine.orm.entity_listener, lazy: true }
+
+  App\Doctrine\ThemeSetFollowedByCurrentUserListener:
+    tags:
+      - { name: doctrine.orm.entity_listener, lazy: true }

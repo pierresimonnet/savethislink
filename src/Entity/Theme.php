@@ -17,6 +17,7 @@ use Symfony\Bridge\Doctrine\Validator\Constraints\UniqueEntity;
 use App\Doctrine\ThemeSetOwnerListener;
 use App\Doctrine\ThemeSetSlugListener;
 use App\Doctrine\ThemeSetWebsiteCountListener;
+use App\Doctrine\ThemeSetFollowedByCurrentUserListener;
 
 /**
  * @ApiResource(
@@ -46,7 +47,7 @@ use App\Doctrine\ThemeSetWebsiteCountListener;
  * @ApiFilter(OrderFilter::class, properties={"websitesCount"})
  * @ApiFilter(PropertyFilter::class)
  * @ORM\Entity(repositoryClass=ThemeRepository::class)
- * @ORM\EntityListeners({ThemeSetSlugListener::class, ThemeSetOwnerListener::class, ThemeSetWebsiteCountListener::class})
+ * @ORM\EntityListeners({ThemeSetSlugListener::class, ThemeSetOwnerListener::class, ThemeSetWebsiteCountListener::class, ThemeSetFollowedByCurrentUserListener::class})
  * @UniqueEntity(fields={"title"}, message="Ce titre existe déjà, choisissez un titre différent.")
  */
 class Theme implements UserOwnedInterface
@@ -129,10 +130,21 @@ class Theme implements UserOwnedInterface
      */
     private $websitesCount = 0;
 
+    /**
+     * @Groups({"theme:read"})
+     */
+    private $followedByCurrentUser = false;
+
+    /**
+     * @ORM\OneToMany(targetEntity=Follow::class, mappedBy="target", orphanRemoval=true, fetch="EXTRA_LAZY")
+     */
+    private $followers;
+
     public function __construct()
     {
         $this->websites = new ArrayCollection();
         $this->createdAt = new \DateTimeImmutable();
+        $this->followers = new ArrayCollection();
     }
 
     public function getId(): ?int
@@ -286,6 +298,48 @@ class Theme implements UserOwnedInterface
     public function setPrivate(?bool $private): self
     {
         $this->private = $private;
+
+        return $this;
+    }
+
+    /**
+     * @return Collection|Follow[]
+     */
+    public function getFollowers(): Collection
+    {
+        return $this->followers;
+    }
+
+    public function addFollower(Follow $follower): self
+    {
+        if (!$this->followers->contains($follower)) {
+            $this->followers[] = $follower;
+            $follower->setTarget($this);
+        }
+
+        return $this;
+    }
+
+    public function removeFollower(Follow $follower): self
+    {
+        if ($this->followers->removeElement($follower)) {
+            // set the owning side to null (unless already changed)
+            if ($follower->getTarget() === $this) {
+                $follower->setTarget(null);
+            }
+        }
+
+        return $this;
+    }
+
+    public function getFollowedByCurrentUser(): bool
+    {
+        return $this->followedByCurrentUser;
+    }
+
+    public function setFollowedByCurrentUser(bool $followedByCurrentUser): self
+    {
+        $this->followedByCurrentUser = $followedByCurrentUser;
 
         return $this;
     }

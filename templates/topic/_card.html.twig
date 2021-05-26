@@ -1,0 +1,44 @@
+<div class="card">
+    <div class="card-body">
+        <div class="d-flex space-between align-start">
+        <a href="{{ path('topic_show', {'slug': theme.slug}) }}" class="card-title">
+            {{theme.title}}
+        </a>
+        <div class="flex-centered">
+            {% if theme.private %}
+                {{ icon('lock-closed') }}
+            {% else %}
+                {{ theme.followedByCurrentUser ? icon('bookmark-solid') : icon('bookmark') }}
+                <span class="status status-{{theme.open ? "open" : "closed"}}">{{theme.open ? "ouvert" : "fermé"}}</span>
+            {% endif %}
+            {{theme.approve ? icon('shield') : ""}}
+            {{ icon('link') }}
+            <span>{{theme.websitesCount}}</span>
+        </div>
+        </div>
+        <div class="card-subtitle text-muted">
+        <a href="{{ path('user_profile', {'username': theme.owner.username}) }}" class="decorated">
+            {{theme.owner.username}}
+        </a>
+        </div>
+        <p class="card-text">{{theme.description}}</p>
+    </div>
+
+    <div class="card-footer">
+        <ul class="d-flex justify-flex-end flex-vertical-centered card-actions">
+        {% if theme.open or theme.owner is same as(app.user) %}
+            <li>
+                <a href="{{ path('website_new', {'slug': theme.slug }) }}" class="button">{{icon('add-link')}}<span>Ajouter</span></a>
+            </li>
+        {% endif %}
+        {% if theme.owner is same as(app.user) %}
+            <li>
+                <a href="{{ path('topic_edit', {'id': theme.id}) }}" class="button">{{icon('edit')}}<span>Editer</span></a>
+            </li>
+            <li>
+                {{ include('topic/_delete_form.html.twig') }}
+            </li>
+        {% endif %}
+        </ul>
+    </div>
+</div>

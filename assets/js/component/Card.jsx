@@ -12,6 +12,13 @@ export const ThemeCard = memo(
               {theme.title}
             </a>
             <div className="flex-centered">
+              {theme.owner.id !== user && !theme.private ? (
+                theme.followedByCurrentUser ? (
+                  <Icon id="bookmark-solid" />
+                ) : (
+                  <Icon id="bookmark" />
+                )
+              ) : null}
               {theme.private ? (
                 <Icon id="lock-closed" />
               ) : (

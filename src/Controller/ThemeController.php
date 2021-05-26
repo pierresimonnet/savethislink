@@ -4,7 +4,7 @@ namespace App\Controller;
 
 use App\Entity\Theme;
 use App\Form\ThemeType;
-use App\Repository\ThemeRepository;
+use App\Service\FollowInteractionService;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
@@ -55,7 +55,20 @@ class ThemeController extends AbstractController
         ]);
     }
 
-    #[Route('/{slug}/new', name: 'topic_additem', methods: ['GET'])]
+    #[Route('/{slug}/follow', name: 'topic_follow', methods: ['GET'])]
+    public function follow(Theme $theme, FollowInteractionService $followInteraction): Response
+    {
+        $this->denyAccessUnlessGranted('ROLE_USER');
+        $this->denyAccessUnlessGranted('TOPIC_READ', $theme);
+
+        if ($this->getUser() !== $theme->getOwner()) {
+            $followInteraction->follow($theme);
+        }
+        
+        return $this->redirectToRoute('topic_show', ['slug' => $theme->getSlug()]);
+    }   
+
+    #[Route('/{slug}/add', name: 'topic_additem', methods: ['GET'])]
     public function addItem(Theme $theme): Response
     {
         return $this->redirectToRoute('website_new', ['slug' => $theme->getSlug()]);

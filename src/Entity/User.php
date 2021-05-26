@@ -56,19 +56,25 @@ class User implements UserInterface
     private $password;
 
     /**
-     * @ORM\OneToMany(targetEntity=Theme::class, mappedBy="owner", orphanRemoval=true)
+     * @ORM\OneToMany(targetEntity=Theme::class, mappedBy="owner", orphanRemoval=true, fetch="EXTRA_LAZY")
      */
     private $themes;
 
     /**
-     * @ORM\OneToMany(targetEntity=Website::class, mappedBy="owner", orphanRemoval=true)
+     * @ORM\OneToMany(targetEntity=Website::class, mappedBy="owner", orphanRemoval=true, fetch="EXTRA_LAZY")
      */
     private $websites;
+
+    /**
+     * @ORM\OneToMany(targetEntity=Follow::class, mappedBy="followedBy", orphanRemoval=true, fetch="EXTRA_LAZY")
+     */
+    private $following;
 
     public function __construct()
     {
         $this->websites = new ArrayCollection();
         $this->themes = new ArrayCollection();
+        $this->following = new ArrayCollection();
     }
 
     public function getId(): ?int
@@ -201,6 +207,36 @@ class User implements UserInterface
             // set the owning side to null (unless already changed)
             if ($website->getOwner() === $this) {
                 $website->setOwner(null);
+            }
+        }
+
+        return $this;
+    }
+
+    /**
+     * @return Collection|Follow[]
+     */
+    public function getFollowing(): Collection
+    {
+        return $this->following;
+    }
+
+    public function addFollowing(Follow $following): self
+    {
+        if (!$this->following->contains($following)) {
+            $this->following[] = $following;
+            $following->setFollowedBy($this);
+        }
+
+        return $this;
+    }
+
+    public function removeFollowing(Follow $following): self
+    {
+        if ($this->following->removeElement($following)) {
+            // set the owning side to null (unless already changed)
+            if ($following->getFollowedBy() === $this) {
+                $following->setFollowedBy(null);
             }
         }
 
