@@ -1,0 +1,18 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Administration{% endblock %}
+
+{% block body %}
+    <h1>Administration</h1>
+    <p>{{ users|length }} users</p>
+    <ul class="listMargin-lg">
+    {% for user in users %}
+        <li>        
+            <div class="card">
+                <a href="{{ path('user_profile', {'username': user.username }) }}">{{ user.username }}</a>
+            </div>
+        </li>
+    {% endfor %}
+    </ul>
+{% endblock %}
+
