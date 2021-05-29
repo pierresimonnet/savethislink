@@ -1,0 +1,14 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Sujets suivis{% endblock %}
+
+{% block body %}
+    <h1>Sujets suivis</h1>
+    {% for following in app.user.following %}
+        {{ include("topic/_card.html.twig", {'theme': following.target}) }}
+    {% else %}
+        <div class="d-flex flex-centered mt-1">
+            Vous ne suivez actuellement aucun sujet<a href="{{ path('topic_index')}}" class="button-primary ml-05">Explorer les sujets</a>
+        </div>
+    {% endfor %}
+{% endblock %}

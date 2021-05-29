@@ -97,4 +97,10 @@ class AccountController extends AbstractController
 
         return $this->redirectToRoute('app_home');
     }
+
+    #[Route('/following', name: 'account_following', methods: ['GET'])]
+    public function following(): Response
+    {
+        return $this->render('user/following.html.twig');
+    }
 }
