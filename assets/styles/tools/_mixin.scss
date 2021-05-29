@@ -1,4 +1,4 @@
-@mixin cta($bg: unset, $color: inherit, $padding: 6px) {
+@mixin cta($bg: unset, $color: #eee, $padding: 6px) {
   background-color: $bg;
   color: $color;
   border-radius: 22px;
@@ -7,4 +7,15 @@
   justify-content: center;
   align-items: center;
   width: max-content;
+}
+
+@mixin dark {
+  @media (prefers-color-scheme: dark) {
+    body:not([class~="theme-light"]) {
+      @content;
+    }
+  }
+  .theme-dark {
+    @content;
+  }
 }

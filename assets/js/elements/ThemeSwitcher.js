@@ -18,21 +18,21 @@ export class ThemeSwitcher extends HTMLElement {
       document.body.classList.add(`theme-${themeToAdd}`);
       document.body.classList.remove(`theme-${themeToRemove}`);
 
-      if (!isAuthenticated()) {
-        localStorage.setItem("theme", themeToAdd);
-      }
+      /*if (!isAuthenticated()) {
+        ...
+      }*/
+
+      localStorage.setItem("theme", themeToAdd);
     });
 
-    if (!isAuthenticated()) {
-      let savedTheme = localStorage.getItem("theme");
+    let savedTheme = localStorage.getItem("theme");
 
-      if (savedTheme === null) {
-        const mq = window.matchMedia("(prefers-color-scheme: dark)");
-        input.checked = mq.matches;
-      } else {
-        document.body.classList.add(`theme-${savedTheme}`);
-        input.checked = savedTheme === "dark";
-      }
+    if (savedTheme === null) {
+      const mq = window.matchMedia("(prefers-color-scheme: dark)");
+      input.checked = mq.matches;
+    } else {
+      document.body.classList.add(`theme-${savedTheme}`);
+      input.checked = savedTheme === "dark";
     }
   }
 }

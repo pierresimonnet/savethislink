@@ -3,15 +3,15 @@ import Icon from "./Icon";
 
 const LinkPreview = memo(({ website }) => {
   return (
-    <div className="d-flex flex-vertical-centered">
-      <Icon id="link" />
+    <div>
       <a
         href={website.url}
         target="_blank"
         rel="noopener noreferrer"
-        className="card-title"
+        className="card-title d-flex flex-vertical-centered"
       >
-        {website.shortUrl}
+        <Icon id="link" />
+        <span> {website.shortUrl}</span>
       </a>
     </div>
   );

@@ -23,7 +23,9 @@ export const ThemeCard = memo(
                 <Icon id="lock-closed" />
               ) : (
                 <span
-                  className={`status status-${theme.open ? "open" : "closed"}`}
+                  className={`mr-05 status status-${
+                    theme.open ? "open" : "closed"
+                  }`}
                 >
                   {theme.open ? "ouvert" : "fermé"}
                 </span>
@@ -97,9 +99,6 @@ export const WebsiteCard = memo(
           </div>
         )}
         <div className="card-body">
-          <div className="pill">
-            <a href={`/topics/${website.theme.slug}`}>{website.theme.title}</a>
-          </div>
           <LinkPreview website={website} />
           <div className="card-subtitle text-muted">
             <a href={`/users/${website.owner.username}`} className="decorated">

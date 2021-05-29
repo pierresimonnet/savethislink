@@ -4,6 +4,7 @@
   font-size: inherit;
   font-family: inherit;
   border: none;
+  color: var(--color);
 }
 
 input {
@@ -17,7 +18,7 @@ textarea {
 
 .input {
   border-radius: var(--radius);
-  background-color: var(--background-muted);
+  background-color: var(--info);
   width: 100%;
 }
 
@@ -68,7 +69,7 @@ form .help-text {
   position: absolute;
   width: 24px;
   height: 24px;
-  background-color: var(--background-muted);
+  background-color: var(--info);
   border-radius: 100px;
   top: 0;
   right: 0;
@@ -87,7 +88,7 @@ form .help-text {
 }
 
 .input-checkbox input[type="checkbox"]:checked + label::after {
-  background-color: var(--primary);
+  background-color: var(--contrast);
 }
 
 .checkbox-toggle label::before {
@@ -96,13 +97,13 @@ form .help-text {
 
 .checkbox-toggle label::after {
   transform: translate3d(0, 0, 0);
-  background-color: var(--white);
+  background-color: var(--color);
   right: 25px;
 }
 
 .checkbox-toggle input:checked + label::after {
   transform: translate3d(20px, 0, 0);
-  background-color: var(--primary);
+  background-color: var(--contrast);
 }
 
 .input-disabled {
@@ -116,7 +117,7 @@ form .help-text {
 }
 
 .input-disabled label {
-  color: var(--color-muted);
+  color: var(--muted);
 }
 
 .form-switch {
@@ -143,7 +144,6 @@ form .help-text {
 
 .switch {
   flex: none;
-  width: 50px;
   height: 26px;
   display: inline-block;
   background-color: var(--background);
@@ -159,15 +159,14 @@ form .help-text {
   display: block;
   height: 24px;
   width: 24px;
-  background: var(--background-light);
-  border: 1px solid var(--border);
-  box-shadow: 0 1px 4px rgba(213, 222, 233, 0.2);
+  background: var(--molecule-background);
+  border: 1px solid var(--background);
   border-radius: 100px;
   transition: transform 0.3s;
 }
 
 .theme-switcher input:checked + label .switch::before {
-  background: var(--primary) !important;
+  background: var(--contrast) !important;
 }
 
 .theme-switcher .icon {
@@ -176,14 +175,12 @@ form .help-text {
   top: 5px;
   width: 16px;
   height: 16px;
-  fill: var(--warning);
   opacity: 1;
   transition: 0.3s;
 }
 
-input:checked + label .switch::before,
-input:checked + label .icon {
-  transform: translateX(24px);
+.icon-sun {
+  color: var(--contrast);
 }
 
 input:checked + label .icon-sun {
@@ -192,4 +189,15 @@ input:checked + label .icon-sun {
 
 input:not(:checked) + label .icon-moon {
   opacity: 0;
+}
+
+@media screen and (min-width: 768px) {
+  .switch {
+    width: 50px;
+  }
+
+  input:checked + label .switch::before,
+  input:checked + label .icon {
+    transform: translateX(24px);
+  }
 }

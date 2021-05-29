@@ -14,11 +14,12 @@
             </li>
         </ul>
     </div>
-    <div class="navbar-auth d-flex flex-centered">
-    {% if app.user %}
-        <a class="d-flex flex-centered" href="{{ path("user_profile", {username: app.user.username}) }}" {{ isActive('profile') }}>{{ icon('account') }}<span class="hidden-on-mobile">{{ app.user.username }}</span></a>
-    {% else %}
-        <a class="d-flex flex-centered" href="{{ path("app_login") }}">{{ icon('login') }}<span class="hidden-on-mobile">Se connecter</span></a>
-    {% endif %}
+    <div class="navbar-auth d-flex flex-centered mr-05">
+        <theme-switcher class="mr-05"></theme-switcher>
+        {% if app.user %}
+            <a class="d-flex flex-centered" href="{{ path("user_profile", {username: app.user.username}) }}" {{ isActive('profile') }}>{{ icon('account') }}<span class="hidden-on-mobile">{{ app.user.username }}</span></a>
+        {% else %}
+            <a class="d-flex flex-centered" href="{{ path("app_login") }}">{{ icon('login') }}<span class="hidden-on-mobile">Se connecter</span></a>
+        {% endif %}
     </div>
 </nav>

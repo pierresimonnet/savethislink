@@ -11,6 +11,7 @@
 .navbar-toggler {
   height: 100%;
   width: var(--topBarHeight);
+  color: var(--color);
 }
 
 .navbar-brand {
@@ -59,7 +60,7 @@
 }
 
 .nav-link[aria-current] {
-  color: var(--primary);
+  color: var(--contrast);
 }
 
 .js-nav-visible {

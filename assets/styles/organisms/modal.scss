@@ -28,7 +28,7 @@
 
 .modal {
   z-index: 100;
-  background: var(--white);
+  background: var(--molecule-background);
   position: relative;
   margin: auto;
   border-radius: 5px;
@@ -50,14 +50,14 @@
 .modal-close-button {
   font-size: 1.4rem;
   font-weight: 700;
-  color: var(--black);
+  color: var(--color);
   cursor: pointer;
   border: none;
   background: transparent;
 }
 
 .form-no-modal {
-  background: var(--white);
+  background: var(--molecule-background);
   margin: auto;
   border-radius: 5px;
   max-width: 540px;
