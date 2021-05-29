@@ -3,5 +3,26 @@
 {% block title %}Paramètres{% endblock %}
 
 {% block body %}
-    <h1>Paramètres</h1>
+    <h1 class="text-center">Paramètres</h1>
+
+    <section>
+        <h2>Mon profil</h2>
+        <p class="mb-1">Modifiez votre nom d'utilisateur pour votre compte.</p>
+        <div class="form-no-modal">
+            {{ include('user/_form.html.twig', {'button_label': 'Enregistrer'}) }}
+        </div>
+    </section>
+
+    <section class="mt-2">
+        <h2>Sécurité</h2>
+        <p class="mb-1">Améliorez la sécurité de votre compte avec un mot de passe complexe.</p>
+        <a href="{{ path('password_edit') }}" class="button-secondary">Modifier mon mot de passe</a>
+    </section>
+
+    <section class="mt-2">
+        <h2>Suppression de mon compte</h2>
+        <p class="mb-1">Supprimer vos sujets, vos liens ajoutés et vos contributions sur les autres sujets.</p>
+        {{ include('user/_delete_form.html.twig') }}
+    </section>
+
 {% endblock %}

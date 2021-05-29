@@ -8,9 +8,7 @@
         {% if app.user == user %}
             <div class="d-flex button-row mb-2">
                 <a href="{{ path('account_following') }}" class="button-secondary">{{ icon('bookmark-solid') }}<span>Sujets suivis</span></a>
-                <a href="{{ path('account_edit', {'id': app.user.id }) }}" class="button-secondary">{{ icon('edit') }}<span>Editer mon profil</span></a>
                 <a href="{{ path('account_settings') }}" class="button-secondary">{{ icon('settings') }}<span>Paramètres</span></a>
-                {{ include('user/_delete_form.html.twig') }}
                 <a href="{{ path('app_logout') }}" class="button-secondary">{{ icon('logout') }}<span>Se déconnecter</span></a>
             </div>
         {% endif %}

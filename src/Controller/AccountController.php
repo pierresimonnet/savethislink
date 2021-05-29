@@ -27,14 +27,12 @@ class AccountController extends AbstractController
         $this->tokenStorage = $tokenStorage;
     }
 
-    #[Route('/edit/{id}', name: 'account_edit', methods: ['GET', 'POST'])]
-    public function profile(Request $request, User $user): Response
-    {        
-        $this->denyAccessUnlessGranted('ROLE_USER');
-        if ($user !== $this->getUser()) {
-            throw new AuthenticationException();
-        }
-        
+    #[Route('/settings', name: 'account_settings', methods: ['GET', 'POST'])]
+    public function settings(Request $request): Response
+    {      
+        /** @var User $user */
+        $user = $this->getUser();
+
         $form = $this->createForm(UserType::class, $user);
         $form->handleRequest($request);
 
@@ -42,10 +40,10 @@ class AccountController extends AbstractController
             $this->getDoctrine()->getManager()->flush();
             $this->addFlash("success", "Profil mis à jour");
             
-            return $this->redirectToRoute('user_profile', ['username' => $user->getUsername()]);
+            return $this->redirectToRoute('account_settings');
         }
 
-        return $this->render('user/edit.html.twig', [
+        return $this->render('user/settings.html.twig', [
             'user' => $user,
             'form' => $form->createView(),
         ]);
@@ -79,7 +77,6 @@ class AccountController extends AbstractController
     #[Route('/delete/{id}', name: 'account_delete', methods: ['POST'])]
     public function delete(Request $request, User $user): Response
     {
-        $this->denyAccessUnlessGranted('ROLE_USER');
         if ($user !== $this->getUser()) {
             throw new AuthenticationException();
         }
@@ -102,11 +99,5 @@ class AccountController extends AbstractController
     public function following(): Response
     {
         return $this->render('user/following.html.twig');
-    }
-
-    #[Route('/settings', name: 'account_settings', methods: ['GET'])]
-    public function settings(): Response
-    {
-        return $this->render('user/settings.html.twig');
     }
 }
