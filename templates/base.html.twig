@@ -12,6 +12,7 @@
 
         {% block javascripts %}
             <script>
+                window.ADMIN = {{ is_granted('ROLE_SUPER_ADMIN') ? 'true' : 'false' }},
                 window.USER = {{ app.user ? app.user.id : 0 }}
             </script>
             {{ encore_entry_script_tags('app') }}
