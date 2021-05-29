@@ -103,4 +103,10 @@ class AccountController extends AbstractController
     {
         return $this->render('user/following.html.twig');
     }
+
+    #[Route('/settings', name: 'account_settings', methods: ['GET'])]
+    public function settings(): Response
+    {
+        return $this->render('user/settings.html.twig');
+    }
 }

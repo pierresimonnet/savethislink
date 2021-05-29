@@ -1,4 +1,5 @@
 import { isAuthenticated } from "../functions/auth";
+import { cookie } from "../functions/cookie";
 
 export class ThemeSwitcher extends HTMLElement {
   connectedCallback() {
@@ -22,10 +23,10 @@ export class ThemeSwitcher extends HTMLElement {
         ...
       }*/
 
-      localStorage.setItem("theme", themeToAdd);
+      cookie("theme", themeToAdd, { expires: 7 });
     });
 
-    let savedTheme = localStorage.getItem("theme");
+    let savedTheme = cookie("theme");
 
     if (savedTheme === null) {
       const mq = window.matchMedia("(prefers-color-scheme: dark)");
