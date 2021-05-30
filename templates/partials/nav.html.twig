@@ -15,6 +15,9 @@
         </ul>
     </div>
     <div class="navbar-auth d-flex flex-centered mr-05">
+        {% if is_granted('IS_IMPERSONATOR') %}
+            <a href="{{ impersonation_exit_path(path('app_home') ) }}" class="mr-05">Exit impersonation</a>
+        {% endif %}
         <theme-switcher class="mr-05"></theme-switcher>
         {% if app.user %}
             <a class="d-flex flex-centered" href="{{ path("user_profile", {username: app.user.username}) }}" {{ isActive('profile') }}>{{ icon('account') }}<span class="hidden-on-mobile">{{ app.user.username }}</span></a>

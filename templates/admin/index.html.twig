@@ -8,8 +8,11 @@
     <ul class="listMargin-lg">
     {% for user in users %}
         <li>        
-            <div class="card">
-                <a href="{{ path('user_profile', {'username': user.username }) }}">{{ user.username }}</a>
+            <div class="card d-flex space-between">
+                <a href="{{ path('user_profile', {'username': user.username}) }}">{{ user.username }}</a>
+                {% if app.user is not same as(user) %}
+                    <a href="{{ path('app_home', {'_switch_user': user.username}) }}">Impersonate</a>
+                {% endif %}
             </div>
         </li>
     {% endfor %}
