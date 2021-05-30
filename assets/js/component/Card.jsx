@@ -12,12 +12,14 @@ export const ThemeCard = memo(
             className="card-title d-flex flex-vertical-centered"
           >
             {theme.title}
+            {theme.private && <Icon id="lock-closed" />}
           </a>
           <div className="flex-centered">
             <Icon id="link" />
             <span>{theme.websitesCount}</span>
           </div>
         </div>
+
         <div className="card-body">
           <div className="card-subtitle text-muted">
             <a href={`/users/${theme.owner.username}`} className="decorated">

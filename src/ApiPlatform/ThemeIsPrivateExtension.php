@@ -33,10 +33,6 @@ class ThemeIsPrivateExtension implements QueryCollectionExtensionInterface, Quer
             return;
         }
 
-        if ($this->security->isGranted('ROLE_ADMIN')) {
-            return;
-        }
-        
         $rootAlias = $queryBuilder->getRootAliases()[0];
         
         if (!$this->security->getUser()) {

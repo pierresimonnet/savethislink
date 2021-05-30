@@ -1,7 +1,7 @@
 <div class="card">
     <div class="card-header d-flex">
         <a href="{{ path('topic_show', {'slug': theme.slug}) }}" class="card-title d-flex flex-vertical-centered">
-            {{theme.title}}
+            {{theme.title}}{{ theme.private ? icon('lock-closed') : '' }}
         </a>
         <div class="flex-centered">
             {{ icon('link') }}<span>{{theme.websitesCount}}</span>

@@ -12,15 +12,17 @@
             <p class="d-flex flex-vertical-centered">{{ icon('lock-closed') }}<span>Ce sujet est privé.</span></p>
         {% else %}
             <p class="status status-{{ theme.open ? "open" : "closed" }}">Ce sujet est {% if theme.open %}ouvert{% else %}fermé{% endif %} aux contributions.</p>
-            {% if theme.approve %}<p class="d-flex flex-vertical-centered mt-05">{{ icon('shield') }}<span>Ce sujet est modéré.</span></p>{% endif %}
+            {% if theme.approve %}
+                <p class="d-flex flex-vertical-centered mt-05">{{ icon('shield') }}<span>Ce sujet est modéré.</span></p>
+            {% endif %}
+           
+            <div class="d-flex flex-vertical-centered mt-1">
+                Partager ce sujet :
+                <a href="https://www.facebook.com/sharer/sharer.php?u={{ app.request.uri }}" class="button" rel="nofollow noreferrer noopener" target="_blank">{{ icon('facebook') }}</a>
+                <a href="https://twitter.com/intent/tweet?text={{ theme.title }}&#38;url={{ app.request.uri }}" class="button" rel="nofollow noreferrer noopener" target="_blank">{{ icon('twitter') }}</a>
+                <a href="https://www.linkedin.com/shareArticle?mini=true&#38;summary={{ theme.description }}&#38;title={{ theme.title }}&#38;url={{ app.request.uri }}" class="button" rel="nofollow noreferrer noopener" target="_blank">{{ icon('linkedin') }}</a><span class="help-text">(Ces boutons de partage ne déposent pas de cookies)</span>
+            </div>
         {% endif %}
-
-        <div class="d-flex flex-vertical-centered mt-1">
-            Partager ce sujet :
-            <a href="https://www.facebook.com/sharer/sharer.php?u={{ app.request.uri }}" class="button" rel="nofollow noreferrer noopener" target="_blank">{{ icon('facebook') }}</a>
-            <a href="https://twitter.com/intent/tweet?text={{ theme.title }}&#38;url={{ app.request.uri }}" class="button" rel="nofollow noreferrer noopener" target="_blank">{{ icon('twitter') }}</a>
-            <a href="https://www.linkedin.com/shareArticle?mini=true&#38;summary={{ theme.description }}&#38;title={{ theme.title }}&#38;url={{ app.request.uri }}" class="button" rel="nofollow noreferrer noopener" target="_blank">{{ icon('linkedin') }}</a><span class="help-text">(Ces boutons de partage ne déposent pas de cookies)</span>
-        </div>
 
         <div class="mt-1 d-flex button-row">
             {% if app.user and app.user == theme.owner %}
