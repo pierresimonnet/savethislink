@@ -6,35 +6,19 @@ export const ThemeCard = memo(
   ({ theme, user, toggleEdit, toggleDelete, isSaving }) => {
     return (
       <div className="card">
-        <div className="card-body">
-          <div className="d-flex space-between align-start">
-            <a href={`/topics/${theme.slug}`} className="card-title">
-              {theme.title}
-            </a>
-            <div className="flex-centered">
-              {theme.owner.id !== user && !theme.private ? (
-                theme.followedByCurrentUser ? (
-                  <Icon id="bookmark-solid" />
-                ) : (
-                  <Icon id="bookmark" />
-                )
-              ) : null}
-              {theme.private ? (
-                <Icon id="lock-closed" />
-              ) : (
-                <span
-                  className={`mr-05 status status-${
-                    theme.open ? "open" : "closed"
-                  }`}
-                >
-                  {theme.open ? "ouvert" : "fermé"}
-                </span>
-              )}
-              {theme.approve && <Icon id="shield" />}
-              <Icon id="link" />
-              <span>{theme.websitesCount}</span>
-            </div>
+        <div className="card-header d-flex">
+          <a
+            href={`/topics/${theme.slug}`}
+            className="card-title d-flex flex-vertical-centered"
+          >
+            {theme.title}
+          </a>
+          <div className="flex-centered">
+            <Icon id="link" />
+            <span>{theme.websitesCount}</span>
           </div>
+        </div>
+        <div className="card-body">
           <div className="card-subtitle text-muted">
             <a href={`/users/${theme.owner.username}`} className="decorated">
               {theme.owner.username}
@@ -45,6 +29,23 @@ export const ThemeCard = memo(
 
         <div className="card-footer">
           <ul className="d-flex justify-flex-end flex-vertical-centered card-actions">
+            {theme.owner.id !== user && !theme.private ? (
+              <li>
+                <a href={`/topics/${theme.slug}/follow`} className="button">
+                  {theme.followedByCurrentUser ? (
+                    <>
+                      <Icon id="bookmark-solid" />
+                      <span>Ne plus suivre</span>
+                    </>
+                  ) : (
+                    <>
+                      <Icon id="bookmark" />
+                      <span>Suivre</span>
+                    </>
+                  )}
+                </a>
+              </li>
+            ) : null}
             {theme.open || theme.owner.id === user ? (
               <li>
                 <a href={`/websites/new/${theme.slug}`} className="button">
@@ -98,8 +99,10 @@ export const WebsiteCard = memo(
             <span>En attente de vérification</span>
           </div>
         )}
-        <div className="card-body">
+        <div className="card-header">
           <LinkPreview website={website} />
+        </div>
+        <div className="card-body">
           <div className="card-subtitle text-muted">
             <a href={`/users/${website.owner.username}`} className="decorated">
               {website.owner.username}
