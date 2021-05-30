@@ -4,11 +4,13 @@
 
 {% block body %}
     <h1>Sujets suivis</h1>
+    <div class="itemsContainer listMargin-lg mt-1">
     {% for following in app.user.following %}
-        {{ include("topic/_card.html.twig", {'theme': following.target}) }}
+        <div>{{ include("topic/_card.html.twig", {'theme': following.target}) }}</div>
     {% else %}
-        <div class="d-flex flex-centered mt-1">
+        <div class="d-flex flex-centered">
             Vous ne suivez actuellement aucun sujet<a href="{{ path('topic_index')}}" class="button-primary ml-05">Explorer les sujets</a>
         </div>
     {% endfor %}
+    </div>
 {% endblock %}
