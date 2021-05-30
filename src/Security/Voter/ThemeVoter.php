@@ -20,10 +20,6 @@ class ThemeVoter extends Voter
     {
         $user = $token->getUser();
 
-        if ($this->security->isGranted('ROLE_SUPER_ADMIN')) {
-            return true;
-        }
-
         /** @var \App\Entity\Theme $subject */
         switch ($attribute) {
             case 'TOPIC_CREATE_CONTENT':

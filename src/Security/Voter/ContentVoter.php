@@ -23,10 +23,6 @@ class ContentVoter extends Voter
         if (!$user instanceof UserInterface) {
             return false;
         }
-
-        if ($this->security->isGranted('ROLE_SUPER_ADMIN')) {
-            return true;
-        }
         
         /** @var \App\Entity\Website $subject */
         switch ($attribute) {
