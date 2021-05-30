@@ -17,7 +17,7 @@
         </div>
     </div>
 
-    <div class="input-group" id="toggle-open">
+    <div class="input-group" id="toggle-private">
         <div class="checkbox-toggle input-checkbox">
             {{ form_widget(form.private) }}
             {{ form_label(form.private) }}
@@ -54,3 +54,49 @@
         <button class="button-primary">{{ button_label|default('Créer') }}</button>
     </div>
 {{ form_end(form) }}
+<script>
+const privateToggleDiv = document.getElementById('toggle-private')
+const privateToggle = document.getElementById('theme_private')
+
+const openToggleDiv = document.getElementById('toggle-open')
+const openToggle = document.getElementById('theme_open')
+
+const approveToggleDiv = document.getElementById('toggle-approve')
+const approveToggle = document.getElementById('theme_approve')
+
+openToggle.disabled = privateToggle.checked
+approveToggle.disabled = privateToggle.checked
+toggleClass(openToggleDiv, privateToggle.checked)
+toggleClass(approveToggleDiv, privateToggle.checked)
+
+privateToggle.addEventListener('change', (e) => {
+    openToggle.disabled = e.target.checked
+    approveToggle.disabled = e.target.checked
+
+    if (e.target.checked) {
+        openToggle.checked = false
+        approveToggle.checked = false
+    }
+
+    toggleClass(openToggleDiv, e.target.checked)
+    toggleClass(approveToggleDiv, !openToggle.checked)
+})
+
+openToggle.addEventListener('change', (e) => {
+    approveToggle.disabled = !e.target.checked
+
+    if (!e.target.checked) {
+        approveToggle.checked = false
+    }
+
+    toggleClass(approveToggleDiv, !e.target.checked)
+})
+
+function toggleClass(div, bool) {
+    if (bool) {
+        div.classList.add('input-disabled')
+    } else {
+        div.classList.remove('input-disabled')
+    }
+}
+</script>
