@@ -1,21 +1,13 @@
 <div class="card">
-    <div class="card-body">
-        <div class="d-flex space-between align-start">
-        <a href="{{ path('topic_show', {'slug': theme.slug}) }}" class="card-title">
+    <div class="card-header d-flex">
+        <a href="{{ path('topic_show', {'slug': theme.slug}) }}" class="card-title d-flex flex-vertical-centered">
             {{theme.title}}
         </a>
         <div class="flex-centered">
-            {% if theme.private %}
-                {{ icon('lock-closed') }}
-            {% else %}
-                {{ theme.followedByCurrentUser ? icon('bookmark-solid') : icon('bookmark') }}
-                <span class="status status-{{theme.open ? "open" : "closed"}}">{{theme.open ? "ouvert" : "fermé"}}</span>
-            {% endif %}
-            {{theme.approve ? icon('shield') : ""}}
-            {{ icon('link') }}
-            <span>{{theme.websitesCount}}</span>
+            {{ icon('link') }}<span>{{theme.websitesCount}}</span>
         </div>
-        </div>
+    </div>     
+    <div class="card-body">
         <div class="card-subtitle text-muted">
         <a href="{{ path('user_profile', {'username': theme.owner.username}) }}" class="decorated">
             {{theme.owner.username}}
@@ -26,6 +18,11 @@
 
     <div class="card-footer">
         <ul class="d-flex justify-flex-end flex-vertical-centered card-actions">
+        {% if theme.private is same as(false) and theme.owner is not same as(app.user) %}
+            <li>
+                <a href="{{ path('topic_follow', {'slug': theme.slug}) }}" class="button">{{ theme.followedByCurrentUser ? icon('bookmark-solid') : icon('bookmark') }}<span>{{theme.followedByCurrentUser ? "Ne plus suivre" : "Suivre"}}</span></a>
+            </li>
+        {% endif %}
         {% if theme.open or theme.owner is same as(app.user) %}
             <li>
                 <a href="{{ path('website_new', {'slug': theme.slug }) }}" class="button">{{icon('add-link')}}<span>Ajouter</span></a>
