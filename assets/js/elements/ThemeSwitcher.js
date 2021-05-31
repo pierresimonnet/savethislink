@@ -1,4 +1,3 @@
-import { isAuthenticated } from "../functions/auth";
 import { cookie } from "../functions/cookie";
 
 export class ThemeSwitcher extends HTMLElement {
@@ -18,10 +17,6 @@ export class ThemeSwitcher extends HTMLElement {
 
       document.body.classList.add(`theme-${themeToAdd}`);
       document.body.classList.remove(`theme-${themeToRemove}`);
-
-      /*if (!isAuthenticated()) {
-        ...
-      }*/
 
       cookie("theme", themeToAdd, { expires: 7 });
     });

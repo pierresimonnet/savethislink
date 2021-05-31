@@ -38,8 +38,11 @@
             {% block body %}{% endblock %}
         </main>
 
-        <footer class="text-center">
-            <a href="{{ path('app_privacy') }}" class="decorated">Confidentialité et vie privée</a>
+        <footer>
+            <ul  class="d-flex justify-flex-center">
+                <li><a href="{{ path('app_privacy') }}" class="decorated">Confidentialité et vie privée</a></li>
+                <li class="ml-1"><a href="{{ path('app_changelog') }}" class="decorated">Mises à jour</a></li>
+            </ul>
         </footer>
     </body>
 </html>

@@ -25,4 +25,10 @@ class DefaultController extends AbstractController
     {
         return $this->render('default/privacy.html.twig');
     }
+
+    #[Route('/changelog', name: 'app_changelog')]
+    public function changelog(): Response
+    {
+        return $this->render('default/changelog.html.twig');
+    }
 }
