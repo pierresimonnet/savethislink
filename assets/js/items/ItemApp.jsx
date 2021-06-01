@@ -5,7 +5,6 @@ import ItemList from "./ItemList";
 import useModal from "../component/useModal";
 import Modal from "../component/Modal";
 import ItemForm from "../component/ItemForm";
-import ThemeForm from "../component/ThemeForm";
 import Icon from "../component/Icon";
 
 const ItemApp = ({
@@ -19,10 +18,8 @@ const ItemApp = ({
   const [successMessage, setSuccessMessage] = useState("");
   const { isShowing, toggle } = useModal();
 
-  const [
-    successMessageTimeoutHandle,
-    setSuccessMessageTimeoutHandle,
-  ] = useState(0);
+  const [successMessageTimeoutHandle, setSuccessMessageTimeoutHandle] =
+    useState(0);
 
   let url = `/api/${ressource}`;
   if (theme) {
@@ -84,12 +81,16 @@ const ItemApp = ({
     <>
       {(user && !owner) || user === owner || (user && open === 1) ? (
         <div className="d-flex justify-flex-center mb-1">
-          <button onClick={toggle} className="button-primary">
-            <Icon id="add" />
-            <span>
-              {ressource === "websites" ? "Ajouter un lien" : "Créer un sujet"}
-            </span>
-          </button>
+          {ressource === "websites" ? (
+            <button onClick={toggle} className="button-primary">
+              <Icon id="add" />
+              <span>Ajouter un lien</span>
+            </button>
+          ) : (
+            <a href="/topics/new" className="button-primary">
+              Créer un sujet
+            </a>
+          )}
         </div>
       ) : !user && open === 1 ? (
         <div className="d-flex justify-flex-center mb-1">
@@ -119,11 +120,6 @@ const ItemApp = ({
       {ressource === "websites" && (
         <Modal isShowing={isShowing} hide={toggle} title="Ajouter un lien">
           <ItemForm onSave={saveItem} toggle={toggle} theme={theme} />
-        </Modal>
-      )}
-      {ressource === "themes" && (
-        <Modal isShowing={isShowing} hide={toggle} title="Créer un sujet">
-          <ThemeForm onSave={saveItem} user={user} toggle={toggle} />
         </Modal>
       )}
     </>

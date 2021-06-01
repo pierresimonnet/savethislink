@@ -27,6 +27,7 @@ class Tag implements \JsonSerializable
      * @ORM\Id
      * @ORM\GeneratedValue
      * @ORM\Column(type="integer")
+     * @Groups({"tag:read", "theme:read"})
      */
     private $id;
 

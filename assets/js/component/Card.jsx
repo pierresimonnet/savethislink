@@ -33,7 +33,9 @@ export const ThemeCard = memo(
           {theme.tags.length > 0 ? (
             <ul className="pill-container d-flex">
               {theme.tags.map((tag) => (
-                <li className="pill">{tag.name}</li>
+                <li className="pill" key={tag.id}>
+                  {tag.name}
+                </li>
               ))}
             </ul>
           ) : null}
@@ -66,14 +68,10 @@ export const ThemeCard = memo(
             {theme.owner.id === user && (
               <>
                 <li>
-                  <button
-                    onClick={toggleEdit}
-                    disabled={isSaving}
-                    className="button"
-                  >
+                  <a href={`/topics/${theme.id}/edit`} className="button">
                     <Icon id="edit" />
                     <span>Editer</span>
-                  </button>
+                  </a>
                 </li>
                 <li>
                   <button

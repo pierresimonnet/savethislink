@@ -3,7 +3,6 @@ import { ThemeCard, WebsiteCard } from "../component/Card";
 import useModal from "../component/useModal";
 import Modal from "../component/Modal";
 import ItemForm from "../component/ItemForm";
-import ThemeForm from "../component/ThemeForm";
 import DeleteForm from "../component/DeleteForm";
 import CheckItemForm from "../component/CheckItemForm";
 
@@ -64,20 +63,7 @@ const Item = memo(({ item, edit, remove, user, ressource }) => {
       )}
       {ressource === "themes" && (
         <>
-          <ThemeCard
-            theme={item}
-            user={user}
-            toggleEdit={toggleEdit}
-            toggleDelete={toggleDelete}
-          />
-
-          <Modal
-            isShowing={isShowingEditModal}
-            hide={toggleEdit}
-            title="Editer ce sujet"
-          >
-            <ThemeForm onSave={handleEdit} item={item} toggle={toggleEdit} />
-          </Modal>
+          <ThemeCard theme={item} user={user} toggleDelete={toggleDelete} />
           <Modal
             isShowing={isShowingDeleteModal}
             hide={toggleDelete}
