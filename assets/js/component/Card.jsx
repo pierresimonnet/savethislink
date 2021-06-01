@@ -29,8 +29,15 @@ export const ThemeCard = memo(
           <p className="card-text">{theme.description}</p>
         </div>
 
-        <div className="card-footer">
-          <ul className="d-flex justify-flex-end flex-vertical-centered card-actions">
+        <div className="card-footer card-actions">
+          {theme.tags.length > 0 ? (
+            <ul className="pill-container d-flex">
+              {theme.tags.map((tag) => (
+                <li className="pill">{tag.name}</li>
+              ))}
+            </ul>
+          ) : null}
+          <ul className="d-flex justify-flex-end flex-vertical-centered">
             {theme.owner.id !== user && !theme.private ? (
               <li>
                 <a href={`/topics/${theme.slug}/follow`} className="button">

@@ -140,11 +140,18 @@ class Theme implements UserOwnedInterface
      */
     private $followers;
 
+    /**
+     * @ORM\ManyToMany(targetEntity=Tag::class, inversedBy="themes", cascade={"persist"})
+     * @Groups({"theme:read"})
+     */
+    private $tags;
+
     public function __construct()
     {
         $this->websites = new ArrayCollection();
         $this->createdAt = new \DateTimeImmutable();
         $this->followers = new ArrayCollection();
+        $this->tags = new ArrayCollection();
     }
 
     public function getId(): ?int
@@ -340,6 +347,30 @@ class Theme implements UserOwnedInterface
     public function setFollowedByCurrentUser(bool $followedByCurrentUser): self
     {
         $this->followedByCurrentUser = $followedByCurrentUser;
+
+        return $this;
+    }
+
+    /**
+     * @return Collection|Tag[]
+     */
+    public function getTags(): Collection
+    {
+        return $this->tags;
+    }
+
+    public function addTag(Tag $tag): self
+    {
+        if (!$this->tags->contains($tag)) {
+            $this->tags[] = $tag;
+        }
+
+        return $this;
+    }
+
+    public function removeTag(Tag $tag): self
+    {
+        $this->tags->removeElement($tag);
 
         return $this;
     }

@@ -16,8 +16,16 @@
         <p class="card-text">{{theme.description}}</p>
     </div>
 
-    <div class="card-footer">
-        <ul class="d-flex justify-flex-end flex-vertical-centered card-actions">
+    <div class="card-footer card-actions">
+        {% if not theme.tags.empty %}
+            <ul class="d-flex pill-container">
+                {% for tag in theme.tags %}
+                    <li class="pill">{{ tag.name }}</li>
+                {% endfor %}
+            </ul>
+        {% endif %}
+
+        <ul class="d-flex justify-flex-end flex-vertical-centered">
         {% if theme.private is same as(false) and theme.owner is not same as(app.user) %}
             <li>
                 <a href="{{ path('topic_follow', {'slug': theme.slug}) }}" class="button">{{ theme.followedByCurrentUser ? icon('bookmark-solid') : icon('bookmark') }}<span>{{theme.followedByCurrentUser ? "Ne plus suivre" : "Suivre"}}</span></a>

@@ -20,6 +20,7 @@ use Symfony\Component\Validator\Constraints as Assert;
  *      itemOperations={
  *          "get", 
  *      },
+ *      normalizationContext={"groups"={"user:read"}},
  * )
  * @ORM\Entity(repositoryClass=UserRepository::class)
  * @ORM\Table(name="`user`")
@@ -37,7 +38,7 @@ class User implements UserInterface
 
     /**
      * @ORM\Column(type="string", length=180, unique=true)
-     * @Groups({"website:read", "theme:read"})
+     * @Groups({"user:read", "website:read", "theme:read"})
      */
     private $username;
 
@@ -57,11 +58,13 @@ class User implements UserInterface
 
     /**
      * @ORM\OneToMany(targetEntity=Theme::class, mappedBy="owner", orphanRemoval=true, fetch="EXTRA_LAZY")
+     * @Groups({"user:read"})
      */
     private $themes;
 
     /**
      * @ORM\OneToMany(targetEntity=Website::class, mappedBy="owner", orphanRemoval=true, fetch="EXTRA_LAZY")
+     * @Groups({"user:read"})
      */
     private $websites;
 

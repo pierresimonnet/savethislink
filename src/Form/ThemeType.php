@@ -3,6 +3,7 @@
 namespace App\Form;
 
 use App\Entity\Theme;
+use App\Form\Type\TagsInputType;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\Extension\Core\Type\CheckboxType;
 use Symfony\Component\Form\Extension\Core\Type\TextareaType;
@@ -38,6 +39,12 @@ class ThemeType extends AbstractType
             ->add('approve', CheckboxType::class, [
                 'label' => 'Approuver les contributions',
                 'help' => 'Approuver les nouvelles contributions avant leur publication.',
+                'required' => false
+            ])
+            ->add('tags', TagsInputType::class, [
+                'attr' => ['class' => 'input input-text', 'placeholder' => 'tag, tag, ...'],
+                'label' => 'Tags',
+                'help' => 'Séparez les tags par une virgule',
                 'required' => false
             ])
         ;

@@ -1,8 +1,9 @@
+.pill-container > * + * {
+  margin-left: 8px;
+}
+
 .pill {
-  color: var(--contrast);
-  border: 1px solid var(--contrast);
   padding: 2px 8px;
   border-radius: 23px;
-  margin-bottom: 8px;
-  width: max-content;
+  background-color: var(--secondary);
 }
