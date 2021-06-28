@@ -11,5 +11,7 @@ function callback (entries) {
     });
 }
 
-let observer = new IntersectionObserver(callback)
-observer.observe(target)
+if (target && btn) {
+    let observer = new IntersectionObserver(callback)
+    observer.observe(target)
+}

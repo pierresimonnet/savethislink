@@ -77,7 +77,7 @@ const approveToggle = document.getElementById('theme_approve')
 openToggle.disabled = privateToggle.checked
 approveToggle.disabled = privateToggle.checked
 toggleClass(openToggleDiv, privateToggle.checked)
-toggleClass(approveToggleDiv, privateToggle.checked)
+toggleClass(approveToggleDiv, !privateToggle.checked)
 
 privateToggle.addEventListener('change', (e) => {
     openToggle.disabled = e.target.checked
