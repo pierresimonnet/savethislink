@@ -80,14 +80,14 @@ const ItemApp = ({
   return (
     <>
       {(user && !owner) || user === owner || (user && open === 1) ? (
-        <div className="d-flex justify-flex-center mb-1">
+        <div className="d-flex justify-flex-center mb-1" id="js-new">
           {ressource === "websites" ? (
-            <button onClick={toggle} className="button-primary">
+            <button onClick={toggle} className="button-primary" id="js-new-btn">
               <Icon id="add" />
               <span>Ajouter un lien</span>
             </button>
           ) : (
-            <a href="/topics/new" className="button-primary">
+            <a href="/topics/new" className="button-primary" id="js-new-btn">
               Créer un sujet
             </a>
           )}

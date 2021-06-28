@@ -33,6 +33,11 @@ button + * {
   text-transform: uppercase;
 }
 
+.button-movable {
+  position: fixed;
+  bottom: 1rem;
+}
+
 @media screen and (min-width: 768px) {
   .button-column > * + * {
     margin-top: 8px;
