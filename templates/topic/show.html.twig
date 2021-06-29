@@ -35,10 +35,13 @@
         <div class="mt-1 d-flex button-row">
             {% if app.user and app.user == theme.owner %}
                 <a href="{{ path('topic_edit', {'id': theme.id}) }}" class="button-secondary">{{ icon('edit') }}<span>Editer</span></a>
-                {{ include('topic/_delete_form.html.twig') }}
-                <div class="button-secondary">{{ theme.followers|length }} followers</div>        
-            {% elseif theme.private == false %}
-                <a href="{{ path('topic_follow', {'slug': theme.slug}) }}" class="button-{{ theme.followedByCurrentUser ? "secondary" : "primary" }}">{{ theme.followedByCurrentUser ? "Ne plus suivre" : "Suivre" }}</a>        
+                {{ include('topic/_delete_form.html.twig') }}       
+            {% endif %}
+            {% if theme.private == false %}
+                <div class="button-secondary">{{ theme.followers|length }} followers</div>
+                {% if app.user != theme.owner %}
+                    <a href="{{ path('topic_follow', {'slug': theme.slug}) }}" class="button-{{ theme.followedByCurrentUser ? "secondary" : "primary" }}">{{ theme.followedByCurrentUser ? "Ne plus suivre" : "Suivre" }}</a>  
+                {% endif %}      
             {% endif %}
         </div>
     </div>
